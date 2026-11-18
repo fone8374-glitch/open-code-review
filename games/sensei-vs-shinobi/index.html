@@ -680,7 +680,6 @@ function drawHeld(f, j) {
   if (!f.holding) return;
   const el = j.elF, h = j.hF, a = Math.atan2(h[1] - el[1], h[0] - el[0]);
   ctx.save(); ctx.translate(h[0], h[1]); ctx.rotate(a + (f.holding.off || 0));
-  if (f.holding.glow) { ctx.shadowColor = '#bfe8ff'; ctx.shadowBlur = 18; }
   drawWeapon(f.holding.type, 1, f.spin ? now * 32 : null);
   ctx.restore();
 }
@@ -920,10 +919,12 @@ function drawFighter(f, p = f.pose, alpha = 1, ghost = false) {
   ctx.translate(j.hx, j.hy); ctx.scale(f.face, 1); ctx.rotate(p.rot);
   if (f.isN) drawNinja(f, j, p); else drawTeacher(f, j, p);
   ctx.restore();
-  if (!ghost && f.flash > 0.05 && 'filter' in ctx) {
-    ctx.save(); ctx.globalAlpha = f.flash * 0.85; ctx.filter = 'brightness(0) invert(1)';
-    ctx.translate(j.hx, j.hy); ctx.scale(f.face, 1); ctx.rotate(p.rot);
-    if (f.isN) drawNinja(f, j, p); else drawTeacher(f, j, p);
+  if (!ghost && f.flash > 0.05) {
+    const c = toWorld(f, j, [j.neck[0] * 0.5, j.neck[1] * 0.5], p), r = f.isN ? 90 : 150;
+    ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.globalAlpha = f.flash;
+    const gl = ctx.createRadialGradient(c[0], c[1], 0, c[0], c[1], r);
+    gl.addColorStop(0, 'rgba(255,255,255,.95)'); gl.addColorStop(0.5, 'rgba(255,230,190,.45)'); gl.addColorStop(1, 'rgba(255,200,150,0)');
+    ctx.fillStyle = gl; ctx.fillRect(c[0] - r, c[1] - r, r * 2, r * 2);
     ctx.restore();
   }
   if (!ghost && f.dizzy) {
@@ -949,12 +950,12 @@ function fujiPath(g) {
 }
 function buildBG() {
   const k = DPR;
-  bg = document.createElement('canvas'); bg.width = W * k; bg.height = H * k;
-  const g = bg.getContext('2d'); g.scale(k, k);
+  bg = document.createElement('canvas'); bg.width = Math.round((W + 48) * k); bg.height = Math.round((H + 28) * k);
+  const g = bg.getContext('2d'); g.scale(k, k); g.translate(24, 14);
   const rnd = seeded(7);
   let gr = g.createLinearGradient(0, 0, 0, 520);
   gr.addColorStop(0, '#271f4b'); gr.addColorStop(0.32, '#653d6d'); gr.addColorStop(0.6, '#d36d4f'); gr.addColorStop(0.83, '#f2ad68'); gr.addColorStop(1, '#f8d293');
-  g.fillStyle = gr; g.fillRect(0, 0, W, H);
+  g.fillStyle = gr; g.fillRect(-24, -14, W + 48, H + 28);
   for (let i = 0; i < 60; i++) { g.fillStyle = `rgba(255,240,220,${rnd() * 0.5})`; g.fillRect(rnd() * W, rnd() * 140, 1.5, 1.5); }
   gr = g.createRadialGradient(330, 400, 10, 330, 400, 460);
   gr.addColorStop(0, 'rgba(255,226,160,.95)'); gr.addColorStop(0.25, 'rgba(255,170,100,.45)'); gr.addColorStop(1, 'rgba(255,140,90,0)');
@@ -1007,7 +1008,7 @@ function buildBG() {
   g.globalAlpha = 1;
   // courtyard ground
   gr = g.createLinearGradient(0, 572, 0, H); gr.addColorStop(0, '#7a5a44'); gr.addColorStop(0.3, '#5e4231'); gr.addColorStop(1, '#2d1e16');
-  g.fillStyle = gr; g.fillRect(0, 572, W, H - 572);
+  g.fillStyle = gr; g.fillRect(-24, 572, W + 48, H - 558);
   g.strokeStyle = 'rgba(20,10,5,.35)'; g.lineWidth = 2;
   for (const y of [590, 612, 640, 676, 718]) { g.beginPath(); g.moveTo(0, y); g.lineTo(W, y); g.stroke(); }
   for (let i = -16; i <= 16; i++) { g.beginPath(); g.moveTo(W / 2 + i * 60, 572); g.lineTo(W / 2 + i * 150, H); g.stroke(); }
@@ -1203,7 +1204,7 @@ function updateFx(g, dt) {
   for (const f of [N, T]) {
     f.flash = Math.max(0, f.flash - g * 4);
     f.disp = f.disp > f.hp ? Math.max(f.hp, f.disp - dt * 40) : f.hp;
-    if (f.trail && f.visible) { f.ghostT = (f.ghostT || 0) + g; if (f.ghostT > 0.035) { f.ghostT = 0; spawnGhost(f); } }
+    if (f.trail && f.visible) { f.ghostT = (f.ghostT || 0) + g; if (f.ghostT > 0.05 && ghosts.length < 6) { f.ghostT = 0; spawnGhost(f); } }
     if (f.aura > 0.2 && Math.random() < g * 40 * f.aura) { const c = chestOf(f); parts.push({ k: 'flame', x: c[0] + rand(-70, 70), y: c[1] + rand(-40, 120), vx: rand(-20, 20), vy: rand(-260, -140), life: 0, max: rand(0.4, 0.8), size: rand(8, 16), g: 0 }); }
   }
   if (G.storm > 0 && Math.random() < g * 60) parts.push({ k: 'leaf', x: rand(0, W), y: rand(0, H), vx: rand(-900, -500), vy: rand(-200, 200), life: 0, max: rand(0.6, 1.2), col: pick(LEAF_COLS), size: rand(8, 14), rot: rand(0, 6), vr: rand(-12, 12), g: 0 });
@@ -1237,7 +1238,7 @@ function drawFx() {
   }
   for (const p of projs) {
     ctx.save(); ctx.translate(p.x, p.y); ctx.scale(p.face, 1); ctx.rotate(p.rot);
-    if (p.type === 'shuriken') { ctx.shadowColor = '#bfe8ff'; ctx.shadowBlur = 12; drawWeapon('shuriken', 1.4); }
+    if (p.type === 'shuriken') drawWeapon('shuriken', 1.4);
     else drawWeapon(p.type, p.type === 'chalk' ? 1.3 : 1);
     ctx.restore();
   }
@@ -1402,6 +1403,7 @@ function frame(ts) {
     if (tw.t >= tw.d) { tweens.splice(i, 1); tw.r(); }
   }
   for (let i = timers.length - 1; i >= 0; i--) { const t = timers[i]; t.t -= t.real ? dt : g; if (t.t <= 0) { timers.splice(i, 1); t.r(); } }
+  watchPerf(dt);
   updateScene(g); updateFx(g, dt); updateQuizTimer(dt);
   if (S.lesson) S.lesson.a = lerp(S.lesson.a, S.lesson.show ? 1 : 0, Math.min(1, dt * 8));
   render();
@@ -2171,10 +2173,21 @@ $('#btnQuit').addEventListener('click', () => {
 /* =========================================================
    Boot
    ========================================================= */
-function resize() {
+/* Fill rate, not script time, limits this game: cap the backing-store density and step it down if frames run long. */
+let quality = 1.25;
+const perf = { dts: [], drops: 0 };
+function resize(force) {
   const r = cv.getBoundingClientRect();
-  const k = clamp((window.devicePixelRatio || 1) * r.width / W, 0.5, 2);
-  if (Math.abs(k - DPR) > 0.01 || !bg) { DPR = k; cv.width = Math.round(W * k); cv.height = Math.round(H * k); buildBG(); }
+  const k = clamp(Math.min(window.devicePixelRatio || 1, quality) * r.width / W, 0.4, 1.6);
+  if (force || Math.abs(k - DPR) > 0.01 || !bg) { DPR = k; cv.width = Math.round(W * k); cv.height = Math.round(H * k); buildBG(); }
+}
+function watchPerf(dt) {
+  if (dt > 0.1) return;
+  perf.dts.push(dt);
+  if (perf.dts.length < 90) return;
+  const sorted = perf.dts.sort((a, b) => a - b), med = sorted[45];
+  perf.dts = [];
+  if (med > 0.021 && quality > 0.55 && perf.drops < 4) { quality -= 0.2; perf.drops++; resize(true); }
 }
 window.addEventListener('resize', resize);
 loadSetup();
