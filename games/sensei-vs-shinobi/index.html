@@ -6,7 +6,7 @@
 <title>Sensei vs Shinobi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shojumaru&family=Rubik:wght@400;500;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shojumaru&family=Rubik:wght@400;500;700;800&family=Cairo:wght@400;600;700;900&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yuji+Syuku&display=swap&text=%E3%81%82%E3%81%AE%E3%82%8A%E3%82%AF%E3%83%81%E3%83%8C%E3%83%A3%E3%83%B3%E4%B8%80%E5%85%88%E5%88%A9%E5%89%A3%E5%8B%9D%E5%90%88%E5%B1%85%E5%B5%90%E5%BD%B1%E5%BF%8D%E6%89%8B%E6%96%AC%E6%97%8B%E6%9C%AC%E7%94%9F%E7%B4%85%E8%80%85%E8%84%9A%E8%91%89%E8%A3%8F%E8%B2%A0%E8%B5%B0%E9%8E%8C%E9%8E%96%E9%A2%A8">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
@@ -22,8 +22,8 @@
   --maple: #e2622b;
   --ok: #5cbf73;
   --bad: #ef5a47;
-  --display: "Shojumaru", "Rubik", Georgia, serif;
-  --body: "Rubik", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --display: "Shojumaru", "Cairo", "Rubik", Georgia, serif;
+  --body: "Rubik", "Cairo", system-ui, -apple-system, "Segoe UI", sans-serif;
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
@@ -52,12 +52,12 @@ button, input, select, textarea { font: inherit; color: inherit; }
 #qtext { font-size: clamp(15px, 1.7vw, 22px); font-weight: 700; margin: 8px 0 10px; line-height: 1.3; text-wrap: balance; }
 #qopts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .opt {
-  display: flex; align-items: center; gap: 10px; text-align: left; cursor: pointer;
+  display: flex; align-items: center; gap: 10px; text-align: start; cursor: pointer;
   background: rgba(244, 231, 208, 0.07); border: 1px solid var(--line); border-radius: 4px;
   padding: 9px 10px; font-size: clamp(13px, 1.3vw, 17px); min-width: 0; transition: background .15s, transform .1s, border-color .15s;
 }
 .opt:hover:not(:disabled), .opt:focus-visible { background: rgba(230, 170, 63, 0.18); border-color: var(--gold); outline: none; transform: translateY(-1px); }
-.opt b { flex: none; width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; background: var(--vermilion); color: #fff; font-family: var(--display); font-size: 13px; }
+.opt b { flex: none; width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; background: var(--vermilion); color: #fff; font-family: "Cairo", var(--display); font-size: 14px; font-weight: 700; }
 .opt span { min-width: 0; overflow-wrap: anywhere; }
 .opt.right { background: rgba(92, 191, 115, 0.3); border-color: var(--ok); }
 .opt.wrong { background: rgba(239, 90, 71, 0.3); border-color: var(--bad); animation: shakeX .35s; }
@@ -70,6 +70,17 @@ button, input, select, textarea { font: inherit; color: inherit; }
 #qfeedback.ok { color: var(--ok); }
 #qfeedback.bad { color: var(--bad); }
 .keyhint { color: var(--muted); font-size: 11px; margin-top: 8px; letter-spacing: .04em; }
+
+/* ---------- Arabic / right-to-left ---------- */
+html[lang=ar] { --body: "Cairo", "Rubik", system-ui, sans-serif; --display: "Cairo", "Shojumaru", serif; }
+html[lang=ar] *, html[lang=ar] *::before { letter-spacing: 0 !important; text-transform: none !important; }
+html[lang=ar] .brand h1, html[lang=ar] .card h2, html[lang=ar] #resTitle { font-weight: 900; }
+.topbar { display: flex; justify-content: flex-end; }
+.lang { display: inline-flex; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
+.lang button { background: transparent; border: 0; padding: 7px 14px; cursor: pointer; font-size: 14px; color: var(--muted); }
+.lang button[aria-pressed=true] { background: var(--vermilion); color: #fff; }
+.lang button:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
+.lang button[lang=ar] { font-family: "Cairo", sans-serif; }
 
 /* ---------- corner controls ---------- */
 #ctrls { position: absolute; right: 1.2%; bottom: 2%; display: flex; gap: 6px; z-index: 6; }
@@ -115,14 +126,14 @@ textarea { min-height: 84px; resize: vertical; font-family: ui-monospace, Menlo,
 .hint { color: var(--muted); font-size: 13px; line-height: 1.45; margin: 0; }
 .cols { overflow-x: auto; }
 .cols table { border-collapse: collapse; font-size: 12px; white-space: nowrap; }
-.cols td, .cols th { border: 1px solid var(--line); padding: 4px 8px; text-align: left; }
+.cols td, .cols th { border: 1px solid var(--line); padding: 4px 8px; text-align: start; }
 .cols th { background: rgba(35, 120, 60, .35); color: #eaf7ec; font-weight: 600; }
 #importMsg { font-size: 13px; margin: 0; min-height: 1em; }
 #importMsg.ok { color: var(--ok); }
 #importMsg.bad { color: var(--bad); }
 #qlist { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; max-height: 260px; overflow-y: auto; }
 #qlist li { display: flex; gap: 10px; align-items: flex-start; background: rgba(0, 0, 0, .25); border: 1px solid var(--line); border-radius: 4px; padding: 7px 10px; font-size: 14px; }
-#qlist li .n { color: var(--gold); font-variant-numeric: tabular-nums; flex: none; width: 2ch; text-align: right; }
+#qlist li .n { color: var(--gold); font-variant-numeric: tabular-nums; flex: none; width: 2ch; text-align: end; }
 #qlist li .t { flex: 1; min-width: 0; overflow-wrap: anywhere; }
 #qlist li .t small { display: block; color: var(--muted); margin-top: 2px; }
 #qlist li button { flex: none; background: none; border: 0; color: var(--muted); cursor: pointer; font-size: 18px; line-height: 1; padding: 0 4px; }
@@ -145,8 +156,8 @@ details summary { cursor: pointer; color: var(--gold); font-size: 14px; }
 .score b { display: block; font-size: 28px; font-variant-numeric: tabular-nums; }
 .score span { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
 #review { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
-#review li { border-left: 3px solid var(--bad); padding: 6px 10px; background: rgba(0, 0, 0, .25); font-size: 14px; line-height: 1.4; }
-#review li.good { border-left-color: var(--ok); }
+#review li { border-inline-start: 3px solid var(--bad); padding: 6px 10px; background: rgba(0, 0, 0, .25); font-size: 14px; line-height: 1.4; }
+#review li.good { border-inline-start-color: var(--ok); }
 #review li small { color: var(--muted); display: block; }
 
 @media (max-aspect-ratio: 1/1) {
@@ -168,100 +179,106 @@ details summary { cursor: pointer; color: var(--gold); font-size: 14px; }
     <canvas id="game" aria-label="Fight scene: the teacher and the ninja student face off below Mount Fuji"></canvas>
     <div id="ctrls" hidden>
       <button id="btnMute" type="button">Sound: on</button>
-      <button id="btnQuit" type="button">Quit</button>
+      <button id="btnQuit" type="button" data-i18n="quit">Quit</button>
     </div>
   </div>
   <div id="quiz" hidden role="dialog" aria-live="polite">
     <div class="qhead"><span id="qnum">Question 1</span><div id="qtimer"><i></i></div><span id="qsec"></span></div>
-    <p id="qtext"></p>
+    <p id="qtext" dir="auto"></p>
     <div id="qopts"></div>
     <form id="qform" hidden>
-      <input id="qinput" type="text" autocomplete="off" placeholder="Type your answer">
-      <button class="strike" type="submit">Strike!</button>
+      <input id="qinput" type="text" dir="auto" autocomplete="off" placeholder="Type your answer" data-i18n-ph="typeAnswer">
+      <button class="strike" type="submit" data-i18n="strike">Strike!</button>
     </form>
     <p id="qfeedback"></p>
-    <div class="keyhint" id="qhint">Keys 1-4 or A-D to answer</div>
+    <div class="keyhint" id="qhint" data-i18n="keyhint">Keys 1-4 or A-D to answer</div>
   </div>
 </div>
 
 <section id="setup" class="overlay" aria-label="Game setup">
   <div class="sheet">
+    <div class="topbar">
+      <div class="lang" role="group" aria-label="Language" id="langSwitch">
+        <button type="button" data-lang="en" aria-pressed="true">English</button>
+        <button type="button" data-lang="ar" lang="ar" aria-pressed="false">&#x627;&#x644;&#x639;&#x631;&#x628;&#x64a;&#x629;</button>
+      </div>
+    </div>
     <div class="brand">
-      <h1>Sensei <em>vs</em> Shinobi</h1>
-      <p>A quiz duel beneath Mount Fuji. Every right answer is a ninja strike on the teacher. Every wrong one costs the ninja a weapon and a quarter of their health.</p>
+      <h1><span data-i18n="h1a">Sensei</span> <em data-i18n="h1vs">vs</em> <span data-i18n="h1b">Shinobi</span></h1>
+      <p data-i18n="tagline">A quiz duel beneath Mount Fuji. Every right answer is a ninja strike on the teacher. Every wrong one costs the ninja a weapon and a quarter of their health.</p>
     </div>
     <div class="grid">
       <div class="card">
-        <h2>The Sensei <small>Teacher</small></h2>
-        <label class="f">Teacher name<input type="text" id="teacherName" maxlength="24" placeholder="Mr. Tanaka"></label>
+        <h2><span data-i18n="senseiTitle">The Sensei</span> <small data-i18n="senseiSmall">Teacher</small></h2>
+        <label class="f"><span data-i18n="teacherNameL">Teacher name</span><input type="text" id="teacherName" dir="auto" maxlength="24" placeholder="Mr. Tanaka" data-i18n-ph="teacherPh"></label>
         <div class="photo">
           <canvas id="crop" width="264" height="264" aria-label="Teacher face preview. Drag to position."></canvas>
           <div class="col">
-            <label class="btn">Upload teacher photo<input type="file" id="photoFile" accept="image/*"></label>
-            <label class="f">Zoom<input type="range" id="photoZoom" min="1" max="3.5" step="0.05" value="1.3"></label>
-            <button class="btn" id="photoClear" type="button">Use drawn face</button>
+            <label class="btn"><span data-i18n="uploadPhoto">Upload teacher photo</span><input type="file" id="photoFile" accept="image/*"></label>
+            <label class="f"><span data-i18n="zoom">Zoom</span><input type="range" id="photoZoom" min="1" max="3.5" step="0.05" value="1.3"></label>
+            <button class="btn" id="photoClear" type="button" data-i18n="drawnFace">Use drawn face</button>
           </div>
         </div>
-        <p class="hint">The photo becomes the fighter's face. Drag the circle to center the face, then zoom to fit.</p>
+        <p class="hint" data-i18n="photoHint">The photo becomes the fighter's face. Drag the circle to center the face, then zoom to fit.</p>
       </div>
       <div class="card">
-        <h2>The Shinobi <small>Student</small></h2>
-        <label class="f">Student name<input type="text" id="studentName" maxlength="24" placeholder="Aiko"></label>
-        <p class="hint">The ninja carries four weapons: katana, nunchaku, shuriken and kusarigama. Each wrong answer knocks one away and takes 25% health. Each right answer lands a strike worth 25% of the teacher's health.</p>
+        <h2><span data-i18n="shinobiTitle">The Shinobi</span> <small data-i18n="shinobiSmall">Student</small></h2>
+        <label class="f"><span data-i18n="studentNameL">Student name</span><input type="text" id="studentName" dir="auto" maxlength="24" placeholder="Aiko" data-i18n-ph="studentPh"></label>
+        <p class="hint" data-i18n="shinobiHint">The ninja carries four weapons: katana, nunchaku, shuriken and kusarigama. Each wrong answer knocks one away and takes 25% health. Each right answer lands a strike worth 25% of the teacher's health.</p>
         <div class="checks">
-          <label><input type="checkbox" id="optVoice" checked> Announcer voice</label>
-          <label><input type="checkbox" id="optMusic" checked> Music</label>
+          <label><input type="checkbox" id="optVoice" checked> <span data-i18n="optVoiceL">Announcer voice</span></label>
+          <label><input type="checkbox" id="optMusic" checked> <span data-i18n="optMusicL">Music</span></label>
         </div>
-        <label class="f">Answer time limit
+        <label class="f"><span data-i18n="timerL">Answer time limit</span>
           <select id="optTimer">
-            <option value="0">No limit</option>
-            <option value="15">15 seconds</option>
-            <option value="30" selected>30 seconds</option>
-            <option value="60">60 seconds</option>
+            <option value="0" data-i18n="t0">No limit</option>
+            <option value="15" data-i18n="t15">15 seconds</option>
+            <option value="30" selected data-i18n="t30">30 seconds</option>
+            <option value="60" data-i18n="t60">60 seconds</option>
           </select>
         </label>
       </div>
       <div class="card wide">
-        <h2>Question Scroll <small>Excel sheet</small></h2>
-        <p class="hint">One question per row. Fill Option A to D for multiple choice and put the letter (or the option text) in Answer. Leave the options empty for a typed answer; separate accepted answers with <code>|</code>. Explanation is optional and is shown after each answer.</p>
+        <h2><span data-i18n="scrollTitle">Question Scroll</span> <small data-i18n="scrollSmall">Excel sheet</small></h2>
+        <p class="hint" data-i18n="scrollHint">One question per row. Fill Option A to D for multiple choice and put the letter (or the option text) in Answer. Leave the options empty for a typed answer; separate accepted answers with |. Explanation is optional and is shown after each answer. Questions can be in English or Arabic.</p>
         <div class="cols">
           <table>
-            <tr><th>Question</th><th>Option A</th><th>Option B</th><th>Option C</th><th>Option D</th><th>Answer</th><th>Explanation</th></tr>
-            <tr><td>What is 7 x 8?</td><td>54</td><td>56</td><td>64</td><td>48</td><td>B</td><td>7 x 8 = 56</td></tr>
-            <tr><td>12 squared is?</td><td></td><td></td><td></td><td></td><td>144</td><td></td></tr>
+            <tr><th data-i18n="colQ">Question</th><th data-i18n="colA">Option A</th><th data-i18n="colB">Option B</th><th data-i18n="colC">Option C</th><th data-i18n="colD">Option D</th><th data-i18n="colAns">Answer</th><th data-i18n="colExp">Explanation</th></tr>
+            <tr><td data-i18n="ex1q">What is 7 x 8?</td><td>54</td><td>56</td><td>64</td><td>48</td><td data-i18n="ex1ans">B</td><td data-i18n="ex1exp">7 x 8 = 56</td></tr>
+            <tr><td data-i18n="ex2q">12 squared is?</td><td></td><td></td><td></td><td></td><td>144</td><td></td></tr>
           </table>
         </div>
         <div class="row">
-          <label class="btn red">Upload Excel / CSV<input type="file" id="xlsFile" accept=".xlsx,.xls,.ods,.csv,.tsv,.txt"></label>
-          <button class="btn" id="tplDownload" type="button">Download Excel template</button>
-          <button class="btn" id="tplCopy" type="button">Copy template rows</button>
-          <button class="btn" id="loadSample" type="button">Load sample questions</button>
-          <button class="btn" id="clearQ" type="button">Clear all</button>
+          <label class="btn red"><span data-i18n="uploadXls">Upload Excel / CSV</span><input type="file" id="xlsFile" accept=".xlsx,.xls,.ods,.csv,.tsv,.txt"></label>
+          <button class="btn" id="tplDownload" type="button" data-i18n="tplDownload">Download Excel template</button>
+          <button class="btn" id="tplCopy" type="button" data-i18n="tplCopy">Copy template rows</button>
+          <button class="btn" id="loadSample" type="button" data-i18n="loadSample">Load sample questions</button>
+          <button class="btn" id="clearQ" type="button" data-i18n="clearQ">Clear all</button>
         </div>
         <p id="importMsg" role="status"></p>
-        <label class="f">Or paste rows straight from Excel
-          <textarea id="pasteBox" placeholder="Select the rows in Excel, copy, and paste them here"></textarea>
+        <label class="f"><span data-i18n="pasteL">Or paste rows straight from Excel</span>
+          <textarea id="pasteBox" dir="auto" data-i18n-ph="pastePh" placeholder="Select the rows in Excel, copy, and paste them here"></textarea>
         </label>
-        <div class="row"><button class="btn" id="pasteAdd" type="button">Add pasted rows</button></div>
+        <div class="row"><button class="btn" id="pasteAdd" type="button" data-i18n="pasteAdd">Add pasted rows</button></div>
         <details>
-          <summary>Write a question by hand</summary>
+          <summary data-i18n="manualSummary">Write a question by hand</summary>
           <form id="manual" class="mgrid">
-            <label class="f full">Question<input type="text" id="mQ" required></label>
-            <label class="f">Option A<input type="text" id="mA"></label>
-            <label class="f">Option B<input type="text" id="mB"></label>
-            <label class="f">Option C<input type="text" id="mC"></label>
-            <label class="f">Option D<input type="text" id="mD"></label>
-            <label class="f">Answer (letter or text)<input type="text" id="mAns" required></label>
-            <label class="f">Explanation (optional)<input type="text" id="mExp"></label>
-            <div class="full"><button class="btn" type="submit">Add question</button></div>
+            <label class="f full"><span data-i18n="mQ">Question</span><input type="text" dir="auto" id="mQ" required></label>
+            <label class="f"><span data-i18n="mA">Option A</span><input type="text" dir="auto" id="mA"></label>
+            <label class="f"><span data-i18n="mB">Option B</span><input type="text" dir="auto" id="mB"></label>
+            <label class="f"><span data-i18n="mC">Option C</span><input type="text" dir="auto" id="mC"></label>
+            <label class="f"><span data-i18n="mD">Option D</span><input type="text" dir="auto" id="mD"></label>
+            <label class="f"><span data-i18n="mAns">Answer (letter or text)</span><input type="text" dir="auto" id="mAns" required></label>
+            <label class="f"><span data-i18n="mExp">Explanation (optional)</span><input type="text" dir="auto" id="mExp"></label>
+            <div class="full"><button class="btn" type="submit" data-i18n="mAdd">Add question</button></div>
           </form>
         </details>
-        <ul id="qlist" aria-label="Questions"></ul>
+        <ul id="qlist" aria-label="Questions" dir="auto"></ul>
       </div>
     </div>
     <div class="go">
       <span id="qcount"></span>
-      <button class="btn red" id="startBtn" type="button">Enter the Dojo</button>
+      <button class="btn red" id="startBtn" type="button" data-i18n="startBtn">Enter the Dojo</button>
     </div>
   </div>
 </section>
@@ -272,15 +289,15 @@ details summary { cursor: pointer; color: var(--gold); font-size: 14px; }
       <h2 id="resTitle">Victory</h2>
       <p class="hint" id="resSub"></p>
       <div class="score">
-        <div><b id="resRight">0</b><span>Correct</span></div>
-        <div><b id="resWrong">0</b><span>Wrong</span></div>
-        <div><b id="resPct">0%</b><span>Accuracy</span></div>
+        <div><b id="resRight">0</b><span data-i18n="correctL">Correct</span></div>
+        <div><b id="resWrong">0</b><span data-i18n="wrongL">Wrong</span></div>
+        <div><b id="resPct">0%</b><span data-i18n="accL">Accuracy</span></div>
       </div>
-      <h2>Lesson review <small>All questions this match</small></h2>
-      <ul id="review"></ul>
+      <h2><span data-i18n="reviewTitle">Lesson review</span> <small data-i18n="reviewSmall">All questions this match</small></h2>
+      <ul id="review" dir="auto"></ul>
       <div class="row">
-        <button class="btn red" id="rematch" type="button">Rematch</button>
-        <button class="btn" id="toSetup" type="button">Change questions or fighters</button>
+        <button class="btn red" id="rematch" type="button" data-i18n="rematch">Rematch</button>
+        <button class="btn" id="toSetup" type="button" data-i18n="toSetup">Change questions or fighters</button>
       </div>
     </div>
   </div>
@@ -308,13 +325,48 @@ const E = {
   back: t => { const c = 1.7; return 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); }
 };
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const DISPLAY = '"Shojumaru", "Rubik", Georgia, serif';
+const DISPLAY = '"Shojumaru", "Cairo", "Rubik", Georgia, serif';
 const KANJI = '"Yuji Syuku", "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif';
 const store = {
   get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } },
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* storage full or blocked */ } }
 };
 function seeded(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+
+
+/* =========================================================
+   Language: English and Arabic (Arabic is kept as escapes so the source stays ASCII)
+   ========================================================= */
+const I18N = { en: {"h1a": "Sensei", "h1vs": "vs", "h1b": "Shinobi", "tagline": "A quiz duel beneath Mount Fuji. Every right answer is a ninja strike on the teacher. Every wrong one costs the ninja a weapon and a quarter of their health.", "senseiTitle": "The Sensei", "senseiSmall": "Teacher", "teacherNameL": "Teacher name", "teacherPh": "Mr. Tanaka", "uploadPhoto": "Upload teacher photo", "zoom": "Zoom", "drawnFace": "Use drawn face", "photoHint": "The photo becomes the fighter's face. Drag the circle to center the face, then zoom to fit.", "shinobiTitle": "The Shinobi", "shinobiSmall": "Student", "studentNameL": "Student name", "studentPh": "Aiko", "shinobiHint": "The ninja carries four weapons: katana, nunchaku, shuriken and kusarigama. Each wrong answer knocks one away and takes 25% health. Each right answer lands a strike worth 25% of the teacher's health.", "optVoiceL": "Announcer voice", "optMusicL": "Music", "timerL": "Answer time limit", "t0": "No limit", "t15": "15 seconds", "t30": "30 seconds", "t60": "60 seconds", "scrollTitle": "Question Scroll", "scrollSmall": "Excel sheet", "scrollHint": "One question per row. Fill Option A to D for multiple choice and put the letter (or the option text) in Answer. Leave the options empty for a typed answer; separate accepted answers with |. Explanation is optional and is shown after each answer. Questions can be in English or Arabic.", "colQ": "Question", "colA": "Option A", "colB": "Option B", "colC": "Option C", "colD": "Option D", "colAns": "Answer", "colExp": "Explanation", "ex1q": "What is 7 x 8?", "ex1ans": "B", "ex1exp": "7 x 8 = 56", "ex2q": "12 squared is?", "uploadXls": "Upload Excel / CSV", "tplDownload": "Download Excel template", "tplCopy": "Copy template rows", "loadSample": "Load sample questions", "clearQ": "Clear all", "pasteL": "Or paste rows straight from Excel", "pastePh": "Select the rows in Excel, copy, and paste them here", "pasteAdd": "Add pasted rows", "manualSummary": "Write a question by hand", "mQ": "Question", "mA": "Option A", "mB": "Option B", "mC": "Option C", "mD": "Option D", "mAns": "Answer (letter or text)", "mExp": "Explanation (optional)", "mAdd": "Add question", "startBtn": "Enter the Dojo", "quit": "Quit", "typeAnswer": "Type your answer", "strike": "Strike!", "keyhint": "Keys 1-4 or A-D to answer", "correctL": "Correct", "wrongL": "Wrong", "accL": "Accuracy", "reviewTitle": "Lesson review", "reviewSmall": "All questions this match", "rematch": "Rematch", "toSetup": "Change questions or fighters", "langLabel": "Language", "soundOn": "Sound: on", "soundOff": "Sound: off", "noPhoto1": "No photo", "noPhoto2": "drawn face used", "qcount": "{n} questions ready", "qcount1": "1 question ready", "qcountNone": "No questions yet: the sample set will be used", "answerItem": "Answer: {a}", "typedItem": "Typed answer: {a}", "or": " or ", "removeQ": "Remove question {n}", "importAdded": "{src}: added {n} question(s).", "importNone": "{src}: no questions found. Check the column order.", "importSkipped": " Skipped {n}: {list}.", "rowNoAns": "row {r}: no answer", "rowBadAns": "row {r}: answer \"{a}\" is not one of the options", "xlsMissing": "The Excel reader could not load. Save the sheet as CSV and upload that, or paste the rows below.", "readErr": "Could not read {f}: {e}", "tplStarted": "Template download started. If nothing downloads here, use \"Copy template rows\" and paste into a blank Excel sheet.", "tplBlocked": "Download is blocked here. Use \"Copy template rows\" and paste into Excel.", "tplCopied": "Template copied. Paste into cell A1 of a blank Excel sheet; each value lands in its own column.", "tplCopyFallback": "Copying is blocked here. The template is selected in the paste box; press Ctrl+C (Cmd+C) to copy it.", "samplesLoaded": "Loaded {n} sample questions.", "srcPasted": "Pasted rows", "srcManual": "Manual entry", "qnum": "Question {n}", "secs": "{n}s", "fbRight": "Correct! Strike now!", "fbWrong": "Wrong! The answer was {a}.", "fbTime": "Time's up! The answer was {a}.", "lsRight": "Correct: {a}", "lsWrong": "Not quite. Answer: {a}", "lsTime": "Time ran out. Answer: {a}", "timeRanOut": "(time ran out)", "blank": "(blank)", "letters": "ABCD", "optLabel": "{l}) {o}", "resWin": "{s} defeats Sensei {t}!", "resLose": "Sensei {t} wins this round", "subFlawless": "Flawless victory: not a single wrong answer.", "subWin": "The student surpasses the master. Review the misses below to stay sharp.", "subLose": "Every wrong answer is a lesson. Study the review below and try again.", "revRight": "Answered {a}", "revWrong": "Answered {g}. Correct: {c}", "hudQ": "QUESTION", "senseiName": "Sensei {t}", "introTitle": "SENSEI vs SHINOBI", "ironTeacher": "THE IRON TEACHER", "shinobiStudent": "THE SHINOBI STUDENT", "round1": "ROUND 1", "fight": "FIGHT!", "mv_katana": "IAI LIGHTNING SLASH", "mv_shuriken": "SHURIKEN STORM", "mv_nunchaku": "NUNCHAKU FURY", "mv_kusarigama": "CHAIN SICKLE SNARE", "mv_kick": "WHIRLWIND KICK", "mv_shadow": "SHADOW STEP", "mv_storm": "AUTUMN LEAF STORM", "mv_ruler": "RULER OF LAW", "mv_chalk": "CHALK BARRAGE", "mv_book": "TEXTBOOK SLAM", "mv_punch": "DETENTION PUNCH", "finalExam": "FINAL EXAM", "senseiFinisher": "SENSEI FINISHER", "popHit": ["WHAM!", "POW!", "SMACK!", "CRACK!"], "popSmall": ["WHAP!", "BAP!", "THOK!"], "popChalk": ["TAK!", "TOK!", "PAK!"], "pw_slash": "SLASH!", "pw_thunk": "THUNK!", "pw_krak": "KRAK!", "pw_knee": "KNEE!", "pw_kick": "KICK!", "pw_behind": "BEHIND YOU!", "pw_whack": "WHACK!", "pw_chalked": "CHALKED!", "pw_smack": "SMACK!", "pw_detention": "DETENTION!", "lost": "LOST {w}!", "w_katana": "KATANA", "w_nunchaku": "NUNCHAKU", "w_shuriken": "SHURIKEN", "w_kusarigama": "KUSARIGAMA", "finishHim": "FINISH HIM!", "seeMe": "SEE ME AFTER CLASS", "senseiWins": "SENSEI WINS", "hitBooks": "{s}, time to hit the books!", "wins": "{s} WINS", "flawless": "FLAWLESS VICTORY", "surpasses": "THE STUDENT SURPASSES THE MASTER", "shobuSub": "SHOBU ARI", "v_sensei": "Sensei {t}", "v_round": "Round one.", "v_fight": "Fight!", "v_finish": "Finish him!", "v_dismissed": "Class dismissed.", "v_wins": "{s} wins!", "v_flawless": "{s} wins. Flawless victory!", "v_lines": ["Wrong answer!", "See me after class!", "Did you even study?", "Pop quiz!", "Detention!"], "v_kiai": ["Hi-yah!", "Hah!", "Eiyah!"]}, ar: {"h1a": "\u0627\u0644\u0633\u064a\u0646\u0633\u064a", "h1vs": "\u0636\u062f", "h1b": "\u0627\u0644\u0634\u064a\u0646\u0648\u0628\u064a", "tagline": "\u0645\u0628\u0627\u0631\u0632\u0629 \u0623\u0633\u0626\u0644\u0629 \u0639\u0646\u062f \u0633\u0641\u062d \u062c\u0628\u0644 \u0641\u0648\u062c\u064a. \u0643\u0644 \u0625\u062c\u0627\u0628\u0629 \u0635\u062d\u064a\u062d\u0629 \u0636\u0631\u0628\u0629 \u0646\u064a\u0646\u062c\u0627 \u0639\u0644\u0649 \u0627\u0644\u0645\u0639\u0644\u0651\u0645\u060c \u0648\u0643\u0644 \u0625\u062c\u0627\u0628\u0629 \u062e\u0627\u0637\u0626\u0629 \u062a\u064f\u0641\u0642\u062f \u0627\u0644\u0646\u064a\u0646\u062c\u0627 \u0633\u0644\u0627\u062d\u064b\u0627 \u0648\u0631\u0628\u0639 \u0635\u062d\u062a\u0647.", "senseiTitle": "\u0627\u0644\u0633\u064a\u0646\u0633\u064a", "senseiSmall": "\u0627\u0644\u0645\u0639\u0644\u0651\u0645", "teacherNameL": "\u0627\u0633\u0645 \u0627\u0644\u0645\u0639\u0644\u0651\u0645", "teacherPh": "\u0627\u0644\u0623\u0633\u062a\u0627\u0630 \u0623\u062d\u0645\u062f", "uploadPhoto": "\u0627\u0631\u0641\u0639 \u0635\u0648\u0631\u0629 \u0627\u0644\u0645\u0639\u0644\u0651\u0645", "zoom": "\u0627\u0644\u062a\u0643\u0628\u064a\u0631", "drawnFace": "\u0627\u0633\u062a\u062e\u062f\u0645 \u0627\u0644\u0648\u062c\u0647 \u0627\u0644\u0645\u0631\u0633\u0648\u0645", "photoHint": "\u062a\u0635\u0628\u062d \u0627\u0644\u0635\u0648\u0631\u0629 \u0648\u062c\u0647 \u0627\u0644\u0645\u0642\u0627\u062a\u0644. \u0627\u0633\u062d\u0628 \u0627\u0644\u062f\u0627\u0626\u0631\u0629 \u0644\u062a\u0648\u0633\u064a\u0637 \u0627\u0644\u0648\u062c\u0647\u060c \u062b\u0645 \u0643\u0628\u0651\u0631 \u0627\u0644\u0635\u0648\u0631\u0629 \u0644\u0636\u0628\u0637\u0647\u0627.", "shinobiTitle": "\u0627\u0644\u0634\u064a\u0646\u0648\u0628\u064a", "shinobiSmall": "\u0627\u0644\u0637\u0627\u0644\u0628", "studentNameL": "\u0627\u0633\u0645 \u0627\u0644\u0637\u0627\u0644\u0628", "studentPh": "\u0633\u0627\u0631\u0629", "shinobiHint": "\u064a\u062d\u0645\u0644 \u0627\u0644\u0646\u064a\u0646\u062c\u0627 \u0623\u0631\u0628\u0639\u0629 \u0623\u0633\u0644\u062d\u0629: \u0627\u0644\u0643\u0627\u062a\u0627\u0646\u0627 \u0648\u0627\u0644\u0646\u0646\u0634\u0627\u0643\u0648 \u0648\u0627\u0644\u0634\u0648\u0631\u064a\u0643\u0646 \u0648\u0627\u0644\u0643\u0648\u0633\u0627\u0631\u064a\u063a\u0627\u0645\u0627. \u0643\u0644 \u0625\u062c\u0627\u0628\u0629 \u062e\u0627\u0637\u0626\u0629 \u062a\u064f\u0633\u0642\u0637 \u0633\u0644\u0627\u062d\u064b\u0627 \u0648\u062a\u062e\u0635\u0645 25% \u0645\u0646 \u0635\u062d\u062a\u0647\u060c \u0648\u0643\u0644 \u0625\u062c\u0627\u0628\u0629 \u0635\u062d\u064a\u062d\u0629 \u062a\u064f\u0646\u0632\u0644 \u0636\u0631\u0628\u0629 \u062a\u062e\u0635\u0645 25% \u0645\u0646 \u0635\u062d\u0629 \u0627\u0644\u0645\u0639\u0644\u0651\u0645.", "optVoiceL": "\u0635\u0648\u062a \u0627\u0644\u0645\u0639\u0644\u0651\u0642", "optMusicL": "\u0627\u0644\u0645\u0648\u0633\u064a\u0642\u0649", "timerL": "\u0645\u0647\u0644\u0629 \u0627\u0644\u0625\u062c\u0627\u0628\u0629", "t0": "\u0628\u0644\u0627 \u062d\u062f", "t15": "15 \u062b\u0627\u0646\u064a\u0629", "t30": "30 \u062b\u0627\u0646\u064a\u0629", "t60": "60 \u062b\u0627\u0646\u064a\u0629", "scrollTitle": "\u0644\u0641\u0627\u0641\u0629 \u0627\u0644\u0623\u0633\u0626\u0644\u0629", "scrollSmall": "\u0648\u0631\u0642\u0629 Excel", "scrollHint": "\u0633\u0624\u0627\u0644 \u0648\u0627\u062d\u062f \u0641\u064a \u0643\u0644 \u0635\u0641. \u0627\u0645\u0644\u0623 \u0627\u0644\u062e\u064a\u0627\u0631\u0627\u062a \u0645\u0646 \u0623 \u0625\u0644\u0649 \u062f \u0644\u0644\u0627\u062e\u062a\u064a\u0627\u0631 \u0645\u0646 \u0645\u062a\u0639\u062f\u062f\u060c \u0648\u0636\u0639 \u062d\u0631\u0641 \u0627\u0644\u0625\u062c\u0627\u0628\u0629 (\u0623\u060c \u0628\u060c \u062c\u060c \u062f \u0623\u0648 A \u0625\u0644\u0649 D) \u0623\u0648 \u0646\u0635 \u0627\u0644\u062e\u064a\u0627\u0631 \u0641\u064a \u0639\u0645\u0648\u062f \u0627\u0644\u0625\u062c\u0627\u0628\u0629. \u0627\u062a\u0631\u0643 \u0627\u0644\u062e\u064a\u0627\u0631\u0627\u062a \u0641\u0627\u0631\u063a\u0629 \u0644\u0625\u062c\u0627\u0628\u0629 \u0645\u0643\u062a\u0648\u0628\u0629\u060c \u0648\u0627\u0641\u0635\u0644 \u0628\u064a\u0646 \u0627\u0644\u0625\u062c\u0627\u0628\u0627\u062a \u0627\u0644\u0645\u0642\u0628\u0648\u0644\u0629 \u0628\u0627\u0644\u0631\u0645\u0632 |. \u0627\u0644\u0634\u0631\u062d \u0627\u062e\u062a\u064a\u0627\u0631\u064a \u0648\u064a\u0638\u0647\u0631 \u0628\u0639\u062f \u0643\u0644 \u0625\u062c\u0627\u0628\u0629. \u064a\u0645\u0643\u0646 \u0643\u062a\u0627\u0628\u0629 \u0627\u0644\u0623\u0633\u0626\u0644\u0629 \u0628\u0627\u0644\u0639\u0631\u0628\u064a\u0629 \u0623\u0648 \u0627\u0644\u0625\u0646\u062c\u0644\u064a\u0632\u064a\u0629.", "colQ": "\u0627\u0644\u0633\u0624\u0627\u0644", "colA": "\u0627\u0644\u062e\u064a\u0627\u0631 \u0623", "colB": "\u0627\u0644\u062e\u064a\u0627\u0631 \u0628", "colC": "\u0627\u0644\u062e\u064a\u0627\u0631 \u062c", "colD": "\u0627\u0644\u062e\u064a\u0627\u0631 \u062f", "colAns": "\u0627\u0644\u0625\u062c\u0627\u0628\u0629", "colExp": "\u0627\u0644\u0634\u0631\u062d", "ex1q": "\u0643\u0645 \u064a\u0633\u0627\u0648\u064a 7 \u00d7 8\u061f", "ex1ans": "\u0628", "ex1exp": "7 \u00d7 8 = 56", "ex2q": "\u0645\u0627 \u0645\u0631\u0628\u0639 \u0627\u0644\u0639\u062f\u062f 12\u061f", "uploadXls": "\u0627\u0631\u0641\u0639 \u0645\u0644\u0641 Excel \u0623\u0648 CSV", "tplDownload": "\u062a\u0646\u0632\u064a\u0644 \u0642\u0627\u0644\u0628 Excel", "tplCopy": "\u0646\u0633\u062e \u0635\u0641\u0648\u0641 \u0627\u0644\u0642\u0627\u0644\u0628", "loadSample": "\u062a\u062d\u0645\u064a\u0644 \u0623\u0633\u0626\u0644\u0629 \u0646\u0645\u0648\u0630\u062c\u064a\u0629", "clearQ": "\u0645\u0633\u062d \u0627\u0644\u0643\u0644", "pasteL": "\u0623\u0648 \u0627\u0644\u0635\u0642 \u0627\u0644\u0635\u0641\u0648\u0641 \u0645\u0628\u0627\u0634\u0631\u0629 \u0645\u0646 Excel", "pastePh": "\u062d\u062f\u0651\u062f \u0627\u0644\u0635\u0641\u0648\u0641 \u0641\u064a Excel \u0648\u0627\u0646\u0633\u062e\u0647\u0627 \u062b\u0645 \u0627\u0644\u0635\u0642\u0647\u0627 \u0647\u0646\u0627", "pasteAdd": "\u0625\u0636\u0627\u0641\u0629 \u0627\u0644\u0635\u0641\u0648\u0641 \u0627\u0644\u0645\u0644\u0635\u0642\u0629", "manualSummary": "\u0627\u0643\u062a\u0628 \u0633\u0624\u0627\u0644\u064b\u0627 \u064a\u062f\u0648\u064a\u064b\u0627", "mQ": "\u0627\u0644\u0633\u0624\u0627\u0644", "mA": "\u0627\u0644\u062e\u064a\u0627\u0631 \u0623", "mB": "\u0627\u0644\u062e\u064a\u0627\u0631 \u0628", "mC": "\u0627\u0644\u062e\u064a\u0627\u0631 \u062c", "mD": "\u0627\u0644\u062e\u064a\u0627\u0631 \u062f", "mAns": "\u0627\u0644\u0625\u062c\u0627\u0628\u0629 (\u062d\u0631\u0641 \u0623\u0648 \u0646\u0635)", "mExp": "\u0627\u0644\u0634\u0631\u062d (\u0627\u062e\u062a\u064a\u0627\u0631\u064a)", "mAdd": "\u0625\u0636\u0627\u0641\u0629 \u0627\u0644\u0633\u0624\u0627\u0644", "startBtn": "\u0627\u062f\u062e\u0644 \u0627\u0644\u062f\u0648\u062c\u0648", "quit": "\u062e\u0631\u0648\u062c", "typeAnswer": "\u0627\u0643\u062a\u0628 \u0625\u062c\u0627\u0628\u062a\u0643", "strike": "\u0627\u0636\u0631\u0628!", "keyhint": "\u0627\u0633\u062a\u062e\u062f\u0645 \u0627\u0644\u0645\u0641\u0627\u062a\u064a\u062d 1-4 \u0644\u0644\u0625\u062c\u0627\u0628\u0629", "correctL": "\u0635\u062d\u064a\u062d\u0629", "wrongL": "\u062e\u0627\u0637\u0626\u0629", "accL": "\u0627\u0644\u062f\u0642\u0629", "reviewTitle": "\u0645\u0631\u0627\u062c\u0639\u0629 \u0627\u0644\u062f\u0631\u0633", "reviewSmall": "\u0643\u0644 \u0623\u0633\u0626\u0644\u0629 \u0647\u0630\u0647 \u0627\u0644\u0645\u0628\u0627\u0631\u0627\u0629", "rematch": "\u0625\u0639\u0627\u062f\u0629 \u0627\u0644\u0645\u0628\u0627\u0631\u0627\u0629", "toSetup": "\u062a\u063a\u064a\u064a\u0631 \u0627\u0644\u0623\u0633\u0626\u0644\u0629 \u0623\u0648 \u0627\u0644\u0645\u0642\u0627\u062a\u0644\u064a\u0646", "langLabel": "\u0627\u0644\u0644\u063a\u0629", "soundOn": "\u0627\u0644\u0635\u0648\u062a: \u064a\u0639\u0645\u0644", "soundOff": "\u0627\u0644\u0635\u0648\u062a: \u0645\u062a\u0648\u0642\u0641", "noPhoto1": "\u0644\u0627 \u062a\u0648\u062c\u062f \u0635\u0648\u0631\u0629", "noPhoto2": "\u0633\u064a\u064f\u0633\u062a\u062e\u062f\u0645 \u0648\u062c\u0647 \u0645\u0631\u0633\u0648\u0645", "qcount": "\u0639\u062f\u062f \u0627\u0644\u0623\u0633\u0626\u0644\u0629 \u0627\u0644\u062c\u0627\u0647\u0632\u0629: {n}", "qcount1": "\u0633\u0624\u0627\u0644 \u0648\u0627\u062d\u062f \u062c\u0627\u0647\u0632", "qcountNone": "\u0644\u0627 \u062a\u0648\u062c\u062f \u0623\u0633\u0626\u0644\u0629 \u0628\u0639\u062f: \u0633\u062a\u064f\u0633\u062a\u062e\u062f\u0645 \u0627\u0644\u0623\u0633\u0626\u0644\u0629 \u0627\u0644\u0646\u0645\u0648\u0630\u062c\u064a\u0629", "answerItem": "\u0627\u0644\u0625\u062c\u0627\u0628\u0629: {a}", "typedItem": "\u0625\u062c\u0627\u0628\u0629 \u0645\u0643\u062a\u0648\u0628\u0629: {a}", "or": " \u0623\u0648 ", "removeQ": "\u062d\u0630\u0641 \u0627\u0644\u0633\u0624\u0627\u0644 {n}", "importAdded": "{src}: \u062a\u0645\u062a \u0625\u0636\u0627\u0641\u0629 {n} \u0645\u0646 \u0627\u0644\u0623\u0633\u0626\u0644\u0629.", "importNone": "{src}: \u0644\u0645 \u064a\u064f\u0639\u062b\u0631 \u0639\u0644\u0649 \u0623\u0633\u0626\u0644\u0629. \u062a\u062d\u0642\u0651\u0642 \u0645\u0646 \u062a\u0631\u062a\u064a\u0628 \u0627\u0644\u0623\u0639\u0645\u062f\u0629.", "importSkipped": " \u062a\u0645 \u062a\u062e\u0637\u064a {n}: {list}.", "rowNoAns": "\u0627\u0644\u0635\u0641 {r}: \u0644\u0627 \u062a\u0648\u062c\u062f \u0625\u062c\u0627\u0628\u0629", "rowBadAns": "\u0627\u0644\u0635\u0641 {r}: \u0627\u0644\u0625\u062c\u0627\u0628\u0629 \u00ab{a}\u00bb \u0644\u064a\u0633\u062a \u0645\u0646 \u0627\u0644\u062e\u064a\u0627\u0631\u0627\u062a", "xlsMissing": "\u062a\u0639\u0630\u0651\u0631 \u062a\u062d\u0645\u064a\u0644 \u0642\u0627\u0631\u0626 Excel. \u0627\u062d\u0641\u0638 \u0627\u0644\u0648\u0631\u0642\u0629 \u0628\u0635\u064a\u063a\u0629 CSV \u0648\u0627\u0631\u0641\u0639\u0647\u0627\u060c \u0623\u0648 \u0627\u0644\u0635\u0642 \u0627\u0644\u0635\u0641\u0648\u0641 \u0623\u062f\u0646\u0627\u0647.", "readErr": "\u062a\u0639\u0630\u0651\u0631\u062a \u0642\u0631\u0627\u0621\u0629 {f}: {e}", "tplStarted": "\u0628\u062f\u0623 \u062a\u0646\u0632\u064a\u0644 \u0627\u0644\u0642\u0627\u0644\u0628. \u0625\u0646 \u0644\u0645 \u064a\u064f\u0646\u0632\u064e\u0651\u0644 \u0634\u064a\u0621 \u0647\u0646\u0627\u060c \u0627\u0633\u062a\u062e\u062f\u0645 \u00ab\u0646\u0633\u062e \u0635\u0641\u0648\u0641 \u0627\u0644\u0642\u0627\u0644\u0628\u00bb \u0648\u0627\u0644\u0635\u0642\u0647\u0627 \u0641\u064a \u0648\u0631\u0642\u0629 Excel \u0641\u0627\u0631\u063a\u0629.", "tplBlocked": "\u0627\u0644\u062a\u0646\u0632\u064a\u0644 \u063a\u064a\u0631 \u0645\u062a\u0627\u062d \u0647\u0646\u0627. \u0627\u0633\u062a\u062e\u062f\u0645 \u00ab\u0646\u0633\u062e \u0635\u0641\u0648\u0641 \u0627\u0644\u0642\u0627\u0644\u0628\u00bb \u0648\u0627\u0644\u0635\u0642\u0647\u0627 \u0641\u064a Excel.", "tplCopied": "\u062a\u0645 \u0646\u0633\u062e \u0627\u0644\u0642\u0627\u0644\u0628. \u0627\u0644\u0635\u0642\u0647 \u0641\u064a \u0627\u0644\u062e\u0644\u064a\u0629 A1 \u0645\u0646 \u0648\u0631\u0642\u0629 Excel \u0641\u0627\u0631\u063a\u0629\u060c \u0648\u0633\u062a\u0648\u0636\u0639 \u0643\u0644 \u0642\u064a\u0645\u0629 \u0641\u064a \u0639\u0645\u0648\u062f\u0647\u0627.", "tplCopyFallback": "\u0627\u0644\u0646\u0633\u062e \u063a\u064a\u0631 \u0645\u062a\u0627\u062d \u0647\u0646\u0627. \u0627\u0644\u0642\u0627\u0644\u0628 \u0645\u062d\u062f\u064e\u0651\u062f \u0641\u064a \u0645\u0631\u0628\u0639 \u0627\u0644\u0644\u0635\u0642\u061b \u0627\u0636\u063a\u0637 Ctrl+C (\u0623\u0648 Cmd+C) \u0644\u0646\u0633\u062e\u0647.", "samplesLoaded": "\u062a\u0645 \u062a\u062d\u0645\u064a\u0644 {n} \u0645\u0646 \u0627\u0644\u0623\u0633\u0626\u0644\u0629 \u0627\u0644\u0646\u0645\u0648\u0630\u062c\u064a\u0629.", "srcPasted": "\u0627\u0644\u0635\u0641\u0648\u0641 \u0627\u0644\u0645\u0644\u0635\u0642\u0629", "srcManual": "\u0625\u062f\u062e\u0627\u0644 \u064a\u062f\u0648\u064a", "qnum": "\u0627\u0644\u0633\u0624\u0627\u0644 {n}", "secs": "{n} \u062b", "fbRight": "\u0625\u062c\u0627\u0628\u0629 \u0635\u062d\u064a\u062d\u0629! \u0627\u0636\u0631\u0628 \u0627\u0644\u0622\u0646!", "fbWrong": "\u062e\u0637\u0623! \u0627\u0644\u0625\u062c\u0627\u0628\u0629 \u0627\u0644\u0635\u062d\u064a\u062d\u0629: {a}.", "fbTime": "\u0627\u0646\u062a\u0647\u0649 \u0627\u0644\u0648\u0642\u062a! \u0627\u0644\u0625\u062c\u0627\u0628\u0629 \u0627\u0644\u0635\u062d\u064a\u062d\u0629: {a}.", "lsRight": "\u0635\u062d\u064a\u062d: {a}", "lsWrong": "\u0644\u064a\u0633 \u062a\u0645\u0627\u0645\u064b\u0627. \u0627\u0644\u0625\u062c\u0627\u0628\u0629: {a}", "lsTime": "\u0627\u0646\u062a\u0647\u0649 \u0627\u0644\u0648\u0642\u062a. \u0627\u0644\u0625\u062c\u0627\u0628\u0629: {a}", "timeRanOut": "(\u0627\u0646\u062a\u0647\u0649 \u0627\u0644\u0648\u0642\u062a)", "blank": "(\u0641\u0627\u0631\u063a\u0629)", "letters": "\u0623\u0628\u062c\u062f", "optLabel": "({l}) {o}", "resWin": "{s} \u064a\u0647\u0632\u0645 \u0627\u0644\u0633\u064a\u0646\u0633\u064a {t}!", "resLose": "\u0627\u0644\u0633\u064a\u0646\u0633\u064a {t} \u064a\u0641\u0648\u0632 \u0628\u0647\u0630\u0647 \u0627\u0644\u062c\u0648\u0644\u0629", "subFlawless": "\u0627\u0646\u062a\u0635\u0627\u0631 \u0643\u0627\u0645\u0644: \u0644\u0627 \u0625\u062c\u0627\u0628\u0629 \u062e\u0627\u0637\u0626\u0629 \u0648\u0627\u062d\u062f\u0629.", "subWin": "\u0627\u0644\u062a\u0644\u0645\u064a\u0630 \u062a\u0641\u0648\u0651\u0642 \u0639\u0644\u0649 \u0627\u0644\u0645\u0639\u0644\u0651\u0645. \u0631\u0627\u062c\u0639 \u0627\u0644\u0623\u062e\u0637\u0627\u0621 \u0623\u062f\u0646\u0627\u0647 \u0644\u062a\u0628\u0642\u0649 \u0645\u062a\u064a\u0642\u0638\u064b\u0627.", "subLose": "\u0643\u0644 \u0625\u062c\u0627\u0628\u0629 \u062e\u0627\u0637\u0626\u0629 \u062f\u0631\u0633. \u0627\u062f\u0631\u0633 \u0627\u0644\u0645\u0631\u0627\u062c\u0639\u0629 \u0623\u062f\u0646\u0627\u0647 \u0648\u062d\u0627\u0648\u0644 \u0645\u062c\u062f\u062f\u064b\u0627.", "revRight": "\u0623\u062c\u0628\u062a: {a}", "revWrong": "\u0623\u062c\u0628\u062a: {g}. \u0627\u0644\u0635\u062d\u064a\u062d: {c}", "hudQ": "\u0627\u0644\u0633\u0624\u0627\u0644", "senseiName": "\u0627\u0644\u0633\u064a\u0646\u0633\u064a {t}", "introTitle": "\u0627\u0644\u0633\u064a\u0646\u0633\u064a \u0636\u062f \u0627\u0644\u0634\u064a\u0646\u0648\u0628\u064a", "ironTeacher": "\u0627\u0644\u0645\u0639\u0644\u0651\u0645 \u0627\u0644\u062d\u062f\u064a\u062f\u064a", "shinobiStudent": "\u0627\u0644\u0637\u0627\u0644\u0628 \u0627\u0644\u0634\u064a\u0646\u0648\u0628\u064a", "round1": "\u0627\u0644\u062c\u0648\u0644\u0629 1", "fight": "\u0642\u0627\u062a\u0644!", "mv_katana": "\u0636\u0631\u0628\u0629 \u0627\u0644\u0628\u0631\u0642 \u0627\u0644\u062e\u0627\u0637\u0641\u0629", "mv_shuriken": "\u0639\u0627\u0635\u0641\u0629 \u0627\u0644\u0634\u0648\u0631\u064a\u0643\u0646", "mv_nunchaku": "\u063a\u0636\u0628 \u0627\u0644\u0646\u0646\u0634\u0627\u0643\u0648", "mv_kusarigama": "\u0641\u062e \u0627\u0644\u0645\u0646\u062c\u0644 \u0648\u0627\u0644\u0633\u0644\u0633\u0644\u0629", "mv_kick": "\u0631\u0643\u0644\u0629 \u0627\u0644\u0625\u0639\u0635\u0627\u0631", "mv_shadow": "\u062e\u0637\u0648\u0629 \u0627\u0644\u0638\u0644", "mv_storm": "\u0639\u0627\u0635\u0641\u0629 \u0623\u0648\u0631\u0627\u0642 \u0627\u0644\u062e\u0631\u064a\u0641", "mv_ruler": "\u0645\u0633\u0637\u0631\u0629 \u0627\u0644\u0642\u0627\u0646\u0648\u0646", "mv_chalk": "\u0648\u0627\u0628\u0644 \u0627\u0644\u0637\u0628\u0627\u0634\u064a\u0631", "mv_book": "\u0635\u0641\u0639\u0629 \u0627\u0644\u0643\u062a\u0627\u0628 \u0627\u0644\u0645\u062f\u0631\u0633\u064a", "mv_punch": "\u0644\u0643\u0645\u0629 \u0627\u0644\u0639\u0642\u0627\u0628", "finalExam": "\u0627\u0644\u0627\u0645\u062a\u062d\u0627\u0646 \u0627\u0644\u0646\u0647\u0627\u0626\u064a", "senseiFinisher": "\u0627\u0644\u0636\u0631\u0628\u0629 \u0627\u0644\u0642\u0627\u0636\u064a\u0629 \u0644\u0644\u0633\u064a\u0646\u0633\u064a", "popHit": ["\u0628\u0648\u0645!", "\u0637\u0627\u062e!", "\u0628\u0627\u0645!", "\u0643\u0631\u0627\u0643!"], "popSmall": ["\u0637\u0642!", "\u0628\u0642!", "\u0637\u062e!"], "popChalk": ["\u062a\u0643!", "\u0637\u0643!", "\u0628\u0643!"], "pw_slash": "\u0634\u064e\u0642!", "pw_thunk": "\u0637\u0642!", "pw_krak": "\u0643\u0631\u0627\u0643!", "pw_knee": "\u0631\u0643\u0628\u0629!", "pw_kick": "\u0631\u0643\u0644\u0629!", "pw_behind": "\u062e\u0644\u0641\u0643!", "pw_whack": "\u0637\u0627\u062e!", "pw_chalked": "\u0637\u0628\u0627\u0634\u064a\u0631!", "pw_smack": "\u0635\u0641\u0639\u0629!", "pw_detention": "\u0639\u0642\u0627\u0628!", "lost": "\u0633\u0642\u0637\u062a {w}!", "w_katana": "\u0627\u0644\u0643\u0627\u062a\u0627\u0646\u0627", "w_nunchaku": "\u0627\u0644\u0646\u0646\u0634\u0627\u0643\u0648", "w_shuriken": "\u0627\u0644\u0634\u0648\u0631\u064a\u0643\u0646", "w_kusarigama": "\u0627\u0644\u0643\u0648\u0633\u0627\u0631\u064a\u063a\u0627\u0645\u0627", "finishHim": "\u0623\u062c\u0647\u0632 \u0639\u0644\u064a\u0647!", "seeMe": "\u0631\u0627\u062c\u0639\u0646\u064a \u0628\u0639\u062f \u0627\u0644\u062d\u0635\u0629", "senseiWins": "\u0627\u0644\u0633\u064a\u0646\u0633\u064a \u064a\u0641\u0648\u0632", "hitBooks": "{s}\u060c \u062d\u0627\u0646 \u0648\u0642\u062a \u0627\u0644\u0645\u0630\u0627\u0643\u0631\u0629!", "wins": "{s} \u064a\u0641\u0648\u0632", "flawless": "\u0627\u0646\u062a\u0635\u0627\u0631 \u0643\u0627\u0645\u0644", "surpasses": "\u0627\u0644\u062a\u0644\u0645\u064a\u0630 \u062a\u0641\u0648\u0651\u0642 \u0639\u0644\u0649 \u0627\u0644\u0645\u0639\u0644\u0651\u0645", "shobuSub": "\u062d\u064f\u0633\u0645 \u0627\u0644\u0646\u0632\u0627\u0644", "v_sensei": "\u0627\u0644\u0633\u064a\u0646\u0633\u064a {t}", "v_round": "\u0627\u0644\u062c\u0648\u0644\u0629 \u0627\u0644\u0623\u0648\u0644\u0649.", "v_fight": "\u0642\u0627\u062a\u0644!", "v_finish": "\u0623\u062c\u0647\u0632 \u0639\u0644\u064a\u0647!", "v_dismissed": "\u0627\u0646\u062a\u0647\u062a \u0627\u0644\u062d\u0635\u0629.", "v_wins": "{s} \u064a\u0641\u0648\u0632!", "v_flawless": "{s} \u064a\u0641\u0648\u0632. \u0627\u0646\u062a\u0635\u0627\u0631 \u0643\u0627\u0645\u0644!", "v_lines": ["\u0625\u062c\u0627\u0628\u0629 \u062e\u0627\u0637\u0626\u0629!", "\u0631\u0627\u062c\u0639\u0646\u064a \u0628\u0639\u062f \u0627\u0644\u062d\u0635\u0629!", "\u0647\u0644 \u0630\u0627\u0643\u0631\u062a \u0623\u0635\u0644\u064b\u0627\u061f", "\u0627\u062e\u062a\u0628\u0627\u0631 \u0645\u0641\u0627\u062c\u0626!", "\u0639\u0642\u0627\u0628!"], "v_kiai": ["\u0647\u064a\u0651\u0627!", "\u0647\u0627\u0647!"]} };
+let LANG = 'en';
+const RTL_RE = /[\u0590-\u08FF\uFB1D-\uFDFF\uFE70-\uFEFF]/;
+function tr(lang, k, v) {
+  let x = I18N[lang][k];
+  if (x === undefined) x = I18N.en[k];
+  if (Array.isArray(x)) return x;
+  return String(x).replace(/\{(\w+)\}/g, (m, n) => (v && v[n] !== undefined ? v[n] : m));
+}
+function t(k, v) { return tr(LANG, k, v); }
+function letters() { return t('letters'); }
+function optLabel(i, o) { return t('optLabel', { l: letters()[i], o }); }
+/* Arabic has no glyphs in the display face, so it falls back to Cairo; ask for its heavy cut. */
+function dfont(size) { return `${LANG === 'ar' ? '900 ' : ''}${size}px ${DISPLAY}`; }
+function applyLang(l) {
+  LANG = I18N[l] ? l : 'en';
+  document.documentElement.lang = LANG;
+  document.documentElement.dir = LANG === 'ar' ? 'rtl' : 'ltr';
+  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => { el.placeholder = t(el.dataset.i18nPh); });
+  document.querySelectorAll('#langSwitch button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === LANG)));
+  $('#langSwitch').setAttribute('aria-label', t('langLabel'));
+  $('#btnMute').textContent = t(AU.on ? 'soundOn' : 'soundOff');
+  if (typeof renderQList === 'function') { renderQList(); renderFace(); }
+}
+/* Canvas text picks its bidi direction from the string, so Arabic names and banners shape correctly. */
+for (const m of ['fillText', 'strokeText']) {
+  const orig = ctx[m].bind(ctx);
+  ctx[m] = (str, x, y, mw) => { ctx.direction = RTL_RE.test(str) ? 'rtl' : 'ltr'; return mw === undefined ? orig(str, x, y) : orig(str, x, y, mw); };
+}
 
 /* Japanese strings kept as escapes so the source stays ASCII. */
 const JP = {
@@ -495,6 +547,14 @@ function say(text, o = {}) {
     speechSynthesis.speak(u);
   } catch (e) { /* speech unavailable */ }
 }
+/* Speaks a table line in the chosen language, falling back to English when the device has no Arabic voice. */
+function sayT(k, v, o = {}) {
+  const ar = LANG === 'ar' && voiceFor('ar');
+  let text = tr(ar ? 'ar' : 'en', k, v);
+  if (Array.isArray(text)) text = pick(text);
+  say(text, { ...o, lang: ar ? 'ar-SA' : 'en-US' });
+}
+function sayName(name, o = {}) { say(name, { ...o, lang: RTL_RE.test(name) && voiceFor('ar') ? 'ar-SA' : 'en-US' }); }
 function sayJa(ja, romaji, o = {}) {
   if (voiceFor('ja-JP')) say(ja, { lang: 'ja-JP', pitch: o.pitch || 0.6, rate: o.rate || 0.8 });
   else say(romaji, { pitch: o.pitch || 0.4, rate: o.rate || 0.75 });
@@ -662,14 +722,14 @@ function drawWeapon(type, sc = 1, spin = null) {
     ctx.beginPath(); ctx.rect(-12, -8, 156, 16); ctx.fill(); ctx.stroke();
     ctx.strokeStyle = '#5a3d08'; ctx.lineWidth = 1;
     for (let x = 0; x < 140; x += 7) { ctx.beginPath(); ctx.moveTo(x, -8); ctx.lineTo(x, x % 35 === 0 ? 0 : -4); ctx.stroke(); }
-    ctx.fillStyle = '#5a3d08'; ctx.font = 'bold 7px Rubik, sans-serif';
+    ctx.fillStyle = '#5a3d08'; ctx.font = 'bold 7px Rubik, Cairo, sans-serif';
     for (let i = 1; i < 4; i++) ctx.fillText(String(i * 10), i * 35 - 4, 6);
   } else if (type === 'book') {
     ctx.fillStyle = '#f3ecd9'; ctx.fillRect(-6, -44, 64, 88);
     ctx.fillStyle = '#8c1d22'; ctx.strokeStyle = '#3d0a0d'; ctx.lineWidth = 2.5;
     ctx.beginPath(); ctx.rect(-10, -48, 64, 92); ctx.fill(); ctx.stroke();
     ctx.fillStyle = '#5d1015'; ctx.fillRect(-10, -48, 10, 92);
-    ctx.fillStyle = '#f2c14e'; ctx.font = '13px ' + DISPLAY; ctx.textAlign = 'center';
+    ctx.fillStyle = '#f2c14e'; ctx.font = dfont(13); ctx.textAlign = 'center';
     ctx.fillText('FINAL', 27, -8); ctx.fillText('EXAM', 27, 10); ctx.textAlign = 'left';
   } else if (type === 'chalk') {
     ctx.fillStyle = '#ffffff'; ctx.strokeStyle = '#9a9a9a'; ctx.lineWidth = 1; ctx.beginPath(); ctx.rect(-8, -3, 16, 6); ctx.fill(); ctx.stroke();
@@ -872,7 +932,7 @@ function drawTeacherHead(f, j, R, OUT, SKIN) {
     ctx.restore();
     ctx.beginPath(); ctx.arc(0, 0, R, 0, Math.PI * 2); ctx.strokeStyle = OUT; ctx.lineWidth = 4; ctx.stroke();
     ctx.restore();
-    if (ko) { ctx.font = `bold ${R * 0.5}px Rubik, sans-serif`; ctx.fillStyle = '#fff'; ctx.strokeStyle = '#000'; ctx.lineWidth = 3; ctx.textAlign = 'center'; for (const x of [-R * 0.38, R * 0.38]) { ctx.strokeText('x', x, -R * 0.05); ctx.fillText('x', x, -R * 0.05); } ctx.textAlign = 'left'; }
+    if (ko) { ctx.font = `bold ${R * 0.5}px Rubik, Cairo, sans-serif`; ctx.fillStyle = '#fff'; ctx.strokeStyle = '#000'; ctx.lineWidth = 3; ctx.textAlign = 'center'; for (const x of [-R * 0.38, R * 0.38]) { ctx.strokeText('x', x, -R * 0.05); ctx.fillText('x', x, -R * 0.05); } ctx.textAlign = 'left'; }
   } else {
     ell(R * 0.08, R * 0.32, R * 0.86, R * 0.72, 0, SKIN, OUT, 4);
     circ(0, 0, R, SKIN, OUT, 4);
@@ -1245,7 +1305,7 @@ function drawFx() {
   for (const p of pops) {
     const k = p.life / p.max, s = k < 0.15 ? E.back(k / 0.15) : 1;
     ctx.save(); ctx.translate(p.x, p.y - k * 40); ctx.rotate(p.rot); ctx.scale(s, s); ctx.globalAlpha = k > 0.7 ? (1 - k) / 0.3 : 1;
-    ctx.font = `${p.size}px ${DISPLAY}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.font = dfont(p.size); ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
     ctx.lineWidth = 8; ctx.strokeStyle = '#1a0606'; ctx.strokeText(p.text, 0, 0); ctx.fillStyle = p.col; ctx.fillText(p.text, 0, 0);
     ctx.restore();
   }
@@ -1270,9 +1330,9 @@ function drawBar(x, y, w, f, right, name) {
   if (f.hp <= 25 && f.hp > 0) { ctx.globalAlpha = 0.3 + Math.sin(rnow * 10) * 0.3; fill(f.hp, '#fff'); ctx.globalAlpha = 1; }
   ctx.fillStyle = 'rgba(255,255,255,.25)'; ctx.fillRect(x, y + 3, w, 4);
   ctx.strokeStyle = 'rgba(10,6,10,.8)'; ctx.lineWidth = 3; for (let i = 1; i < 4; i++) { ctx.beginPath(); ctx.moveTo(x + w * i / 4, y); ctx.lineTo(x + w * i / 4, y + h); ctx.stroke(); }
-  ctx.font = `22px ${DISPLAY}`; ctx.textBaseline = 'bottom'; ctx.textAlign = right ? 'right' : 'left';
+  ctx.font = dfont(22); ctx.textBaseline = 'bottom'; ctx.textAlign = right ? 'right' : 'left';
   ctx.lineWidth = 5; ctx.strokeStyle = '#1a0606'; ctx.strokeText(name, right ? x + w : x, y - 10); ctx.fillStyle = '#fff3d6'; ctx.fillText(name, right ? x + w : x, y - 10);
-  ctx.font = '600 13px Rubik, sans-serif'; ctx.fillStyle = '#e6aa3f'; ctx.textAlign = right ? 'left' : 'right';
+  ctx.font = '600 13px Rubik, Cairo, sans-serif'; ctx.fillStyle = '#e6aa3f'; ctx.textAlign = right ? 'left' : 'right';
   ctx.fillText(`${f.hp}%`, right ? x : x + w, y - 12);
   ctx.restore();
   const px = right ? x + w + 44 : x - 44, py = y + 12;
@@ -1288,7 +1348,7 @@ function drawHUD() {
   if (G.hud <= 0.01) return;
   ctx.save(); ctx.globalAlpha = G.hud;
   drawBar(110, 46, 420, N, false, S.student.toUpperCase());
-  drawBar(W - 530, 46, 420, T, true, ('Sensei ' + S.teacher).toUpperCase());
+  drawBar(W - 530, 46, 420, T, true, t('senseiName', { t: S.teacher }).toUpperCase());
   ['katana', 'nunchaku', 'shuriken', 'kusarigama'].forEach((w, i) => {
     const x = 128 + i * 52, y = 104, has = N.weapons.includes(w);
     ctx.save(); ctx.globalAlpha = G.hud * (has ? 1 : 0.35);
@@ -1304,12 +1364,12 @@ function drawHUD() {
   for (let i = 0; i < 8; i++) { const a = i * Math.PI / 4 + Math.PI / 8; ctx.lineTo(cx + Math.cos(a) * 42, cy + Math.sin(a) * 42); }
   ctx.closePath(); ctx.fill(); ctx.stroke();
   ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-  if (S.timeLeft !== null && S.asking) { ctx.font = `30px ${DISPLAY}`; ctx.fillStyle = S.timeLeft <= 5 ? '#ef5a47' : '#fff3d6'; ctx.fillText(String(Math.ceil(S.timeLeft)), cx, cy + 2); }
-  else { ctx.font = '600 10px Rubik, sans-serif'; ctx.fillStyle = '#e6aa3f'; ctx.fillText('QUESTION', cx, cy - 12); ctx.font = `26px ${DISPLAY}`; ctx.fillStyle = '#fff3d6'; ctx.fillText(String(S.qn || 0), cx, cy + 10); }
+  if (S.timeLeft !== null && S.asking) { ctx.font = dfont(30); ctx.fillStyle = S.timeLeft <= 5 ? '#ef5a47' : '#fff3d6'; ctx.fillText(String(Math.ceil(S.timeLeft)), cx, cy + 2); }
+  else { ctx.font = '600 10px Rubik, Cairo, sans-serif'; ctx.fillStyle = '#e6aa3f'; ctx.fillText(t('hudQ'), cx, cy - 12); ctx.font = dfont(26); ctx.fillStyle = '#fff3d6'; ctx.fillText(String(S.qn || 0), cx, cy + 10); }
   ctx.restore();
   if (S.lesson && S.lesson.a > 0.01) {
     const L = S.lesson; ctx.save(); ctx.globalAlpha = L.a;
-    ctx.font = '600 18px Rubik, sans-serif';
+    ctx.font = '600 18px Rubik, Cairo, sans-serif';
     const lines = [L.head, L.body].filter(Boolean);
     let tw = 0; for (const l of lines) tw = Math.max(tw, ctx.measureText(l).width);
     tw = Math.min(tw, 760);
@@ -1318,7 +1378,7 @@ function drawHUD() {
     ctx.beginPath(); ctx.roundRect ? ctx.roundRect(bx, by, bw, bh, 6) : ctx.rect(bx, by, bw, bh); ctx.fill(); ctx.stroke();
     ctx.textAlign = 'center'; ctx.textBaseline = 'top';
     ctx.fillStyle = L.ok ? '#24683a' : '#9e2318'; ctx.fillText(fit(L.head, 760), W / 2, by + 12);
-    if (L.body) { ctx.font = '400 16px Rubik, sans-serif'; ctx.fillStyle = '#3a2a22'; ctx.fillText(fit(L.body, 760), W / 2, by + 40); }
+    if (L.body) { ctx.font = '400 16px Rubik, Cairo, sans-serif'; ctx.fillStyle = '#3a2a22'; ctx.fillText(fit(L.body, 760), W / 2, by + 40); }
     ctx.restore();
   }
 }
@@ -1333,15 +1393,16 @@ function drawBanners() {
       ctx.fillStyle = 'rgba(15,8,12,.7)'; ctx.fillRect(x - 330, b.y - 34, 660, 68);
       ctx.fillStyle = '#c8372d'; ctx.fillRect(x - 330, b.y - 34, 8, 68); ctx.fillRect(x + 322, b.y - 34, 8, 68);
       if (b.kanji) { ctx.font = `30px ${KANJI}`; ctx.fillStyle = '#e6aa3f'; ctx.fillText(b.kanji, x, b.y - 14); }
-      ctx.font = `${b.size * 0.7}px ${DISPLAY}`; ctx.lineWidth = 6; ctx.strokeStyle = b.stroke; ctx.strokeText(b.text, x, b.y + (b.kanji ? 14 : 0)); ctx.fillStyle = b.col; ctx.fillText(b.text, x, b.y + (b.kanji ? 14 : 0));
+      ctx.font = dfont(b.size * 0.7); const mw = ctx.measureText(b.text).width; if (mw > 610) ctx.font = dfont(b.size * 0.7 * 610 / mw); ctx.lineWidth = 6; ctx.strokeStyle = b.stroke; ctx.strokeText(b.text, x, b.y + (b.kanji ? 14 : 0)); ctx.fillStyle = b.col; ctx.fillText(b.text, x, b.y + (b.kanji ? 14 : 0));
     } else {
       ctx.translate(W / 2, b.y); ctx.scale(sIn, sIn);
       if (b.kind === 'shake') ctx.translate(rand(-4, 4), rand(-4, 4));
       if (b.kanji) { ctx.font = `${b.size * 0.6}px ${KANJI}`; ctx.lineWidth = 8; ctx.strokeStyle = '#000'; ctx.strokeText(b.kanji, 0, -b.size * 0.85); ctx.fillStyle = '#e6aa3f'; ctx.fillText(b.kanji, 0, -b.size * 0.85); }
-      ctx.font = `${b.size}px ${DISPLAY}`;
+      ctx.font = dfont(b.size);
+      const bw = ctx.measureText(b.text).width; if (bw > W * 0.88) ctx.scale(W * 0.88 / bw, W * 0.88 / bw);
       const g = ctx.createLinearGradient(0, -b.size / 2, 0, b.size / 2); g.addColorStop(0, '#fff6d8'); g.addColorStop(0.45, b.col); g.addColorStop(1, '#b8321c');
       ctx.lineWidth = 14; ctx.strokeStyle = b.stroke; ctx.strokeText(b.text, 0, 0); ctx.lineWidth = 4; ctx.strokeStyle = '#ffeec0'; ctx.strokeText(b.text, 0, 0); ctx.fillStyle = g; ctx.fillText(b.text, 0, 0);
-      if (b.sub) { ctx.font = `600 ${Math.round(b.size * 0.24)}px Rubik, sans-serif`; ctx.lineWidth = 5; ctx.strokeStyle = '#000'; ctx.strokeText(b.sub, 0, b.size * 0.72); ctx.fillStyle = '#fff3d6'; ctx.fillText(b.sub, 0, b.size * 0.72); }
+      if (b.sub) { ctx.font = `600 ${Math.round(b.size * 0.24)}px Rubik, Cairo, sans-serif`; ctx.lineWidth = 5; ctx.strokeStyle = '#000'; ctx.strokeText(b.sub, 0, b.size * 0.72); ctx.fillStyle = '#fff3d6'; ctx.fillText(b.sub, 0, b.size * 0.72); }
     }
     ctx.restore();
   }
@@ -1359,17 +1420,18 @@ function drawOverlays() {
     ctx.save(); ctx.globalAlpha = a * (0.55 + Math.sin(rnow * 6) * 0.1); ctx.fillStyle = '#300000'; ctx.fillRect(0, 0, W, H);
     ctx.globalAlpha = a; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
     ctx.translate(W / 2 + rand(-3, 3), H * 0.36 + rand(-3, 3)); const s = 0.9 + Math.sin(rnow * 8) * 0.03; ctx.scale(s, s);
-    ctx.font = `150px ${DISPLAY}`;
+    ctx.font = dfont(150);
     const g = ctx.createLinearGradient(0, -70, 0, 70); g.addColorStop(0, '#ffb199'); g.addColorStop(0.5, '#e01b10'); g.addColorStop(1, '#5a0000');
-    ctx.lineWidth = 16; ctx.strokeStyle = '#000'; ctx.strokeText('FINISH HIM!', 0, 0); ctx.fillStyle = g; ctx.fillText('FINISH HIM!', 0, 0);
+    const fh = t('finishHim'), fw = ctx.measureText(fh).width; if (fw > W * 0.9) ctx.scale(W * 0.9 / fw, W * 0.9 / fw);
+    ctx.lineWidth = 16; ctx.strokeStyle = '#000'; ctx.strokeText(fh, 0, 0); ctx.fillStyle = g; ctx.fillText(fh, 0, 0);
     ctx.restore();
   }
   if (G.stamp > 0.01) {
     const k = G.stamp, s = 1 + (1 - k) * 2.5;
     ctx.save(); ctx.globalAlpha = Math.min(1, k * 1.4); ctx.translate(W / 2, H * 0.44); ctx.rotate(-0.18); ctx.scale(s, s);
     ctx.strokeStyle = '#d0201a'; ctx.lineWidth = 12; ctx.beginPath(); ctx.arc(0, 0, 120, 0, Math.PI * 2); ctx.stroke(); ctx.lineWidth = 4; ctx.beginPath(); ctx.arc(0, 0, 100, 0, Math.PI * 2); ctx.stroke();
-    ctx.fillStyle = '#d0201a'; ctx.font = `190px ${DISPLAY}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('F', 0, 12);
-    ctx.font = `20px ${DISPLAY}`; ctx.fillText('SEE ME AFTER CLASS', 0, 150);
+    ctx.fillStyle = '#d0201a'; ctx.font = dfont(190); ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('F', 0, 12);
+    ctx.font = dfont(20); ctx.fillText(t('seeMe'), 0, 150);
     ctx.restore();
   }
   if (G.ko > 0.01) {
@@ -1381,7 +1443,7 @@ function drawOverlays() {
     const r = seeded(5); for (let i = 0; i < 18; i++) { const a = r() * Math.PI * 2; ctx.beginPath(); ctx.arc(0, 0, 196 + r() * 14, a, a + r() * 0.6); ctx.stroke(); }
     ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
     ctx.font = `150px ${KANJI}`; ctx.lineWidth = 12; ctx.strokeStyle = '#fff4e2'; ctx.strokeText(JP.shobu, 0, -10); ctx.fillStyle = '#120a0a'; ctx.fillText(JP.shobu, 0, -10);
-    ctx.font = `30px ${DISPLAY}`; ctx.lineWidth = 6; ctx.strokeStyle = '#000'; ctx.strokeText('SHOBU ARI', 0, 120); ctx.fillStyle = '#ffd25a'; ctx.fillText('SHOBU ARI', 0, 120);
+    ctx.font = dfont(30); ctx.lineWidth = 6; ctx.strokeStyle = '#000'; ctx.strokeText(t('shobuSub'), 0, 120); ctx.fillStyle = '#ffd25a'; ctx.fillText(t('shobuSub'), 0, 120);
     ctx.restore();
   }
 }
@@ -1434,9 +1496,7 @@ function render() {
 /* =========================================================
    Fight choreography
    ========================================================= */
-const KIAI = ['Hi-yah!', 'Hah!', 'Eiyah!'];
-const SENSEI_LINES = ['Wrong answer!', 'See me after class!', 'Did you even study?', 'Pop quiz!', 'Detention!'];
-function kiai() { if (Math.random() < 0.8) say(pick(KIAI), { pitch: 1.4, rate: 1.4 }); }
+function kiai() { if (Math.random() < 0.8) sayT('v_kiai', null, { pitch: 1.4, rate: 1.4 }); }
 function distTo(a, b, gap) { return (b.homeX + b.pose.x) - a.homeX - gap * a.face; }
 
 async function stagger(f, kb) {
@@ -1465,7 +1525,7 @@ async function hurt(f, power = 1, o = {}) {
   f.hp = Math.max(0, f.hp - 25); f.dmg = Math.min(4, f.dmg + 1); f.flash = 1;
   hitstop(90 + 50 * power); shake(10 + 8 * power); sfx.hit(power);
   impact(c[0], c[1], power);
-  popup(o.word || pick(['WHAM!', 'POW!', 'SMACK!', 'CRACK!']), c[0] + rand(-30, 30), c[1] - 70, '#ffd23f', 52);
+  popup(o.word || pick(t('popHit')), c[0] + rand(-30, 30), c[1] - 70, '#ffd23f', 52);
   popup('-25%', c[0] + (f.isN ? -60 : 60), c[1] - 20, '#ff5a4a', 36, 0);
   G.flash = 0.35; G.flashCol = f.isN ? '#ff3a2a' : '#ffffff'; tween(G, { flash: 0 }, 220, E.out, true);
   if (f.isN) loseWeapon(c);
@@ -1478,7 +1538,7 @@ function loseWeapon(c) {
   N.weapons = N.weapons.filter(x => x !== w);
   if (N.holding && N.holding.type === w) N.holding = null;
   dropWeapon(w, c[0], c[1] - 20, -N.face);
-  setTimeout(() => popup('LOST ' + w.toUpperCase() + '!', c[0] - 40, c[1] - 140, '#ff8a6a', 30, 0), 120);
+  setTimeout(() => popup(t('lost', { w: t('w_' + w) }), c[0] - 40, c[1] - 140, '#ff8a6a', 30, 0), 120);
 }
 async function goHome(f, ms = 420) {
   f.trail = false; f.spin = false;
@@ -1500,7 +1560,7 @@ async function walk(f, toX, steps = 2) {
 /* ---------- ninja attacks (correct answer) ---------- */
 const NINJA_MOVES = {
   async katana() {
-    moveBanner('IAI LIGHTNING SLASH', JP.iai); N.holding = { type: 'katana', glow: true }; sfx.draw(); kiai();
+    moveBanner(t('mv_katana'), JP.iai); N.holding = { type: 'katana', glow: true }; sfx.draw(); kiai();
     await pose(N, NP.crouch, 220);
     N.trail = true; sfx.whoosh(1.2); dust(N.homeX + N.pose.x, GROUND, 8, -1);
     await pose(N, { ...NP.dash, x: distTo(N, T, 150) }, 160, E.out);
@@ -1513,10 +1573,10 @@ const NINJA_MOVES = {
       if (i < 2) { sparks(c[0], c[1], 8, '#cfefff', 300); T.flash = 0.6; shake(5); sfx.thwack(); hitstop(40); }
     }
     N.trail = false;
-    await hurt(T, 1.2, { word: 'SLASH!' });
+    await hurt(T, 1.2, { word: t('pw_slash') });
   },
   async shuriken() {
-    moveBanner('SHURIKEN STORM', JP.shuriken); kiai();
+    moveBanner(t('mv_shuriken'), JP.shuriken); kiai();
     await pose(N, NP.crouch, 160);
     sfx.whoosh();
     await pose(N, { ...NP.tuck, y: -190, rot: 3.14 }, 260, E.out);
@@ -1531,11 +1591,11 @@ const NINJA_MOVES = {
       else await wait(230);
     }
     const land = pose(N, { ...NP.crouch, y: 0 }, 300, E.in).then(() => { dust(N.homeX + N.pose.x, GROUND, 10); sfx.step(); });
-    await hurt(T, 1.1, { word: 'THUNK!' });
+    await hurt(T, 1.1, { word: t('pw_thunk') });
     await land;
   },
   async nunchaku() {
-    moveBanner('NUNCHAKU FURY', JP.nunchaku); N.holding = { type: 'nunchaku' }; N.spin = true; kiai();
+    moveBanner(t('mv_nunchaku'), JP.nunchaku); N.holding = { type: 'nunchaku' }; N.spin = true; kiai();
     await pose(N, NP.spinA, 160);
     N.trail = true; sfx.whoosh();
     await pose(N, { ...NP.dash, x: distTo(N, T, 135) }, 180, E.out);
@@ -1543,15 +1603,15 @@ const NINJA_MOVES = {
     for (let i = 0; i < 5; i++) {
       await pose(N, i % 2 ? NP.spinB : NP.spinA, 70);
       sfx.whoosh(0.6);
-      if (i < 4) { sparks(c[0] + rand(-25, 25), c[1] + rand(-40, 30), 6, '#ffe7a0', 300); sfx.thwack(); T.flash = 0.6; shake(4); popup(pick(['WHAP!', 'BAP!', 'THOK!']), c[0] + rand(-40, 40), c[1] - rand(40, 100), '#fff1c0', 30); hitstop(35); }
+      if (i < 4) { sparks(c[0] + rand(-25, 25), c[1] + rand(-40, 30), 6, '#ffe7a0', 300); sfx.thwack(); T.flash = 0.6; shake(4); popup(pick(t('popSmall')), c[0] + rand(-40, 40), c[1] - rand(40, 100), '#fff1c0', 30); hitstop(35); }
     }
     N.trail = false;
     await pose(N, { ...NP.raise, y: -40 }, 90);
-    await hurt(T, 1.15, { word: 'KRAK!' });
+    await hurt(T, 1.15, { word: t('pw_krak') });
     N.spin = false;
   },
   async kusarigama() {
-    moveBanner('CHAIN SICKLE SNARE', JP.kusari); N.holding = { type: 'kusarigama' }; kiai();
+    moveBanner(t('mv_kusarigama'), JP.kusari); N.holding = { type: 'kusarigama' }; kiai();
     await pose(N, NP.throwBack, 220);
     const c = chestOf(T);
     N.holding = null; N.chain = { k: 0, tx: c[0], ty: c[1] };
@@ -1568,11 +1628,11 @@ const NINJA_MOVES = {
     await pose(N, { ...NP.knee, x: distTo(N, T, 90), y: -50 }, 150, E.out);
     N.trail = false;
     const p = pose(N, { ...NP.stance, y: 0 }, 260);
-    await hurt(T, 1.2, { word: 'KNEE!' });
+    await hurt(T, 1.2, { word: t('pw_knee') });
     await p;
   },
   async kick() {
-    moveBanner('WHIRLWIND KICK', JP.senpu); kiai();
+    moveBanner(t('mv_kick'), JP.senpu); kiai();
     await pose(N, NP.crouch, 200);
     N.trail = true; sfx.whoosh(1.3); leafBurst(N.homeX, GROUND - 10, 12, 260);
     await pose(N, { ...NP.tuck, x: distTo(N, T, 260), y: -150, rot: 3.14 }, 220, E.out);
@@ -1581,11 +1641,11 @@ const NINJA_MOVES = {
     await pose(N, { ...NP.flyKick, x: distTo(N, T, 120), y: -110 }, 110, E.in);
     N.trail = false;
     const p = pose(N, { ...NP.crouch, y: 0, x: N.pose.x - 60 }, 320, E.in).then(() => { dust(N.homeX + N.pose.x, GROUND, 8); sfx.step(); });
-    await hurt(T, 1.2, { word: 'KICK!' });
+    await hurt(T, 1.2, { word: t('pw_kick') });
     await p;
   },
   async shadow() {
-    moveBanner('SHADOW STEP', JP.kage); kiai();
+    moveBanner(t('mv_shadow'), JP.kage); kiai();
     const p0 = chestOf(N);
     sfx.poof(); smoke(p0[0], p0[1] + 30, 30); N.visible = false;
     await wait(350);
@@ -1596,7 +1656,7 @@ const NINJA_MOVES = {
     await pose(N, { ...NP.kick, x: N.pose.x + 30 * N.face }, 110, E.out);
     N.trail = false;
     T.face = 1;
-    await hurt(T, 1.15, { word: 'BEHIND YOU!' });
+    await hurt(T, 1.15, { word: t('pw_behind') });
     T.face = -1;
     await pose(N, NP.stance, 150);
     sfx.poof(); smoke(chestOf(N)[0], chestOf(N)[1], 16); N.visible = false;
@@ -1625,16 +1685,16 @@ async function ninjaTurn() {
 /* ---------- teacher attacks (wrong answer) ---------- */
 const TEACHER_MOVES = {
   async ruler() {
-    moveBanner('RULER OF LAW', '', '#ffe1c4'); T.holding = { type: 'ruler' };
+    moveBanner(t('mv_ruler'), '', '#ffe1c4'); T.holding = { type: 'ruler' };
     await walk(T, distTo(T, N, 210), 2);
     await pose(T, TP.raise, 320, E.out);
     sfx.whoosh(1.3);
     await pose(T, TP.smash, 110, E.in);
     const c = chestOf(N); slashFx(c[0] + 20, c[1] - 30, 110, -1.2, 0.5, '255,220,140', 12);
-    await hurt(N, 1.3, { word: 'WHACK!' });
+    await hurt(N, 1.3, { word: t('pw_whack') });
   },
   async chalk() {
-    moveBanner('CHALK BARRAGE', '', '#ffe1c4');
+    moveBanner(t('mv_chalk'), '', '#ffe1c4');
     const c = chestOf(N);
     for (let i = 0; i < 5; i++) {
       T.holding = { type: 'chalk' };
@@ -1643,22 +1703,22 @@ const TEACHER_MOVES = {
       await pose(T, TP.throwFwd, 70);
       sfx.chalk(); sfx.whoosh(0.5);
       const h = handOf(T), last = i === 4;
-      const pr = shoot('chalk', h, [c[0] + rand(-15, 15), c[1] + rand(-40, 20)], 240, { spin: 25, arc: 20, trail: '255,255,255', face: -1, onHit: () => { chalkPuff(c[0], c[1]); sfx.chalkHit(); if (!last) { N.flash = 0.6; shake(3); popup(pick(['TAK!', 'TOK!', 'PAK!']), c[0] + rand(-30, 30), c[1] - rand(40, 90), '#ffffff', 26); } } });
+      const pr = shoot('chalk', h, [c[0] + rand(-15, 15), c[1] + rand(-40, 20)], 240, { spin: 25, arc: 20, trail: '255,255,255', face: -1, onHit: () => { chalkPuff(c[0], c[1]); sfx.chalkHit(); if (!last) { N.flash = 0.6; shake(3); popup(pick(t('popChalk')), c[0] + rand(-30, 30), c[1] - rand(40, 90), '#ffffff', 26); } } });
       if (last) { await pr; break; }
     }
-    await hurt(N, 1.1, { word: 'CHALKED!' });
+    await hurt(N, 1.1, { word: t('pw_chalked') });
   },
   async book() {
-    moveBanner('TEXTBOOK SLAM', '', '#ffe1c4'); T.holding = { type: 'book', off: -0.4 };
+    moveBanner(t('mv_book'), '', '#ffe1c4'); T.holding = { type: 'book', off: -0.4 };
     await walk(T, distTo(T, N, 200), 2);
     await pose(T, TP.swingBack, 300, E.out);
     sfx.whoosh(1.2);
     await pose(T, TP.swingFwd, 110, E.in);
     const c = chestOf(N); slashFx(c[0] + 30, c[1], 100, -2.6, -0.4, '255,200,170', 12);
-    await hurt(N, 1.3, { word: 'SMACK!', kb: 200 });
+    await hurt(N, 1.3, { word: t('pw_smack'), kb: 200 });
   },
   async punch() {
-    moveBanner('DETENTION PUNCH', '', '#ffe1c4');
+    moveBanner(t('mv_punch'), '', '#ffe1c4');
     sfx.charge(); tween(T, { aura: 1 }, 600);
     await pose(T, TP.windPunch, 500, E.out);
     for (let i = 0; i < 4; i++) { shake(4); dust(T.homeX + T.pose.x + rand(-60, 60), GROUND, 3); await wait(90); }
@@ -1667,12 +1727,12 @@ const TEACHER_MOVES = {
     T.trail = false;
     const c = chestOf(N); ring(c[0], c[1], 220, 0.5, '255,180,120', 12);
     tween(T, { aura: 0 }, 600);
-    await hurt(N, 1.6, { word: 'DETENTION!', kb: 240 });
+    await hurt(N, 1.6, { word: t('pw_detention'), kb: 240 });
   }
 };
 async function teacherTurn() {
   S.front = 'T';
-  say(pick(SENSEI_LINES), { pitch: 0.3, rate: 0.9 });
+  sayT('v_lines', null, { pitch: 0.3, rate: 0.9 });
   const keys = Object.keys(TEACHER_MOVES);
   const used = S.tused || (S.tused = {});
   keys.sort((a, b) => (used[a] || 0) - (used[b] || 0) + (Math.random() - 0.5) * 0.9);
@@ -1695,11 +1755,11 @@ async function finishHim() {
   tween(cam, { z: 1.2, x: (N.homeX + N.pose.x + T.homeX) / 2, y: 430 }, 900, E.inOut, true);
   sfx.gong(); G.ts = 1;
   tween(G, { finish: 1, dim: 0.5 }, 250, E.out, true);
-  say('Finish him!', { pitch: 0.1, rate: 0.62 });
+  sayT('v_finish', null, { pitch: 0.1, rate: 0.62 });
   for (let i = 0; i < 4; i++) { sfx.heart(); shake(3); await wait(560, true); }
   await tween(G, { finish: 0 }, 300, E.inOut, true);
   // FINAL EXAM: the sensei leaps and slams down
-  banner('FINAL EXAM', { sub: 'SENSEI FINISHER', col: '#ff6a4a', size: 90, y: 200, dur: 2 });
+  banner(t('finalExam'), { sub: t('senseiFinisher'), col: '#ff6a4a', size: 90, y: 200, dur: 2 });
   T.holding = { type: 'book', off: -0.4 };
   sfx.charge(); tween(T, { aura: 1 }, 500);
   await pose(T, TP.flex, 450, E.out);
@@ -1727,10 +1787,10 @@ async function finishHim() {
   await pose(T, TP.stance, 400);
   await wait(300);
   sfx.stamp(); await tween(G, { stamp: 1 }, 260, E.in, true); shake(12);
-  say('Class dismissed.', { pitch: 0.2, rate: 0.7 });
+  sayT('v_dismissed', null, { pitch: 0.2, rate: 0.7 });
   await wait(1500, true);
   await pose(T, TP.flex, 500, E.out);
-  banner('SENSEI WINS', { sub: `${S.student}, time to hit the books!`, size: 100, y: H * 0.78, dur: 3.2 });
+  banner(t('senseiWins'), { sub: t('hitBooks', { s: S.student }), size: 100, y: H * 0.78, dur: 3.2 });
   tween(cam, { z: 1, x: W / 2, y: H / 2 }, 900, E.inOut, true);
   await wait(2200, true);
   tween(G, { stamp: 0, dim: 0 }, 600, E.inOut, true);
@@ -1740,7 +1800,7 @@ async function ninjaFinisher() {
   if (S.lesson) S.lesson.show = false;
   tween(G, { dim: 0.6 }, 400, E.out, true);
   banner(JP.momiji, { kind: 'pop', size: 120, y: H * 0.38, dur: 1.5, col: '#ffcf5a' });
-  banner('AUTUMN LEAF STORM', { kind: 'move', size: 40, y: H * 0.62, dur: 1.8, col: '#fff1d6', stroke: '#2a0d0d' });
+  banner(t('mv_storm'), { kind: 'move', size: 40, y: H * 0.62, dur: 1.8, col: '#fff1d6', stroke: '#2a0d0d' });
   sfx.gust(); sfx.gust(); tween(G, { storm: 1 }, 400, E.out, true);
   say('Momiji arashi!', { pitch: 1.1, rate: 1.1 });
   const hasKatana = N.weapons.includes('katana');
@@ -1789,8 +1849,8 @@ async function ninjaFinisher() {
   await tween(G, { ko: 0 }, 400, E.inOut, true);
   N.face = -1;
   await pose(N, NP.victory, 400, E.back);
-  banner(`${S.student.toUpperCase()} WINS`, { sub: N.hp === 100 ? 'FLAWLESS VICTORY' : 'THE STUDENT SURPASSES THE MASTER', size: 100, y: H * 0.8, dur: 3.2 });
-  say(N.hp === 100 ? `${S.student} wins. Flawless victory!` : `${S.student} wins!`, { pitch: 0.4, rate: 0.85 });
+  banner(t('wins', { s: S.student.toUpperCase() }), { sub: t(N.hp === 100 ? 'flawless' : 'surpasses'), size: 100, y: H * 0.8, dur: 3.2 });
+  sayT(N.hp === 100 ? 'v_flawless' : 'v_wins', { s: S.student }, { pitch: 0.4, rate: 0.85 });
   await wait(2400, true);
   tween(G, { dim: 0 }, 600, E.inOut, true);
 }
@@ -1799,13 +1859,13 @@ async function ninjaFinisher() {
 async function intro() {
   G.hud = 0; N.pose.y = -760; T.pose.x = 380; N.idle = 0;
   tween(cam, { z: 1.15, x: 900, y: 420 }, 10, E.lin, true);
-  banner('SENSEI vs SHINOBI', { size: 84, y: H * 0.3, dur: 1.8, kanji: JP.sensei + ' ' + JP.ippon });
+  banner(t('introTitle'), { size: 84, y: H * 0.3, dur: 1.8, kanji: JP.sensei + ' ' + JP.ippon });
   sfx.taiko(1, 70); await wait(300, true); sfx.taiko(1, 70);
   await wait(500, true);
   for (let i = 0; i < 3; i++) { sfx.step(); shake(7); dust(T.homeX + T.pose.x, GROUND, 6); await pose(T, { ...(i % 2 ? TP.step1 : TP.step2), x: 380 - (i + 1) * 127 }, 280); }
   T.pose.x = 0; await pose(T, TP.flex, 380, E.out); sfx.hit(0.6);
-  banner(('Sensei ' + S.teacher).toUpperCase(), { sub: 'THE IRON TEACHER', size: 70, y: H * 0.78, dur: 1.6 });
-  say(`Sensei ${S.teacher}`, { pitch: 0.3, rate: 0.85 });
+  banner(t('senseiName', { t: S.teacher }).toUpperCase(), { sub: t('ironTeacher'), size: 70, y: H * 0.78, dur: 1.6 });
+  sayT('v_sensei', { t: S.teacher }, { pitch: 0.3, rate: 0.85 });
   await wait(1300, true);
   await pose(T, TP.stance, 300);
   tween(cam, { z: 1.15, x: 380, y: 420 }, 600, E.inOut, true);
@@ -1815,18 +1875,18 @@ async function intro() {
   N.pose.rot = 0;
   await pose(N, { ...NP.crouch, y: 0 }, 120, E.in);
   sfx.thud(); shake(10); dust(N.homeX, GROUND, 18); leafBurst(N.homeX, GROUND - 10, 20, 320);
-  banner(S.student.toUpperCase(), { sub: 'THE SHINOBI STUDENT', size: 70, y: H * 0.78, dur: 1.6 });
-  say(S.student, { pitch: 0.4, rate: 0.85 });
+  banner(S.student.toUpperCase(), { sub: t('shinobiStudent'), size: 70, y: H * 0.78, dur: 1.6 });
+  sayName(S.student, { pitch: 0.4, rate: 0.85 });
   await pose(N, NP.stance, 300); N.idle = 1;
   await wait(1100, true);
   tween(cam, { z: 1, x: W / 2, y: H / 2 }, 600, E.inOut, true);
   tween(G, { hud: 1 }, 500, E.out, true);
-  banner('ROUND 1', { size: 110, dur: 1.2 });
-  say('Round one.', { pitch: 0.3, rate: 0.8 });
+  banner(t('round1'), { size: 110, dur: 1.2 });
+  sayT('v_round', null, { pitch: 0.3, rate: 0.8 });
   await wait(1250, true);
   sfx.gong();
-  banner('FIGHT!', { size: 150, dur: 1.1, col: '#ff8a3a' });
-  say('Fight!', { pitch: 0.3, rate: 0.9 });
+  banner(t('fight'), { size: 150, dur: 1.1, col: '#ff8a3a' });
+  sayT('v_fight', null, { pitch: 0.3, rate: 0.9 });
   shake(8);
   mus.on = true;
   await wait(1000, true);
@@ -1835,7 +1895,7 @@ async function intro() {
 /* =========================================================
    Questions: model, import, quiz flow
    ========================================================= */
-const SAMPLE = [
+const SAMPLE_EN = [
   { q: 'What is 7 x 8?', opts: ['54', '56', '64', '48'], ans: 1, exp: '7 x 8 = 56.' },
   { q: 'Which planet is known as the Red Planet?', opts: ['Venus', 'Mars', 'Jupiter', 'Saturn'], ans: 1, exp: 'Iron oxide dust makes Mars look red.' },
   { q: 'What is the capital city of Japan?', opts: ['Kyoto', 'Osaka', 'Tokyo', 'Sapporo'], ans: 2, exp: 'Tokyo has been the capital since 1868.' },
@@ -1845,28 +1905,35 @@ const SAMPLE = [
   { q: 'What is 12 squared? (type it)', opts: [], answers: ['144'], exp: '12 x 12 = 144.' },
   { q: 'Who wrote "Romeo and Juliet"?', opts: ['Charles Dickens', 'William Shakespeare', 'Jane Austen', 'Mark Twain'], ans: 1, exp: 'Shakespeare wrote it around 1595.' }
 ];
+const SAMPLES = { en: SAMPLE_EN, ar: [{"q": "\u0643\u0645 \u064a\u0633\u0627\u0648\u064a 7 \u00d7 8\u061f", "opts": ["54", "56", "64", "48"], "ans": 1, "exp": "7 \u00d7 8 = 56."}, {"q": "\u0623\u064a \u0643\u0648\u0643\u0628 \u064a\u064f\u0639\u0631\u0641 \u0628\u0627\u0644\u0643\u0648\u0643\u0628 \u0627\u0644\u0623\u062d\u0645\u0631\u061f", "opts": ["\u0627\u0644\u0632\u0647\u0631\u0629", "\u0627\u0644\u0645\u0631\u064a\u062e", "\u0627\u0644\u0645\u0634\u062a\u0631\u064a", "\u0632\u062d\u0644"], "ans": 1, "exp": "\u064a\u063a\u0637\u064a \u063a\u0628\u0627\u0631 \u0623\u0643\u0633\u064a\u062f \u0627\u0644\u062d\u062f\u064a\u062f \u0633\u0637\u062d \u0627\u0644\u0645\u0631\u064a\u062e \u0641\u064a\u0628\u062f\u0648 \u0623\u062d\u0645\u0631."}, {"q": "\u0645\u0627 \u0639\u0627\u0635\u0645\u0629 \u0627\u0644\u064a\u0627\u0628\u0627\u0646\u061f", "opts": ["\u0643\u064a\u0648\u062a\u0648", "\u0623\u0648\u0633\u0627\u0643\u0627", "\u0637\u0648\u0643\u064a\u0648", "\u0633\u0627\u0628\u0648\u0631\u0648"], "ans": 2, "exp": "\u0637\u0648\u0643\u064a\u0648 \u0639\u0627\u0635\u0645\u0629 \u0627\u0644\u064a\u0627\u0628\u0627\u0646 \u0645\u0646\u0630 \u0639\u0627\u0645 1868."}, {"q": "\u0643\u0645 \u064a\u0628\u0644\u063a \u0627\u0631\u062a\u0641\u0627\u0639 \u062c\u0628\u0644 \u0641\u0648\u062c\u064a\u061f", "opts": ["2,776 \u0645", "3,776 \u0645", "4,776 \u0645", "1,776 \u0645"], "ans": 1, "exp": "\u064a\u0631\u062a\u0641\u0639 \u062c\u0628\u0644 \u0641\u0648\u062c\u064a 3,776 \u0645\u062a\u0631\u064b\u0627\u060c \u0648\u0647\u0648 \u0623\u0639\u0644\u0649 \u0642\u0645\u0629 \u0641\u064a \u0627\u0644\u064a\u0627\u0628\u0627\u0646."}, {"q": "\u0627\u0644\u0635\u064a\u063a\u0629 \u0627\u0644\u0643\u064a\u0645\u064a\u0627\u0626\u064a\u0629 H2O \u062a\u062f\u0644 \u0639\u0644\u0649...", "opts": ["\u0627\u0644\u0645\u0644\u062d", "\u0627\u0644\u0623\u0643\u0633\u062c\u064a\u0646", "\u0627\u0644\u0645\u0627\u0621", "\u0641\u0648\u0642 \u0623\u0643\u0633\u064a\u062f \u0627\u0644\u0647\u064a\u062f\u0631\u0648\u062c\u064a\u0646"], "ans": 2, "exp": "\u0630\u0631\u062a\u0627 \u0647\u064a\u062f\u0631\u0648\u062c\u064a\u0646 \u0648\u0630\u0631\u0629 \u0623\u0643\u0633\u062c\u064a\u0646 \u062a\u0643\u0648\u0651\u0646\u0627\u0646 \u062c\u0632\u064a\u0621 \u0627\u0644\u0645\u0627\u0621."}, {"q": "\u0623\u064a \u0627\u0644\u0643\u0644\u0645\u0627\u062a \u0627\u0644\u062a\u0627\u0644\u064a\u0629 \u0641\u0639\u0644\u061f", "opts": ["\u0628\u0633\u0631\u0639\u0629", "\u064a\u0631\u0643\u0636", "\u0623\u0632\u0631\u0642", "\u0633\u0639\u0627\u062f\u0629"], "ans": 1, "exp": "\u00ab\u064a\u0631\u0643\u0636\u00bb \u062a\u062f\u0644 \u0639\u0644\u0649 \u062d\u062f\u062b \u0645\u0642\u062a\u0631\u0646 \u0628\u0632\u0645\u0646."}, {"q": "\u0645\u0627 \u0645\u0631\u0628\u0639 \u0627\u0644\u0639\u062f\u062f 12\u061f (\u0627\u0643\u062a\u0628 \u0627\u0644\u0625\u062c\u0627\u0628\u0629)", "opts": [], "answers": ["144"], "exp": "12 \u00d7 12 = 144."}, {"q": "\u0645\u0646 \u0643\u062a\u0628 \u0645\u0633\u0631\u062d\u064a\u0629 \u00ab\u0631\u0648\u0645\u064a\u0648 \u0648\u062c\u0648\u0644\u064a\u064a\u062a\u00bb\u061f", "opts": ["\u062a\u0634\u0627\u0631\u0644\u0632 \u062f\u064a\u0643\u0646\u0632", "\u0648\u0644\u064a\u0627\u0645 \u0634\u0643\u0633\u0628\u064a\u0631", "\u062c\u064a\u0646 \u0623\u0648\u0633\u062a\u0646", "\u0645\u0627\u0631\u0643 \u062a\u0648\u064a\u0646"], "ans": 1, "exp": "\u0643\u062a\u0628\u0647\u0627 \u0634\u0643\u0633\u0628\u064a\u0631 \u0646\u062d\u0648 \u0639\u0627\u0645 1595."}] };
+function samples() { return SAMPLES[LANG].map(q => ({ ...q, opts: [...q.opts], answers: q.answers ? [...q.answers] : undefined })); }
 const S = {
   teacher: 'Tanaka', student: 'Student', face: null, questions: [], order: [], op: 0, qn: 0,
   timer: 30, timeLeft: null, asking: false, log: [], front: 'N', lesson: null, running: false, quit: false
 };
-function norm(s) { s = String(s == null ? '' : s).trim().toLowerCase().replace(/\s+/g, ' ').replace(/[.!]+$/, ''); if (/^[\d,.\s-]+$/.test(s)) s = s.replace(/[,\s]/g, ''); return s; }
+function norm(s) {
+  s = String(s == null ? '' : s).trim().toLowerCase().replace(/\s+/g, ' ').replace(/[.!\u061f?]+$/, '');
+  s = s.replace(/[\u0660-\u0669]/g, d => String(d.charCodeAt(0) - 0x660)).replace(/[\u06f0-\u06f9]/g, d => String(d.charCodeAt(0) - 0x6f0));
+  s = s.replace(/[\u064b-\u0652\u0640]/g, '').replace(/[\u0622\u0623\u0625]/g, '\u0627').replace(/\u0629/g, '\u0647').replace(/\u0649/g, '\u064a'); if (/^[\d,.\s-]+$/.test(s)) s = s.replace(/[,\s]/g, ''); return s; }
 function cell(v) { return String(v == null ? '' : v).trim(); }
 function rowsToQuestions(rows) {
   const out = [], skipped = [];
   let start = 0;
-  if (rows.length && /question|frage|pregunta|question/i.test(cell(rows[0][0]))) start = 1;
+  if (rows.length && /question|\u0633\u0624\u0627\u0644/i.test(cell(rows[0][0]))) start = 1;
   for (let i = start; i < rows.length; i++) {
     const r = rows[i] || [];
     const q = cell(r[0]); if (!q) continue;
     const opts = [1, 2, 3, 4].map(k => cell(r[k])).filter(Boolean);
     const ansRaw = cell(r[5]), exp = cell(r[6]);
-    if (!ansRaw) { skipped.push(`row ${i + 1}: no answer`); continue; }
+    if (!ansRaw) { skipped.push(t('rowNoAns', { r: i + 1 })); continue; }
     if (opts.length >= 2) {
       let idx = -1;
+      const AR_LETTER = { '\u0623': 0, '\u0627': 0, '\u0628': 1, '\u062c': 2, '\u062f': 3 };
       if (/^[a-d]$/i.test(ansRaw)) idx = ansRaw.toUpperCase().charCodeAt(0) - 65;
+      else if (AR_LETTER[ansRaw] !== undefined) idx = AR_LETTER[ansRaw];
       else if (/^[1-4]$/.test(ansRaw) && !opts.some(o => norm(o) === norm(ansRaw))) idx = Number(ansRaw) - 1;
       else idx = opts.findIndex(o => norm(o) === norm(ansRaw));
-      if (idx < 0 || idx >= opts.length) { skipped.push(`row ${i + 1}: answer "${ansRaw}" is not one of the options`); continue; }
+      if (idx < 0 || idx >= opts.length) { skipped.push(t('rowBadAns', { r: i + 1, a: ansRaw })); continue; }
       out.push({ q, opts, ans: idx, exp });
     } else {
       out.push({ q, opts: [], answers: ansRaw.split(/[|;]/).map(cell).filter(Boolean), exp });
@@ -1892,22 +1959,22 @@ function addQuestions(list, msg) {
   S.questions.push(...list.out);
   const m = $('#importMsg');
   m.className = list.out.length ? 'ok' : 'bad';
-  m.textContent = (list.out.length ? `${msg}: added ${list.out.length} question${list.out.length === 1 ? '' : 's'}.` : `${msg}: no questions found. Check the column order.`) + (list.skipped.length ? ` Skipped ${list.skipped.length}: ${list.skipped.slice(0, 3).join('; ')}${list.skipped.length > 3 ? '; ...' : ''}.` : '');
+  m.textContent = (list.out.length ? t('importAdded', { src: msg, n: list.out.length }) : t('importNone', { src: msg })) + (list.skipped.length ? t('importSkipped', { n: list.skipped.length, list: list.skipped.slice(0, 3).join('; ') + (list.skipped.length > 3 ? '; ...' : '') }) : '');
   saveSetup(); renderQList();
 }
-const TEMPLATE = [['Question', 'Option A', 'Option B', 'Option C', 'Option D', 'Answer', 'Explanation'], ...SAMPLE.map(s => [s.q, ...(s.opts.length ? s.opts : ['', '', '', '']), s.opts.length ? 'ABCD'[s.ans] : s.answers.join('|'), s.exp])];
+function template() { return [['colQ', 'colA', 'colB', 'colC', 'colD', 'colAns', 'colExp'].map(k => t(k)), ...SAMPLES[LANG].map(s => [s.q, ...(s.opts.length ? s.opts : ['', '', '', '']), s.opts.length ? letters()[s.ans] : s.answers.join('|'), s.exp])]; }
 function renderQList() {
   const ul = $('#qlist'); ul.textContent = '';
   S.questions.forEach((q, i) => {
     const li = document.createElement('li');
     const n = document.createElement('span'); n.className = 'n'; n.textContent = i + 1;
-    const t = document.createElement('div'); t.className = 't'; t.textContent = q.q;
-    const sm = document.createElement('small'); sm.textContent = q.opts.length ? `Answer: ${'ABCD'[q.ans]}) ${q.opts[q.ans]}` : `Typed answer: ${q.answers.join(' or ')}`; t.appendChild(sm);
-    const b = document.createElement('button'); b.type = 'button'; b.textContent = '\u00d7'; b.setAttribute('aria-label', 'Remove question ' + (i + 1));
+    const tx = document.createElement('div'); tx.className = 't'; tx.textContent = q.q;
+    const sm = document.createElement('small'); sm.textContent = q.opts.length ? t('answerItem', { a: optLabel(q.ans, q.opts[q.ans]) }) : t('typedItem', { a: q.answers.join(t('or')) }); tx.appendChild(sm);
+    const b = document.createElement('button'); b.type = 'button'; b.textContent = '\u00d7'; b.setAttribute('aria-label', t('removeQ', { n: i + 1 }));
     b.onclick = () => { S.questions.splice(i, 1); saveSetup(); renderQList(); };
-    li.append(n, t, b); ul.appendChild(li);
+    li.append(n, tx, b); ul.appendChild(li);
   });
-  $('#qcount').textContent = S.questions.length ? `${S.questions.length} question${S.questions.length === 1 ? '' : 's'} ready` : 'No questions yet: the sample set will be used';
+  $('#qcount').textContent = S.questions.length ? (S.questions.length === 1 ? t('qcount1') : t('qcount', { n: S.questions.length })) : t('qcountNone');
 }
 function nextQuestion() {
   if (S.op >= S.order.length) {
@@ -1923,14 +1990,14 @@ function updateQuizTimer(dt) {
   if (!S.asking || S.timeLeft === null) return;
   S.timeLeft = Math.max(0, S.timeLeft - dt);
   $('#qtimer i').style.transform = `scaleX(${S.timeLeft / S.timer})`;
-  $('#qsec').textContent = Math.ceil(S.timeLeft) + 's';
+  $('#qsec').textContent = t('secs', { n: Math.ceil(S.timeLeft) });
   if (S.timeLeft <= 0) submitAnswer(null, true);
   else if (S.timeLeft < 5.5 && Math.floor(S.timeLeft) !== S.lastTick) { S.lastTick = Math.floor(S.timeLeft); if (AU.ctx) tone('square', 1200, 1200, 0.04, 0.05); }
 }
 function askQuestion() {
   curQ = nextQuestion(); S.qn++;
   const box = $('#quiz'); box.hidden = false;
-  $('#qnum').textContent = `Question ${S.qn}`;
+  $('#qnum').textContent = t('qnum', { n: S.qn });
   $('#qtext').textContent = curQ.q;
   $('#qfeedback').textContent = ''; $('#qfeedback').className = '';
   const opts = $('#qopts'); opts.textContent = '';
@@ -1939,8 +2006,8 @@ function askQuestion() {
     form.hidden = true; opts.hidden = false; $('#qhint').hidden = false;
     curQ.opts.forEach((o, i) => {
       const b = document.createElement('button'); b.type = 'button'; b.className = 'opt';
-      const l = document.createElement('b'); l.textContent = 'ABCD'[i];
-      const s = document.createElement('span'); s.textContent = o;
+      const l = document.createElement('b'); l.textContent = letters()[i];
+      const s = document.createElement('span'); s.textContent = o; s.dir = 'auto';
       b.append(l, s); b.onclick = () => submitAnswer(i);
       opts.appendChild(b);
     });
@@ -1960,19 +2027,19 @@ function submitAnswer(choice, timeout = false) {
   S.asking = false;
   const q = curQ;
   let ok = false, given = '';
-  const correctText = q.opts.length ? `${'ABCD'[q.ans]}) ${q.opts[q.ans]}` : q.answers[0];
-  if (timeout) given = '(time ran out)';
-  else if (q.opts.length) { ok = choice === q.ans; given = `${'ABCD'[choice]}) ${q.opts[choice]}`; }
+  const correctText = q.opts.length ? optLabel(q.ans, q.opts[q.ans]) : q.answers[0];
+  if (timeout) given = t('timeRanOut');
+  else if (q.opts.length) { ok = choice === q.ans; given = optLabel(choice, q.opts[choice]); }
   else { given = $('#qinput').value.trim(); ok = q.answers.some(a => norm(a) === norm(given)); }
   const btns = [...document.querySelectorAll('#qopts .opt')];
   btns.forEach((b, i) => { b.disabled = true; if (i === q.ans) b.classList.add('right'); if (i === choice && !ok) b.classList.add('wrong'); });
   $('#qinput').disabled = true;
   const fb = $('#qfeedback');
   fb.className = ok ? 'ok' : 'bad';
-  fb.textContent = ok ? 'Correct! Strike now!' : (timeout ? `Time's up! The answer was ${correctText}.` : `Wrong! The answer was ${correctText}.`);
+  fb.textContent = ok ? t('fbRight') : t(timeout ? 'fbTime' : 'fbWrong', { a: correctText });
   ok ? sfx.right() : sfx.wrong();
   S.log.push({ q: q.q, ok, given, correct: correctText, exp: q.exp });
-  S.lesson = { show: true, a: 0, ok, head: ok ? `Correct: ${correctText}` : `${timeout ? 'Time ran out' : 'Not quite'}. Answer: ${correctText}`, body: q.exp || '' };
+  S.lesson = { show: true, a: 0, ok, head: ok ? t('lsRight', { a: correctText }) : t(timeout ? 'lsTime' : 'lsWrong', { a: correctText }), body: q.exp || '' };
   setTimeout(() => { $('#quiz').hidden = true; if (answerResolve) answerResolve(ok); answerResolve = null; }, ok ? 900 : 1500);
 }
 $('#qform').addEventListener('submit', e => { e.preventDefault(); if ($('#qinput').value.trim()) submitAnswer(null); });
@@ -2018,14 +2085,14 @@ async function runMatch() {
 }
 function showResult() {
   const won = T.hp <= 0, right = S.log.filter(l => l.ok).length, total = S.log.length;
-  $('#resTitle').textContent = won ? `${S.student} defeats Sensei ${S.teacher}!` : `Sensei ${S.teacher} wins this round`;
-  $('#resSub').textContent = won ? (N.hp === 100 ? 'Flawless victory: not a single wrong answer.' : 'The student surpasses the master. Review the misses below to stay sharp.') : 'Every wrong answer is a lesson. Study the review below and try again.';
+  $('#resTitle').textContent = t(won ? 'resWin' : 'resLose', { s: S.student, t: S.teacher });
+  $('#resSub').textContent = t(won ? (N.hp === 100 ? 'subFlawless' : 'subWin') : 'subLose');
   $('#resRight').textContent = right; $('#resWrong').textContent = total - right; $('#resPct').textContent = total ? Math.round(right / total * 100) + '%' : '0%';
   const ul = $('#review'); ul.textContent = '';
   for (const l of S.log) {
     const li = document.createElement('li'); li.className = l.ok ? 'good' : '';
     const b = document.createElement('b'); b.textContent = (l.ok ? '\u2713 ' : '\u2717 ') + l.q;
-    const s1 = document.createElement('small'); s1.textContent = l.ok ? `Answered ${l.correct}` : `Answered ${l.given || '(blank)'}. Correct: ${l.correct}`;
+    const s1 = document.createElement('small'); s1.textContent = l.ok ? t('revRight', { a: l.correct }) : t('revWrong', { g: l.given || t('blank'), c: l.correct });
     li.append(b, s1);
     if (l.exp) { const s2 = document.createElement('small'); s2.textContent = l.exp; li.append(s2); }
     ul.appendChild(li);
@@ -2045,8 +2112,8 @@ function renderFace() {
   if (!photo.img) {
     S.face = null;
     g.fillStyle = '#2a1f2c'; g.fillRect(0, 0, cp.width, cp.height);
-    g.fillStyle = '#b9a78e'; g.font = '600 22px Rubik, sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle';
-    g.fillText('No photo', cp.width / 2, cp.height / 2 - 12); g.font = '16px Rubik, sans-serif'; g.fillText('drawn face used', cp.width / 2, cp.height / 2 + 16);
+    g.fillStyle = '#b9a78e'; g.font = '600 22px Rubik, Cairo, sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle';
+    g.fillText(t('noPhoto1'), cp.width / 2, cp.height / 2 - 12); g.font = '16px Rubik, Cairo, sans-serif'; g.fillText(t('noPhoto2'), cp.width / 2, cp.height / 2 + 16);
     return;
   }
   const f = faceCv.getContext('2d'), img = photo.img;
@@ -2093,42 +2160,43 @@ $('#xlsFile').addEventListener('change', async e => {
     let rows;
     if (/\.(csv|tsv|txt)$/i.test(file.name)) rows = parseDelimited(await file.text());
     else {
-      if (!window.XLSX) { $('#importMsg').className = 'bad'; $('#importMsg').textContent = 'The Excel reader could not load. Save the sheet as CSV and upload that, or paste the rows below.'; return; }
+      if (!window.XLSX) { $('#importMsg').className = 'bad'; $('#importMsg').textContent = t('xlsMissing'); return; }
       const wb = XLSX.read(await file.arrayBuffer(), { type: 'array' });
       rows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { header: 1, defval: '', raw: false });
     }
     addQuestions(rowsToQuestions(rows), file.name);
-  } catch (err) { $('#importMsg').className = 'bad'; $('#importMsg').textContent = `Could not read ${file.name}: ${err.message}`; }
+  } catch (err) { $('#importMsg').className = 'bad'; $('#importMsg').textContent = t('readErr', { f: file.name, e: err.message }); }
 });
 $('#tplDownload').addEventListener('click', () => {
   try {
-    if (window.XLSX) { const ws = XLSX.utils.aoa_to_sheet(TEMPLATE); ws['!cols'] = [{ wch: 40 }, { wch: 16 }, { wch: 16 }, { wch: 16 }, { wch: 16 }, { wch: 10 }, { wch: 40 }]; const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, 'Questions'); XLSX.writeFile(wb, 'sensei-vs-shinobi-questions.xlsx'); }
-    else { const csv = TEMPLATE.map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(',')).join('\n'); const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' })); a.download = 'sensei-vs-shinobi-questions.csv'; a.click(); }
-    $('#importMsg').className = 'ok'; $('#importMsg').textContent = 'Template download started. If nothing downloads here, use "Copy template rows" and paste into a blank Excel sheet.';
-  } catch (err) { $('#importMsg').className = 'bad'; $('#importMsg').textContent = 'Download is blocked here. Use "Copy template rows" and paste into Excel.'; }
+    if (window.XLSX) { const ws = XLSX.utils.aoa_to_sheet(template()); ws['!cols'] = [{ wch: 40 }, { wch: 16 }, { wch: 16 }, { wch: 16 }, { wch: 16 }, { wch: 10 }, { wch: 40 }]; const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, 'Questions'); XLSX.writeFile(wb, 'sensei-vs-shinobi-questions.xlsx'); }
+    else { const csv = template().map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(',')).join('\n'); const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' })); a.download = 'sensei-vs-shinobi-questions.csv'; a.click(); }
+    $('#importMsg').className = 'ok'; $('#importMsg').textContent = t('tplStarted');
+  } catch (err) { $('#importMsg').className = 'bad'; $('#importMsg').textContent = t('tplBlocked'); }
 });
 $('#tplCopy').addEventListener('click', () => {
-  const tsv = TEMPLATE.map(r => r.join('\t')).join('\n');
-  const done = () => { $('#importMsg').className = 'ok'; $('#importMsg').textContent = 'Template copied. Paste into cell A1 of a blank Excel sheet; each value lands in its own column.'; };
-  const fallback = () => { const b = $('#pasteBox'); b.value = tsv; b.focus(); b.select(); $('#importMsg').className = ''; $('#importMsg').textContent = 'Copying is blocked here. The template is selected in the paste box; press Ctrl+C (Cmd+C) to copy it.'; };
+  const tsv = template().map(r => r.join('\t')).join('\n');
+  const done = () => { $('#importMsg').className = 'ok'; $('#importMsg').textContent = t('tplCopied'); };
+  const fallback = () => { const b = $('#pasteBox'); b.value = tsv; b.focus(); b.select(); $('#importMsg').className = ''; $('#importMsg').textContent = t('tplCopyFallback'); };
   try { navigator.clipboard.writeText(tsv).then(done, fallback); } catch (e) { fallback(); }
 });
-$('#pasteAdd').addEventListener('click', () => { const t = $('#pasteBox').value; if (!t.trim()) return; addQuestions(rowsToQuestions(parseDelimited(t)), 'Pasted rows'); $('#pasteBox').value = ''; });
-$('#loadSample').addEventListener('click', () => { S.questions = SAMPLE.map(q => ({ ...q })); saveSetup(); renderQList(); $('#importMsg').className = 'ok'; $('#importMsg').textContent = `Loaded ${SAMPLE.length} sample questions.`; });
+$('#pasteAdd').addEventListener('click', () => { const txt = $('#pasteBox').value; if (!txt.trim()) return; addQuestions(rowsToQuestions(parseDelimited(txt)), t('srcPasted')); $('#pasteBox').value = ''; });
+$('#loadSample').addEventListener('click', () => { S.questions = samples(); saveSetup(); renderQList(); $('#importMsg').className = 'ok'; $('#importMsg').textContent = t('samplesLoaded', { n: S.questions.length }); });
 $('#clearQ').addEventListener('click', () => { S.questions = []; saveSetup(); renderQList(); $('#importMsg').textContent = ''; });
 $('#manual').addEventListener('submit', e => {
   e.preventDefault();
   const row = ['#mQ', '#mA', '#mB', '#mC', '#mD', '#mAns', '#mExp'].map(id => $(id).value);
   const res = rowsToQuestions([row]);
-  addQuestions(res, 'Manual entry');
+  addQuestions(res, t('srcManual'));
   if (res.out.length) ['#mQ', '#mA', '#mB', '#mC', '#mD', '#mAns', '#mExp'].forEach(id => $(id).value = '');
 });
 function saveSetup() {
-  store.set('svs-setup', { teacher: $('#teacherName').value, student: $('#studentName').value, questions: S.questions, timer: $('#optTimer').value, voice: $('#optVoice').checked, music: $('#optMusic').checked });
+  store.set('svs-setup', { lang: LANG, teacher: $('#teacherName').value, student: $('#studentName').value, questions: S.questions, timer: $('#optTimer').value, voice: $('#optVoice').checked, music: $('#optMusic').checked });
   if (photo.src) store.set('svs-photo', { src: photo.src, zoom: photo.zoom, ox: photo.ox, oy: photo.oy }); else { try { localStorage.removeItem('svs-photo'); } catch (e) { /* blocked */ } }
 }
 function loadSetup() {
   const s = store.get('svs-setup');
+  applyLang((s && s.lang) || ((navigator.language || '').toLowerCase().startsWith('ar') ? 'ar' : 'en'));
   if (s) {
     $('#teacherName').value = s.teacher || ''; $('#studentName').value = s.student || '';
     if (Array.isArray(s.questions)) S.questions = s.questions.filter(q => q && q.q);
@@ -2139,6 +2207,7 @@ function loadSetup() {
   if (p && p.src) loadPhoto(p.src, { zoom: p.zoom || 1.3, ox: p.ox || 0, oy: p.oy || 0 });
   renderQList(); renderFace();
 }
+document.querySelectorAll('#langSwitch button').forEach(b => b.addEventListener('click', () => { applyLang(b.dataset.lang); saveSetup(); }));
 for (const id of ['#teacherName', '#studentName', '#optTimer', '#optVoice', '#optMusic']) $(id).addEventListener('change', saveSetup);
 $('#teacherName').addEventListener('input', () => { S.teacher = $('#teacherName').value.trim() || 'Tanaka'; });
 $('#studentName').addEventListener('input', () => { S.student = $('#studentName').value.trim() || 'Student'; });
@@ -2150,7 +2219,7 @@ function readOptions() {
 }
 $('#startBtn').addEventListener('click', () => {
   readOptions();
-  if (!S.questions.length) { S.questions = SAMPLE.map(q => ({ ...q })); renderQList(); }
+  if (!S.questions.length) { S.questions = samples(); renderQList(); }
   saveSetup();
   initAudio();
   try { speechSynthesis && speechSynthesis.getVoices(); } catch (e) { /* no speech */ }
@@ -2160,7 +2229,7 @@ $('#startBtn').addEventListener('click', () => {
 $('#rematch').addEventListener('click', () => { $('#result').hidden = true; initAudio(); runMatch(); });
 $('#toSetup').addEventListener('click', () => { $('#result').hidden = true; resetMatch(); G.hud = 0; $('#setup').hidden = false; });
 $('#btnMute').addEventListener('click', () => {
-  AU.on = !AU.on; $('#btnMute').textContent = 'Sound: ' + (AU.on ? 'on' : 'off');
+  AU.on = !AU.on; $('#btnMute').textContent = t(AU.on ? 'soundOn' : 'soundOff');
   if (AU.master) AU.master.gain.value = AU.on ? 0.9 : 0;
   if (!AU.on) try { speechSynthesis.cancel(); } catch (e) { /* no speech */ }
 });
