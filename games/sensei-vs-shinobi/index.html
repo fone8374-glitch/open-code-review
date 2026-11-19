@@ -1480,6 +1480,7 @@ function init3D() {
   R3.tried = true;
   if (!window.THREE) return false;
   try {
+    UPV = new THREE.Vector3(0, 1, 0);
     const renderer = new THREE.WebGLRenderer({ canvas: $('#gl'), antialias: true, powerPreference: 'high-performance' });
     renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.setClearColor(0x271f4b);
@@ -1782,7 +1783,7 @@ function setRibbon(m, pts, width) {
   }
   p.needsUpdate = true; m.geometry.computeVertexNormals();
 }
-const UPV = new THREE.Vector3(0, 1, 0);
+let UPV = null;
 function place(mesh, a, b) {
   const d = new THREE.Vector3().subVectors(b, a), len = d.length() || 1e-4;
   mesh.position.copy(a).addScaledVector(d, 0.5);
