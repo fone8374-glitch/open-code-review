@@ -278,7 +278,7 @@ details summary { cursor: pointer; font-weight: 500; font-size: 15px; width: fit
 
     <div class="versus">
       <section class="fighter shinobi" aria-labelledby="shinobiH">
-        <div class="stage"><canvas id="pvN" width="440" height="440" aria-hidden="true"></canvas></div>
+        <div class="stage"><canvas id="pvN" width="440" height="440" aria-hidden="true"></canvas><canvas id="pvN3" hidden aria-hidden="true"></canvas></div>
         <div class="body">
           <h2 id="shinobiH" data-i18n="shinobiTitle">The Shinobi</h2>
           <p class="role" data-i18n="shinobiSmall">Student</p>
@@ -288,7 +288,7 @@ details summary { cursor: pointer; font-weight: 500; font-size: 15px; width: fit
       </section>
       <div class="vs-mark" aria-hidden="true">VS</div>
       <section class="fighter sensei" aria-labelledby="senseiH">
-        <div class="stage"><canvas id="pvT" width="440" height="440" aria-hidden="true"></canvas></div>
+        <div class="stage"><canvas id="pvT" width="440" height="440" aria-hidden="true"></canvas><canvas id="pvT3" hidden aria-hidden="true"></canvas></div>
         <div class="body">
           <h2 id="senseiH" data-i18n="senseiTitle">The Sensei</h2>
           <p class="role" data-i18n="senseiSmall">Teacher</p>
@@ -429,7 +429,7 @@ function seeded(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; 
 /* =========================================================
    Language: English and Arabic (Arabic is kept as escapes so the source stays ASCII)
    ========================================================= */
-const I18N = { en: {"h1a": "Sensei", "h1vs": "vs", "h1b": "Shinobi", "tagline": "A quiz duel beneath Mount Fuji. Every right answer is a ninja strike on the teacher. Every wrong one costs the ninja a weapon and a quarter of their health.", "senseiTitle": "The Sensei", "senseiSmall": "Teacher", "teacherNameL": "Teacher name", "teacherPh": "Mr. Tanaka", "uploadPhoto": "Upload teacher photo", "zoom": "Zoom", "drawnFace": "Use drawn face", "photoHint": "The photo becomes the fighter's face. Drag the circle to center the face, then zoom to fit.", "shinobiTitle": "The Shinobi", "shinobiSmall": "Student", "studentNameL": "Student name", "studentPh": "Aiko", "shinobiHint": "The ninja carries four weapons: katana, nunchaku, shuriken and kusarigama. Each wrong answer knocks one away and takes 25% health. Each right answer lands a strike worth 25% of the teacher's health.", "optVoiceL": "Announcer voice", "optMusicL": "Music", "timerL": "Answer time limit", "t0": "No limit", "t15": "15 seconds", "t30": "30 seconds", "t60": "60 seconds", "scrollTitle": "Question Scroll", "scrollSmall": "Excel sheet", "scrollHint": "One question per row. Fill Option A to D for multiple choice and put the letter (or the option text) in Answer. Leave the options empty for a typed answer; separate accepted answers with |. Explanation is optional and is shown after each answer. Questions can be in English or Arabic.", "colQ": "Question", "colA": "Option A", "colB": "Option B", "colC": "Option C", "colD": "Option D", "colAns": "Answer", "colExp": "Explanation", "ex1q": "What is 7 x 8?", "ex1ans": "B", "ex1exp": "7 x 8 = 56", "ex2q": "12 squared is?", "uploadXls": "Upload Excel / CSV", "tplDownload": "Download Excel template", "tplCopy": "Copy template rows", "loadSample": "Load sample questions", "clearQ": "Clear all", "pasteL": "Or paste rows straight from Excel", "pastePh": "Select the rows in Excel, copy, and paste them here", "pasteAdd": "Add pasted rows", "manualSummary": "Write a question by hand", "mQ": "Question", "mA": "Option A", "mB": "Option B", "mC": "Option C", "mD": "Option D", "mAns": "Answer (letter or text)", "mExp": "Explanation (optional)", "mAdd": "Add question", "startBtn": "Enter the Dojo", "quit": "Quit", "typeAnswer": "Type your answer", "strike": "Strike!", "keyhint": "Keys 1-4 or A-D to answer", "correctL": "Correct", "wrongL": "Wrong", "accL": "Accuracy", "reviewTitle": "Lesson review", "reviewSmall": "All questions this match", "rematch": "Rematch", "toSetup": "Change questions or fighters", "langLabel": "Language", "soundOn": "Sound: on", "soundOff": "Sound: off", "noPhoto1": "No photo", "noPhoto2": "drawn face used", "qcount": "{n} questions ready", "qcount1": "1 question ready", "qcountNone": "No questions yet: the sample set will be used", "answerItem": "Answer: {a}", "typedItem": "Typed answer: {a}", "or": " or ", "removeQ": "Remove question {n}", "importAdded": "{src}: added {n} question(s).", "importNone": "{src}: no questions found. Check the column order.", "importSkipped": " Skipped {n}: {list}.", "rowNoAns": "row {r}: no answer", "rowBadAns": "row {r}: answer \"{a}\" is not one of the options", "xlsMissing": "The Excel reader could not load. Save the sheet as CSV and upload that, or paste the rows below.", "readErr": "Could not read {f}: {e}", "tplStarted": "Template download started. If nothing downloads here, use \"Copy template rows\" and paste into a blank Excel sheet.", "tplBlocked": "Download is blocked here. Use \"Copy template rows\" and paste into Excel.", "tplCopied": "Template copied. Paste into cell A1 of a blank Excel sheet; each value lands in its own column.", "tplCopyFallback": "Copying is blocked here. The template is selected in the paste box; press Ctrl+C (Cmd+C) to copy it.", "samplesLoaded": "Loaded {n} sample questions.", "srcPasted": "Pasted rows", "srcManual": "Manual entry", "qnum": "Question {n}", "secs": "{n}s", "fbRight": "Correct! Strike now!", "fbWrong": "Wrong! The answer was {a}.", "fbTime": "Time's up! The answer was {a}.", "lsRight": "Correct: {a}", "lsWrong": "Not quite. Answer: {a}", "lsTime": "Time ran out. Answer: {a}", "timeRanOut": "(time ran out)", "blank": "(blank)", "letters": "ABCD", "optLabel": "{l}) {o}", "resWin": "{s} defeats Sensei {t}!", "resLose": "Sensei {t} wins this round", "subFlawless": "Flawless victory: not a single wrong answer.", "subWin": "The student surpasses the master. Review the misses below to stay sharp.", "subLose": "Every wrong answer is a lesson. Study the review below and try again.", "revRight": "Answered {a}", "revWrong": "Answered {g}. Correct: {c}", "hudQ": "QUESTION", "senseiName": "Sensei {t}", "introTitle": "SENSEI vs SHINOBI", "ironTeacher": "THE IRON TEACHER", "shinobiStudent": "THE SHINOBI STUDENT", "round1": "ROUND 1", "fight": "FIGHT!", "mv_katana": "IAI LIGHTNING SLASH", "mv_shuriken": "SHURIKEN STORM", "mv_nunchaku": "NUNCHAKU FURY", "mv_kusarigama": "CHAIN SICKLE SNARE", "mv_kick": "WHIRLWIND KICK", "mv_shadow": "SHADOW STEP", "mv_storm": "AUTUMN LEAF STORM", "mv_ruler": "RULER OF LAW", "mv_chalk": "CHALK BARRAGE", "mv_book": "TEXTBOOK SLAM", "mv_punch": "DETENTION PUNCH", "finalExam": "FINAL EXAM", "senseiFinisher": "SENSEI FINISHER", "popHit": ["WHAM!", "POW!", "SMACK!", "CRACK!"], "popSmall": ["WHAP!", "BAP!", "THOK!"], "popChalk": ["TAK!", "TOK!", "PAK!"], "pw_slash": "SLASH!", "pw_thunk": "THUNK!", "pw_krak": "KRAK!", "pw_knee": "KNEE!", "pw_kick": "KICK!", "pw_behind": "BEHIND YOU!", "pw_whack": "WHACK!", "pw_chalked": "CHALKED!", "pw_smack": "SMACK!", "pw_detention": "DETENTION!", "lost": "LOST {w}!", "w_katana": "KATANA", "w_nunchaku": "NUNCHAKU", "w_shuriken": "SHURIKEN", "w_kusarigama": "KUSARIGAMA", "finishHim": "FINISH HIM!", "seeMe": "SEE ME AFTER CLASS", "senseiWins": "SENSEI WINS", "hitBooks": "{s}, time to hit the books!", "wins": "{s} WINS", "flawless": "FLAWLESS VICTORY", "surpasses": "THE STUDENT SURPASSES THE MASTER", "shobuSub": "SHOBU ARI", "v_sensei": "Sensei {t}", "v_round": "Round one.", "v_fight": "Fight!", "v_finish": "Finish him!", "v_dismissed": "Class dismissed.", "v_wins": "{s} wins!", "v_flawless": "{s} wins. Flawless victory!", "v_lines": ["Wrong answer!", "See me after class!", "Did you even study?", "Pop quiz!", "Detention!"], "v_kiai": ["Hi-yah!", "Hah!", "Eiyah!"], "viewL": "Graphics", "view3d": "3D", "view2d": "2D classic (for slower computers)"}, ar: {"h1a": "\u0627\u0644\u0633\u064a\u0646\u0633\u064a", "h1vs": "\u0636\u062f", "h1b": "\u0627\u0644\u0634\u064a\u0646\u0648\u0628\u064a", "tagline": "\u0645\u0628\u0627\u0631\u0632\u0629 \u0623\u0633\u0626\u0644\u0629 \u0639\u0646\u062f \u0633\u0641\u062d \u062c\u0628\u0644 \u0641\u0648\u062c\u064a. \u0643\u0644 \u0625\u062c\u0627\u0628\u0629 \u0635\u062d\u064a\u062d\u0629 \u0636\u0631\u0628\u0629 \u0646\u064a\u0646\u062c\u0627 \u0639\u0644\u0649 \u0627\u0644\u0645\u0639\u0644\u0651\u0645\u060c \u0648\u0643\u0644 \u0625\u062c\u0627\u0628\u0629 \u062e\u0627\u0637\u0626\u0629 \u062a\u064f\u0641\u0642\u062f \u0627\u0644\u0646\u064a\u0646\u062c\u0627 \u0633\u0644\u0627\u062d\u064b\u0627 \u0648\u0631\u0628\u0639 \u0635\u062d\u062a\u0647.", "senseiTitle": "\u0627\u0644\u0633\u064a\u0646\u0633\u064a", "senseiSmall": "\u0627\u0644\u0645\u0639\u0644\u0651\u0645", "teacherNameL": "\u0627\u0633\u0645 \u0627\u0644\u0645\u0639\u0644\u0651\u0645", "teacherPh": "\u0627\u0644\u0623\u0633\u062a\u0627\u0630 \u0623\u062d\u0645\u062f", "uploadPhoto": "\u0627\u0631\u0641\u0639 \u0635\u0648\u0631\u0629 \u0627\u0644\u0645\u0639\u0644\u0651\u0645", "zoom": "\u0627\u0644\u062a\u0643\u0628\u064a\u0631", "drawnFace": "\u0627\u0633\u062a\u062e\u062f\u0645 \u0627\u0644\u0648\u062c\u0647 \u0627\u0644\u0645\u0631\u0633\u0648\u0645", "photoHint": "\u062a\u0635\u0628\u062d \u0627\u0644\u0635\u0648\u0631\u0629 \u0648\u062c\u0647 \u0627\u0644\u0645\u0642\u0627\u062a\u0644. \u0627\u0633\u062d\u0628 \u0627\u0644\u062f\u0627\u0626\u0631\u0629 \u0644\u062a\u0648\u0633\u064a\u0637 \u0627\u0644\u0648\u062c\u0647\u060c \u062b\u0645 \u0643\u0628\u0651\u0631 \u0627\u0644\u0635\u0648\u0631\u0629 \u0644\u0636\u0628\u0637\u0647\u0627.", "shinobiTitle": "\u0627\u0644\u0634\u064a\u0646\u0648\u0628\u064a", "shinobiSmall": "\u0627\u0644\u0637\u0627\u0644\u0628", "studentNameL": "\u0627\u0633\u0645 \u0627\u0644\u0637\u0627\u0644\u0628", "studentPh": "\u0633\u0627\u0631\u0629", "shinobiHint": "\u064a\u062d\u0645\u0644 \u0627\u0644\u0646\u064a\u0646\u062c\u0627 \u0623\u0631\u0628\u0639\u0629 \u0623\u0633\u0644\u062d\u0629: \u0627\u0644\u0643\u0627\u062a\u0627\u0646\u0627 \u0648\u0627\u0644\u0646\u0646\u0634\u0627\u0643\u0648 \u0648\u0627\u0644\u0634\u0648\u0631\u064a\u0643\u0646 \u0648\u0627\u0644\u0643\u0648\u0633\u0627\u0631\u064a\u063a\u0627\u0645\u0627. \u0643\u0644 \u0625\u062c\u0627\u0628\u0629 \u062e\u0627\u0637\u0626\u0629 \u062a\u064f\u0633\u0642\u0637 \u0633\u0644\u0627\u062d\u064b\u0627 \u0648\u062a\u062e\u0635\u0645 25% \u0645\u0646 \u0635\u062d\u062a\u0647\u060c \u0648\u0643\u0644 \u0625\u062c\u0627\u0628\u0629 \u0635\u062d\u064a\u062d\u0629 \u062a\u064f\u0646\u0632\u0644 \u0636\u0631\u0628\u0629 \u062a\u062e\u0635\u0645 25% \u0645\u0646 \u0635\u062d\u0629 \u0627\u0644\u0645\u0639\u0644\u0651\u0645.", "optVoiceL": "\u0635\u0648\u062a \u0627\u0644\u0645\u0639\u0644\u0651\u0642", "optMusicL": "\u0627\u0644\u0645\u0648\u0633\u064a\u0642\u0649", "timerL": "\u0645\u0647\u0644\u0629 \u0627\u0644\u0625\u062c\u0627\u0628\u0629", "t0": "\u0628\u0644\u0627 \u062d\u062f", "t15": "15 \u062b\u0627\u0646\u064a\u0629", "t30": "30 \u062b\u0627\u0646\u064a\u0629", "t60": "60 \u062b\u0627\u0646\u064a\u0629", "scrollTitle": "\u0644\u0641\u0627\u0641\u0629 \u0627\u0644\u0623\u0633\u0626\u0644\u0629", "scrollSmall": "\u0648\u0631\u0642\u0629 Excel", "scrollHint": "\u0633\u0624\u0627\u0644 \u0648\u0627\u062d\u062f \u0641\u064a \u0643\u0644 \u0635\u0641. \u0627\u0645\u0644\u0623 \u0627\u0644\u062e\u064a\u0627\u0631\u0627\u062a \u0645\u0646 \u0623 \u0625\u0644\u0649 \u062f \u0644\u0644\u0627\u062e\u062a\u064a\u0627\u0631 \u0645\u0646 \u0645\u062a\u0639\u062f\u062f\u060c \u0648\u0636\u0639 \u062d\u0631\u0641 \u0627\u0644\u0625\u062c\u0627\u0628\u0629 (\u0623\u060c \u0628\u060c \u062c\u060c \u062f \u0623\u0648 A \u0625\u0644\u0649 D) \u0623\u0648 \u0646\u0635 \u0627\u0644\u062e\u064a\u0627\u0631 \u0641\u064a \u0639\u0645\u0648\u062f \u0627\u0644\u0625\u062c\u0627\u0628\u0629. \u0627\u062a\u0631\u0643 \u0627\u0644\u062e\u064a\u0627\u0631\u0627\u062a \u0641\u0627\u0631\u063a\u0629 \u0644\u0625\u062c\u0627\u0628\u0629 \u0645\u0643\u062a\u0648\u0628\u0629\u060c \u0648\u0627\u0641\u0635\u0644 \u0628\u064a\u0646 \u0627\u0644\u0625\u062c\u0627\u0628\u0627\u062a \u0627\u0644\u0645\u0642\u0628\u0648\u0644\u0629 \u0628\u0627\u0644\u0631\u0645\u0632 |. \u0627\u0644\u0634\u0631\u062d \u0627\u062e\u062a\u064a\u0627\u0631\u064a \u0648\u064a\u0638\u0647\u0631 \u0628\u0639\u062f \u0643\u0644 \u0625\u062c\u0627\u0628\u0629. \u064a\u0645\u0643\u0646 \u0643\u062a\u0627\u0628\u0629 \u0627\u0644\u0623\u0633\u0626\u0644\u0629 \u0628\u0627\u0644\u0639\u0631\u0628\u064a\u0629 \u0623\u0648 \u0627\u0644\u0625\u0646\u062c\u0644\u064a\u0632\u064a\u0629.", "colQ": "\u0627\u0644\u0633\u0624\u0627\u0644", "colA": "\u0627\u0644\u062e\u064a\u0627\u0631 \u0623", "colB": "\u0627\u0644\u062e\u064a\u0627\u0631 \u0628", "colC": "\u0627\u0644\u062e\u064a\u0627\u0631 \u062c", "colD": "\u0627\u0644\u062e\u064a\u0627\u0631 \u062f", "colAns": "\u0627\u0644\u0625\u062c\u0627\u0628\u0629", "colExp": "\u0627\u0644\u0634\u0631\u062d", "ex1q": "\u0643\u0645 \u064a\u0633\u0627\u0648\u064a 7 \u00d7 8\u061f", "ex1ans": "\u0628", "ex1exp": "7 \u00d7 8 = 56", "ex2q": "\u0645\u0627 \u0645\u0631\u0628\u0639 \u0627\u0644\u0639\u062f\u062f 12\u061f", "uploadXls": "\u0627\u0631\u0641\u0639 \u0645\u0644\u0641 Excel \u0623\u0648 CSV", "tplDownload": "\u062a\u0646\u0632\u064a\u0644 \u0642\u0627\u0644\u0628 Excel", "tplCopy": "\u0646\u0633\u062e \u0635\u0641\u0648\u0641 \u0627\u0644\u0642\u0627\u0644\u0628", "loadSample": "\u062a\u062d\u0645\u064a\u0644 \u0623\u0633\u0626\u0644\u0629 \u0646\u0645\u0648\u0630\u062c\u064a\u0629", "clearQ": "\u0645\u0633\u062d \u0627\u0644\u0643\u0644", "pasteL": "\u0623\u0648 \u0627\u0644\u0635\u0642 \u0627\u0644\u0635\u0641\u0648\u0641 \u0645\u0628\u0627\u0634\u0631\u0629 \u0645\u0646 Excel", "pastePh": "\u062d\u062f\u0651\u062f \u0627\u0644\u0635\u0641\u0648\u0641 \u0641\u064a Excel \u0648\u0627\u0646\u0633\u062e\u0647\u0627 \u062b\u0645 \u0627\u0644\u0635\u0642\u0647\u0627 \u0647\u0646\u0627", "pasteAdd": "\u0625\u0636\u0627\u0641\u0629 \u0627\u0644\u0635\u0641\u0648\u0641 \u0627\u0644\u0645\u0644\u0635\u0642\u0629", "manualSummary": "\u0627\u0643\u062a\u0628 \u0633\u0624\u0627\u0644\u064b\u0627 \u064a\u062f\u0648\u064a\u064b\u0627", "mQ": "\u0627\u0644\u0633\u0624\u0627\u0644", "mA": "\u0627\u0644\u062e\u064a\u0627\u0631 \u0623", "mB": "\u0627\u0644\u062e\u064a\u0627\u0631 \u0628", "mC": "\u0627\u0644\u062e\u064a\u0627\u0631 \u062c", "mD": "\u0627\u0644\u062e\u064a\u0627\u0631 \u062f", "mAns": "\u0627\u0644\u0625\u062c\u0627\u0628\u0629 (\u062d\u0631\u0641 \u0623\u0648 \u0646\u0635)", "mExp": "\u0627\u0644\u0634\u0631\u062d (\u0627\u062e\u062a\u064a\u0627\u0631\u064a)", "mAdd": "\u0625\u0636\u0627\u0641\u0629 \u0627\u0644\u0633\u0624\u0627\u0644", "startBtn": "\u0627\u062f\u062e\u0644 \u0627\u0644\u062f\u0648\u062c\u0648", "quit": "\u062e\u0631\u0648\u062c", "typeAnswer": "\u0627\u0643\u062a\u0628 \u0625\u062c\u0627\u0628\u062a\u0643", "strike": "\u0627\u0636\u0631\u0628!", "keyhint": "\u0627\u0633\u062a\u062e\u062f\u0645 \u0627\u0644\u0645\u0641\u0627\u062a\u064a\u062d 1-4 \u0644\u0644\u0625\u062c\u0627\u0628\u0629", "correctL": "\u0635\u062d\u064a\u062d\u0629", "wrongL": "\u062e\u0627\u0637\u0626\u0629", "accL": "\u0627\u0644\u062f\u0642\u0629", "reviewTitle": "\u0645\u0631\u0627\u062c\u0639\u0629 \u0627\u0644\u062f\u0631\u0633", "reviewSmall": "\u0643\u0644 \u0623\u0633\u0626\u0644\u0629 \u0647\u0630\u0647 \u0627\u0644\u0645\u0628\u0627\u0631\u0627\u0629", "rematch": "\u0625\u0639\u0627\u062f\u0629 \u0627\u0644\u0645\u0628\u0627\u0631\u0627\u0629", "toSetup": "\u062a\u063a\u064a\u064a\u0631 \u0627\u0644\u0623\u0633\u0626\u0644\u0629 \u0623\u0648 \u0627\u0644\u0645\u0642\u0627\u062a\u0644\u064a\u0646", "langLabel": "\u0627\u0644\u0644\u063a\u0629", "soundOn": "\u0627\u0644\u0635\u0648\u062a: \u064a\u0639\u0645\u0644", "soundOff": "\u0627\u0644\u0635\u0648\u062a: \u0645\u062a\u0648\u0642\u0641", "noPhoto1": "\u0644\u0627 \u062a\u0648\u062c\u062f \u0635\u0648\u0631\u0629", "noPhoto2": "\u0633\u064a\u064f\u0633\u062a\u062e\u062f\u0645 \u0648\u062c\u0647 \u0645\u0631\u0633\u0648\u0645", "qcount": "\u0639\u062f\u062f \u0627\u0644\u0623\u0633\u0626\u0644\u0629 \u0627\u0644\u062c\u0627\u0647\u0632\u0629: {n}", "qcount1": "\u0633\u0624\u0627\u0644 \u0648\u0627\u062d\u062f \u062c\u0627\u0647\u0632", "qcountNone": "\u0644\u0627 \u062a\u0648\u062c\u062f \u0623\u0633\u0626\u0644\u0629 \u0628\u0639\u062f: \u0633\u062a\u064f\u0633\u062a\u062e\u062f\u0645 \u0627\u0644\u0623\u0633\u0626\u0644\u0629 \u0627\u0644\u0646\u0645\u0648\u0630\u062c\u064a\u0629", "answerItem": "\u0627\u0644\u0625\u062c\u0627\u0628\u0629: {a}", "typedItem": "\u0625\u062c\u0627\u0628\u0629 \u0645\u0643\u062a\u0648\u0628\u0629: {a}", "or": " \u0623\u0648 ", "removeQ": "\u062d\u0630\u0641 \u0627\u0644\u0633\u0624\u0627\u0644 {n}", "importAdded": "{src}: \u062a\u0645\u062a \u0625\u0636\u0627\u0641\u0629 {n} \u0645\u0646 \u0627\u0644\u0623\u0633\u0626\u0644\u0629.", "importNone": "{src}: \u0644\u0645 \u064a\u064f\u0639\u062b\u0631 \u0639\u0644\u0649 \u0623\u0633\u0626\u0644\u0629. \u062a\u062d\u0642\u0651\u0642 \u0645\u0646 \u062a\u0631\u062a\u064a\u0628 \u0627\u0644\u0623\u0639\u0645\u062f\u0629.", "importSkipped": " \u062a\u0645 \u062a\u062e\u0637\u064a {n}: {list}.", "rowNoAns": "\u0627\u0644\u0635\u0641 {r}: \u0644\u0627 \u062a\u0648\u062c\u062f \u0625\u062c\u0627\u0628\u0629", "rowBadAns": "\u0627\u0644\u0635\u0641 {r}: \u0627\u0644\u0625\u062c\u0627\u0628\u0629 \u00ab{a}\u00bb \u0644\u064a\u0633\u062a \u0645\u0646 \u0627\u0644\u062e\u064a\u0627\u0631\u0627\u062a", "xlsMissing": "\u062a\u0639\u0630\u0651\u0631 \u062a\u062d\u0645\u064a\u0644 \u0642\u0627\u0631\u0626 Excel. \u0627\u062d\u0641\u0638 \u0627\u0644\u0648\u0631\u0642\u0629 \u0628\u0635\u064a\u063a\u0629 CSV \u0648\u0627\u0631\u0641\u0639\u0647\u0627\u060c \u0623\u0648 \u0627\u0644\u0635\u0642 \u0627\u0644\u0635\u0641\u0648\u0641 \u0623\u062f\u0646\u0627\u0647.", "readErr": "\u062a\u0639\u0630\u0651\u0631\u062a \u0642\u0631\u0627\u0621\u0629 {f}: {e}", "tplStarted": "\u0628\u062f\u0623 \u062a\u0646\u0632\u064a\u0644 \u0627\u0644\u0642\u0627\u0644\u0628. \u0625\u0646 \u0644\u0645 \u064a\u064f\u0646\u0632\u064e\u0651\u0644 \u0634\u064a\u0621 \u0647\u0646\u0627\u060c \u0627\u0633\u062a\u062e\u062f\u0645 \u00ab\u0646\u0633\u062e \u0635\u0641\u0648\u0641 \u0627\u0644\u0642\u0627\u0644\u0628\u00bb \u0648\u0627\u0644\u0635\u0642\u0647\u0627 \u0641\u064a \u0648\u0631\u0642\u0629 Excel \u0641\u0627\u0631\u063a\u0629.", "tplBlocked": "\u0627\u0644\u062a\u0646\u0632\u064a\u0644 \u063a\u064a\u0631 \u0645\u062a\u0627\u062d \u0647\u0646\u0627. \u0627\u0633\u062a\u062e\u062f\u0645 \u00ab\u0646\u0633\u062e \u0635\u0641\u0648\u0641 \u0627\u0644\u0642\u0627\u0644\u0628\u00bb \u0648\u0627\u0644\u0635\u0642\u0647\u0627 \u0641\u064a Excel.", "tplCopied": "\u062a\u0645 \u0646\u0633\u062e \u0627\u0644\u0642\u0627\u0644\u0628. \u0627\u0644\u0635\u0642\u0647 \u0641\u064a \u0627\u0644\u062e\u0644\u064a\u0629 A1 \u0645\u0646 \u0648\u0631\u0642\u0629 Excel \u0641\u0627\u0631\u063a\u0629\u060c \u0648\u0633\u062a\u0648\u0636\u0639 \u0643\u0644 \u0642\u064a\u0645\u0629 \u0641\u064a \u0639\u0645\u0648\u062f\u0647\u0627.", "tplCopyFallback": "\u0627\u0644\u0646\u0633\u062e \u063a\u064a\u0631 \u0645\u062a\u0627\u062d \u0647\u0646\u0627. \u0627\u0644\u0642\u0627\u0644\u0628 \u0645\u062d\u062f\u064e\u0651\u062f \u0641\u064a \u0645\u0631\u0628\u0639 \u0627\u0644\u0644\u0635\u0642\u061b \u0627\u0636\u063a\u0637 Ctrl+C (\u0623\u0648 Cmd+C) \u0644\u0646\u0633\u062e\u0647.", "samplesLoaded": "\u062a\u0645 \u062a\u062d\u0645\u064a\u0644 {n} \u0645\u0646 \u0627\u0644\u0623\u0633\u0626\u0644\u0629 \u0627\u0644\u0646\u0645\u0648\u0630\u062c\u064a\u0629.", "srcPasted": "\u0627\u0644\u0635\u0641\u0648\u0641 \u0627\u0644\u0645\u0644\u0635\u0642\u0629", "srcManual": "\u0625\u062f\u062e\u0627\u0644 \u064a\u062f\u0648\u064a", "qnum": "\u0627\u0644\u0633\u0624\u0627\u0644 {n}", "secs": "{n} \u062b", "fbRight": "\u0625\u062c\u0627\u0628\u0629 \u0635\u062d\u064a\u062d\u0629! \u0627\u0636\u0631\u0628 \u0627\u0644\u0622\u0646!", "fbWrong": "\u062e\u0637\u0623! \u0627\u0644\u0625\u062c\u0627\u0628\u0629 \u0627\u0644\u0635\u062d\u064a\u062d\u0629: {a}.", "fbTime": "\u0627\u0646\u062a\u0647\u0649 \u0627\u0644\u0648\u0642\u062a! \u0627\u0644\u0625\u062c\u0627\u0628\u0629 \u0627\u0644\u0635\u062d\u064a\u062d\u0629: {a}.", "lsRight": "\u0635\u062d\u064a\u062d: {a}", "lsWrong": "\u0644\u064a\u0633 \u062a\u0645\u0627\u0645\u064b\u0627. \u0627\u0644\u0625\u062c\u0627\u0628\u0629: {a}", "lsTime": "\u0627\u0646\u062a\u0647\u0649 \u0627\u0644\u0648\u0642\u062a. \u0627\u0644\u0625\u062c\u0627\u0628\u0629: {a}", "timeRanOut": "(\u0627\u0646\u062a\u0647\u0649 \u0627\u0644\u0648\u0642\u062a)", "blank": "(\u0641\u0627\u0631\u063a\u0629)", "letters": "\u0623\u0628\u062c\u062f", "optLabel": "({l}) {o}", "resWin": "{s} \u064a\u0647\u0632\u0645 \u0627\u0644\u0633\u064a\u0646\u0633\u064a {t}!", "resLose": "\u0627\u0644\u0633\u064a\u0646\u0633\u064a {t} \u064a\u0641\u0648\u0632 \u0628\u0647\u0630\u0647 \u0627\u0644\u062c\u0648\u0644\u0629", "subFlawless": "\u0627\u0646\u062a\u0635\u0627\u0631 \u0643\u0627\u0645\u0644: \u0644\u0627 \u0625\u062c\u0627\u0628\u0629 \u062e\u0627\u0637\u0626\u0629 \u0648\u0627\u062d\u062f\u0629.", "subWin": "\u0627\u0644\u062a\u0644\u0645\u064a\u0630 \u062a\u0641\u0648\u0651\u0642 \u0639\u0644\u0649 \u0627\u0644\u0645\u0639\u0644\u0651\u0645. \u0631\u0627\u062c\u0639 \u0627\u0644\u0623\u062e\u0637\u0627\u0621 \u0623\u062f\u0646\u0627\u0647 \u0644\u062a\u0628\u0642\u0649 \u0645\u062a\u064a\u0642\u0638\u064b\u0627.", "subLose": "\u0643\u0644 \u0625\u062c\u0627\u0628\u0629 \u062e\u0627\u0637\u0626\u0629 \u062f\u0631\u0633. \u0627\u062f\u0631\u0633 \u0627\u0644\u0645\u0631\u0627\u062c\u0639\u0629 \u0623\u062f\u0646\u0627\u0647 \u0648\u062d\u0627\u0648\u0644 \u0645\u062c\u062f\u062f\u064b\u0627.", "revRight": "\u0623\u062c\u0628\u062a: {a}", "revWrong": "\u0623\u062c\u0628\u062a: {g}. \u0627\u0644\u0635\u062d\u064a\u062d: {c}", "hudQ": "\u0627\u0644\u0633\u0624\u0627\u0644", "senseiName": "\u0627\u0644\u0633\u064a\u0646\u0633\u064a {t}", "introTitle": "\u0627\u0644\u0633\u064a\u0646\u0633\u064a \u0636\u062f \u0627\u0644\u0634\u064a\u0646\u0648\u0628\u064a", "ironTeacher": "\u0627\u0644\u0645\u0639\u0644\u0651\u0645 \u0627\u0644\u062d\u062f\u064a\u062f\u064a", "shinobiStudent": "\u0627\u0644\u0637\u0627\u0644\u0628 \u0627\u0644\u0634\u064a\u0646\u0648\u0628\u064a", "round1": "\u0627\u0644\u062c\u0648\u0644\u0629 1", "fight": "\u0642\u0627\u062a\u0644!", "mv_katana": "\u0636\u0631\u0628\u0629 \u0627\u0644\u0628\u0631\u0642 \u0627\u0644\u062e\u0627\u0637\u0641\u0629", "mv_shuriken": "\u0639\u0627\u0635\u0641\u0629 \u0627\u0644\u0634\u0648\u0631\u064a\u0643\u0646", "mv_nunchaku": "\u063a\u0636\u0628 \u0627\u0644\u0646\u0646\u0634\u0627\u0643\u0648", "mv_kusarigama": "\u0641\u062e \u0627\u0644\u0645\u0646\u062c\u0644 \u0648\u0627\u0644\u0633\u0644\u0633\u0644\u0629", "mv_kick": "\u0631\u0643\u0644\u0629 \u0627\u0644\u0625\u0639\u0635\u0627\u0631", "mv_shadow": "\u062e\u0637\u0648\u0629 \u0627\u0644\u0638\u0644", "mv_storm": "\u0639\u0627\u0635\u0641\u0629 \u0623\u0648\u0631\u0627\u0642 \u0627\u0644\u062e\u0631\u064a\u0641", "mv_ruler": "\u0645\u0633\u0637\u0631\u0629 \u0627\u0644\u0642\u0627\u0646\u0648\u0646", "mv_chalk": "\u0648\u0627\u0628\u0644 \u0627\u0644\u0637\u0628\u0627\u0634\u064a\u0631", "mv_book": "\u0635\u0641\u0639\u0629 \u0627\u0644\u0643\u062a\u0627\u0628 \u0627\u0644\u0645\u062f\u0631\u0633\u064a", "mv_punch": "\u0644\u0643\u0645\u0629 \u0627\u0644\u0639\u0642\u0627\u0628", "finalExam": "\u0627\u0644\u0627\u0645\u062a\u062d\u0627\u0646 \u0627\u0644\u0646\u0647\u0627\u0626\u064a", "senseiFinisher": "\u0627\u0644\u0636\u0631\u0628\u0629 \u0627\u0644\u0642\u0627\u0636\u064a\u0629 \u0644\u0644\u0633\u064a\u0646\u0633\u064a", "popHit": ["\u0628\u0648\u0645!", "\u0637\u0627\u062e!", "\u0628\u0627\u0645!", "\u0643\u0631\u0627\u0643!"], "popSmall": ["\u0637\u0642!", "\u0628\u0642!", "\u0637\u062e!"], "popChalk": ["\u062a\u0643!", "\u0637\u0643!", "\u0628\u0643!"], "pw_slash": "\u0634\u064e\u0642!", "pw_thunk": "\u0637\u0642!", "pw_krak": "\u0643\u0631\u0627\u0643!", "pw_knee": "\u0631\u0643\u0628\u0629!", "pw_kick": "\u0631\u0643\u0644\u0629!", "pw_behind": "\u062e\u0644\u0641\u0643!", "pw_whack": "\u0637\u0627\u062e!", "pw_chalked": "\u0637\u0628\u0627\u0634\u064a\u0631!", "pw_smack": "\u0635\u0641\u0639\u0629!", "pw_detention": "\u0639\u0642\u0627\u0628!", "lost": "\u0633\u0642\u0637\u062a {w}!", "w_katana": "\u0627\u0644\u0643\u0627\u062a\u0627\u0646\u0627", "w_nunchaku": "\u0627\u0644\u0646\u0646\u0634\u0627\u0643\u0648", "w_shuriken": "\u0627\u0644\u0634\u0648\u0631\u064a\u0643\u0646", "w_kusarigama": "\u0627\u0644\u0643\u0648\u0633\u0627\u0631\u064a\u063a\u0627\u0645\u0627", "finishHim": "\u0623\u062c\u0647\u0632 \u0639\u0644\u064a\u0647!", "seeMe": "\u0631\u0627\u062c\u0639\u0646\u064a \u0628\u0639\u062f \u0627\u0644\u062d\u0635\u0629", "senseiWins": "\u0627\u0644\u0633\u064a\u0646\u0633\u064a \u064a\u0641\u0648\u0632", "hitBooks": "{s}\u060c \u062d\u0627\u0646 \u0648\u0642\u062a \u0627\u0644\u0645\u0630\u0627\u0643\u0631\u0629!", "wins": "{s} \u064a\u0641\u0648\u0632", "flawless": "\u0627\u0646\u062a\u0635\u0627\u0631 \u0643\u0627\u0645\u0644", "surpasses": "\u0627\u0644\u062a\u0644\u0645\u064a\u0630 \u062a\u0641\u0648\u0651\u0642 \u0639\u0644\u0649 \u0627\u0644\u0645\u0639\u0644\u0651\u0645", "shobuSub": "\u062d\u064f\u0633\u0645 \u0627\u0644\u0646\u0632\u0627\u0644", "v_sensei": "\u0627\u0644\u0633\u064a\u0646\u0633\u064a {t}", "v_round": "\u0627\u0644\u062c\u0648\u0644\u0629 \u0627\u0644\u0623\u0648\u0644\u0649.", "v_fight": "\u0642\u0627\u062a\u0644!", "v_finish": "\u0623\u062c\u0647\u0632 \u0639\u0644\u064a\u0647!", "v_dismissed": "\u0627\u0646\u062a\u0647\u062a \u0627\u0644\u062d\u0635\u0629.", "v_wins": "{s} \u064a\u0641\u0648\u0632!", "v_flawless": "{s} \u064a\u0641\u0648\u0632. \u0627\u0646\u062a\u0635\u0627\u0631 \u0643\u0627\u0645\u0644!", "v_lines": ["\u0625\u062c\u0627\u0628\u0629 \u062e\u0627\u0637\u0626\u0629!", "\u0631\u0627\u062c\u0639\u0646\u064a \u0628\u0639\u062f \u0627\u0644\u062d\u0635\u0629!", "\u0647\u0644 \u0630\u0627\u0643\u0631\u062a \u0623\u0635\u0644\u064b\u0627\u061f", "\u0627\u062e\u062a\u0628\u0627\u0631 \u0645\u0641\u0627\u062c\u0626!", "\u0639\u0642\u0627\u0628!"], "v_kiai": ["\u0647\u064a\u0651\u0627!", "\u0647\u0627\u0647!"], "viewL": "\u0627\u0644\u0631\u0633\u0648\u0645\u064a\u0627\u062a", "view3d": "\u062b\u0644\u0627\u062b\u064a \u0627\u0644\u0623\u0628\u0639\u0627\u062f", "view2d": "\u062b\u0646\u0627\u0626\u064a \u0627\u0644\u0623\u0628\u0639\u0627\u062f (\u0644\u0644\u0623\u062c\u0647\u0632\u0629 \u0627\u0644\u0623\u0628\u0637\u0623)"} };
+const I18N = { en: {"h1a": "Sensei", "h1vs": "vs", "h1b": "Shinobi", "tagline": "A quiz duel beneath Mount Fuji. Every right answer is a ninja strike on the teacher. Every wrong one costs the ninja a weapon and a quarter of their health.", "senseiTitle": "The Sensei", "senseiSmall": "Teacher", "teacherNameL": "Teacher name", "teacherPh": "Mr. Tanaka", "uploadPhoto": "Upload teacher photo", "zoom": "Zoom", "drawnFace": "Use drawn face", "photoHint": "The photo becomes the fighter's face. Drag the circle to center the face, then zoom to fit.", "shinobiTitle": "The Shinobi", "shinobiSmall": "Student", "studentNameL": "Student name", "studentPh": "Aiko", "shinobiHint": "The ninja carries four weapons: katana, nunchaku, shuriken and kusarigama. Each wrong answer knocks one away and takes 25% health. Each right answer lands a strike worth 25% of the teacher's health.", "optVoiceL": "Announcer voice", "optMusicL": "Music", "timerL": "Answer time limit", "t0": "No limit", "t15": "15 seconds", "t30": "30 seconds", "t60": "60 seconds", "scrollTitle": "Question Scroll", "scrollSmall": "Excel sheet", "scrollHint": "One question per row. Fill Option A to D for multiple choice and put the letter (or the option text) in Answer. Leave the options empty for a typed answer; separate accepted answers with |. Explanation is optional and is shown after each answer. Questions can be in English or Arabic.", "colQ": "Question", "colA": "Option A", "colB": "Option B", "colC": "Option C", "colD": "Option D", "colAns": "Answer", "colExp": "Explanation", "ex1q": "What is 7 x 8?", "ex1ans": "B", "ex1exp": "7 x 8 = 56", "ex2q": "12 squared is?", "uploadXls": "Upload Excel / CSV", "tplDownload": "Download Excel template", "tplCopy": "Copy template rows", "loadSample": "Load sample questions", "clearQ": "Clear all", "pasteL": "Or paste rows straight from Excel", "pastePh": "Select the rows in Excel, copy, and paste them here", "pasteAdd": "Add pasted rows", "manualSummary": "Write a question by hand", "mQ": "Question", "mA": "Option A", "mB": "Option B", "mC": "Option C", "mD": "Option D", "mAns": "Answer (letter or text)", "mExp": "Explanation (optional)", "mAdd": "Add question", "startBtn": "Enter the Dojo", "quit": "Quit", "typeAnswer": "Type your answer", "strike": "Strike!", "keyhint": "Keys 1-4 or A-D to answer", "correctL": "Correct", "wrongL": "Wrong", "accL": "Accuracy", "reviewTitle": "Lesson review", "reviewSmall": "All questions this match", "rematch": "Rematch", "toSetup": "Change questions or fighters", "langLabel": "Language", "soundOn": "Sound: on", "soundOff": "Sound: off", "noPhoto1": "No photo", "noPhoto2": "drawn face used", "qcount": "{n} questions ready", "qcount1": "1 question ready", "qcountNone": "No questions yet: the sample set will be used", "answerItem": "Answer: {a}", "typedItem": "Typed answer: {a}", "or": " or ", "removeQ": "Remove question {n}", "importAdded": "{src}: added {n} question(s).", "importNone": "{src}: no questions found. Check the column order.", "importSkipped": " Skipped {n}: {list}.", "rowNoAns": "row {r}: no answer", "rowBadAns": "row {r}: answer \"{a}\" is not one of the options", "xlsMissing": "The Excel reader could not load. Save the sheet as CSV and upload that, or paste the rows below.", "readErr": "Could not read {f}: {e}", "tplStarted": "Template download started. If nothing downloads here, use \"Copy template rows\" and paste into a blank Excel sheet.", "tplBlocked": "Download is blocked here. Use \"Copy template rows\" and paste into Excel.", "tplCopied": "Template copied. Paste into cell A1 of a blank Excel sheet; each value lands in its own column.", "tplCopyFallback": "Copying is blocked here. The template is selected in the paste box; press Ctrl+C (Cmd+C) to copy it.", "samplesLoaded": "Loaded {n} sample questions.", "srcPasted": "Pasted rows", "srcManual": "Manual entry", "qnum": "Question {n}", "secs": "{n}s", "fbRight": "Correct! Strike now!", "fbWrong": "Wrong! The answer was {a}.", "fbTime": "Time's up! The answer was {a}.", "lsRight": "Correct: {a}", "lsWrong": "Not quite. Answer: {a}", "lsTime": "Time ran out. Answer: {a}", "timeRanOut": "(time ran out)", "blank": "(blank)", "letters": "ABCD", "optLabel": "{l}) {o}", "resWin": "{s} defeats Sensei {t}!", "resLose": "Sensei {t} wins this round", "subFlawless": "Flawless victory: not a single wrong answer.", "subWin": "The student surpasses the master. Review the misses below to stay sharp.", "subLose": "Every wrong answer is a lesson. Study the review below and try again.", "revRight": "Answered {a}", "revWrong": "Answered {g}. Correct: {c}", "hudQ": "QUESTION", "senseiName": "Sensei {t}", "introTitle": "SENSEI vs SHINOBI", "ironTeacher": "THE IRON TEACHER", "shinobiStudent": "THE SHINOBI STUDENT", "round1": "ROUND 1", "fight": "FIGHT!", "mv_katana": "IAI LIGHTNING SLASH", "mv_shuriken": "SHURIKEN STORM", "mv_nunchaku": "NUNCHAKU FURY", "mv_kusarigama": "CHAIN SICKLE SNARE", "mv_kick": "WHIRLWIND KICK", "mv_shadow": "SHADOW STEP", "mv_storm": "AUTUMN LEAF STORM", "mv_ruler": "RULER OF LAW", "mv_chalk": "CHALK BARRAGE", "mv_book": "TEXTBOOK SLAM", "mv_punch": "DETENTION PUNCH", "finalExam": "FINAL EXAM", "senseiFinisher": "SENSEI FINISHER", "popHit": ["WHAM!", "POW!", "SMACK!", "CRACK!"], "popSmall": ["WHAP!", "BAP!", "THOK!"], "popChalk": ["TAK!", "TOK!", "PAK!"], "pw_slash": "SLASH!", "pw_thunk": "THUNK!", "pw_krak": "KRAK!", "pw_knee": "KNEE!", "pw_kick": "KICK!", "pw_behind": "BEHIND YOU!", "pw_whack": "WHACK!", "pw_chalked": "CHALKED!", "pw_smack": "SMACK!", "pw_detention": "DETENTION!", "lost": "LOST {w}!", "w_katana": "KATANA", "w_nunchaku": "NUNCHAKU", "w_shuriken": "SHURIKEN", "w_kusarigama": "KUSARIGAMA", "finishHim": "FINISH HIM!", "seeMe": "SEE ME AFTER CLASS", "senseiWins": "SENSEI WINS", "hitBooks": "{s}, time to hit the books!", "wins": "{s} WINS", "flawless": "FLAWLESS VICTORY", "surpasses": "THE STUDENT SURPASSES THE MASTER", "shobuSub": "SHOBU ARI", "v_sensei": "Sensei {t}", "v_round": "Round one.", "v_fight": "Fight!", "v_finish": "Finish him!", "v_dismissed": "Class dismissed.", "v_wins": "{s} wins!", "v_flawless": "{s} wins. Flawless victory!", "v_lines": ["Wrong answer!", "See me after class!", "Did you even study?", "Pop quiz!", "Detention!"], "v_kiai": ["Hi-yah!", "Hah!", "Eiyah!"], "viewL": "Graphics", "view3d": "3D", "view2d": "2D classic (for slower computers)", "streak": "{n} IN A ROW!"}, ar: {"h1a": "\u0627\u0644\u0633\u064a\u0646\u0633\u064a", "h1vs": "\u0636\u062f", "h1b": "\u0627\u0644\u0634\u064a\u0646\u0648\u0628\u064a", "tagline": "\u0645\u0628\u0627\u0631\u0632\u0629 \u0623\u0633\u0626\u0644\u0629 \u0639\u0646\u062f \u0633\u0641\u062d \u062c\u0628\u0644 \u0641\u0648\u062c\u064a. \u0643\u0644 \u0625\u062c\u0627\u0628\u0629 \u0635\u062d\u064a\u062d\u0629 \u0636\u0631\u0628\u0629 \u0646\u064a\u0646\u062c\u0627 \u0639\u0644\u0649 \u0627\u0644\u0645\u0639\u0644\u0651\u0645\u060c \u0648\u0643\u0644 \u0625\u062c\u0627\u0628\u0629 \u062e\u0627\u0637\u0626\u0629 \u062a\u064f\u0641\u0642\u062f \u0627\u0644\u0646\u064a\u0646\u062c\u0627 \u0633\u0644\u0627\u062d\u064b\u0627 \u0648\u0631\u0628\u0639 \u0635\u062d\u062a\u0647.", "senseiTitle": "\u0627\u0644\u0633\u064a\u0646\u0633\u064a", "senseiSmall": "\u0627\u0644\u0645\u0639\u0644\u0651\u0645", "teacherNameL": "\u0627\u0633\u0645 \u0627\u0644\u0645\u0639\u0644\u0651\u0645", "teacherPh": "\u0627\u0644\u0623\u0633\u062a\u0627\u0630 \u0623\u062d\u0645\u062f", "uploadPhoto": "\u0627\u0631\u0641\u0639 \u0635\u0648\u0631\u0629 \u0627\u0644\u0645\u0639\u0644\u0651\u0645", "zoom": "\u0627\u0644\u062a\u0643\u0628\u064a\u0631", "drawnFace": "\u0627\u0633\u062a\u062e\u062f\u0645 \u0627\u0644\u0648\u062c\u0647 \u0627\u0644\u0645\u0631\u0633\u0648\u0645", "photoHint": "\u062a\u0635\u0628\u062d \u0627\u0644\u0635\u0648\u0631\u0629 \u0648\u062c\u0647 \u0627\u0644\u0645\u0642\u0627\u062a\u0644. \u0627\u0633\u062d\u0628 \u0627\u0644\u062f\u0627\u0626\u0631\u0629 \u0644\u062a\u0648\u0633\u064a\u0637 \u0627\u0644\u0648\u062c\u0647\u060c \u062b\u0645 \u0643\u0628\u0651\u0631 \u0627\u0644\u0635\u0648\u0631\u0629 \u0644\u0636\u0628\u0637\u0647\u0627.", "shinobiTitle": "\u0627\u0644\u0634\u064a\u0646\u0648\u0628\u064a", "shinobiSmall": "\u0627\u0644\u0637\u0627\u0644\u0628", "studentNameL": "\u0627\u0633\u0645 \u0627\u0644\u0637\u0627\u0644\u0628", "studentPh": "\u0633\u0627\u0631\u0629", "shinobiHint": "\u064a\u062d\u0645\u0644 \u0627\u0644\u0646\u064a\u0646\u062c\u0627 \u0623\u0631\u0628\u0639\u0629 \u0623\u0633\u0644\u062d\u0629: \u0627\u0644\u0643\u0627\u062a\u0627\u0646\u0627 \u0648\u0627\u0644\u0646\u0646\u0634\u0627\u0643\u0648 \u0648\u0627\u0644\u0634\u0648\u0631\u064a\u0643\u0646 \u0648\u0627\u0644\u0643\u0648\u0633\u0627\u0631\u064a\u063a\u0627\u0645\u0627. \u0643\u0644 \u0625\u062c\u0627\u0628\u0629 \u062e\u0627\u0637\u0626\u0629 \u062a\u064f\u0633\u0642\u0637 \u0633\u0644\u0627\u062d\u064b\u0627 \u0648\u062a\u062e\u0635\u0645 25% \u0645\u0646 \u0635\u062d\u062a\u0647\u060c \u0648\u0643\u0644 \u0625\u062c\u0627\u0628\u0629 \u0635\u062d\u064a\u062d\u0629 \u062a\u064f\u0646\u0632\u0644 \u0636\u0631\u0628\u0629 \u062a\u062e\u0635\u0645 25% \u0645\u0646 \u0635\u062d\u0629 \u0627\u0644\u0645\u0639\u0644\u0651\u0645.", "optVoiceL": "\u0635\u0648\u062a \u0627\u0644\u0645\u0639\u0644\u0651\u0642", "optMusicL": "\u0627\u0644\u0645\u0648\u0633\u064a\u0642\u0649", "timerL": "\u0645\u0647\u0644\u0629 \u0627\u0644\u0625\u062c\u0627\u0628\u0629", "t0": "\u0628\u0644\u0627 \u062d\u062f", "t15": "15 \u062b\u0627\u0646\u064a\u0629", "t30": "30 \u062b\u0627\u0646\u064a\u0629", "t60": "60 \u062b\u0627\u0646\u064a\u0629", "scrollTitle": "\u0644\u0641\u0627\u0641\u0629 \u0627\u0644\u0623\u0633\u0626\u0644\u0629", "scrollSmall": "\u0648\u0631\u0642\u0629 Excel", "scrollHint": "\u0633\u0624\u0627\u0644 \u0648\u0627\u062d\u062f \u0641\u064a \u0643\u0644 \u0635\u0641. \u0627\u0645\u0644\u0623 \u0627\u0644\u062e\u064a\u0627\u0631\u0627\u062a \u0645\u0646 \u0623 \u0625\u0644\u0649 \u062f \u0644\u0644\u0627\u062e\u062a\u064a\u0627\u0631 \u0645\u0646 \u0645\u062a\u0639\u062f\u062f\u060c \u0648\u0636\u0639 \u062d\u0631\u0641 \u0627\u0644\u0625\u062c\u0627\u0628\u0629 (\u0623\u060c \u0628\u060c \u062c\u060c \u062f \u0623\u0648 A \u0625\u0644\u0649 D) \u0623\u0648 \u0646\u0635 \u0627\u0644\u062e\u064a\u0627\u0631 \u0641\u064a \u0639\u0645\u0648\u062f \u0627\u0644\u0625\u062c\u0627\u0628\u0629. \u0627\u062a\u0631\u0643 \u0627\u0644\u062e\u064a\u0627\u0631\u0627\u062a \u0641\u0627\u0631\u063a\u0629 \u0644\u0625\u062c\u0627\u0628\u0629 \u0645\u0643\u062a\u0648\u0628\u0629\u060c \u0648\u0627\u0641\u0635\u0644 \u0628\u064a\u0646 \u0627\u0644\u0625\u062c\u0627\u0628\u0627\u062a \u0627\u0644\u0645\u0642\u0628\u0648\u0644\u0629 \u0628\u0627\u0644\u0631\u0645\u0632 |. \u0627\u0644\u0634\u0631\u062d \u0627\u062e\u062a\u064a\u0627\u0631\u064a \u0648\u064a\u0638\u0647\u0631 \u0628\u0639\u062f \u0643\u0644 \u0625\u062c\u0627\u0628\u0629. \u064a\u0645\u0643\u0646 \u0643\u062a\u0627\u0628\u0629 \u0627\u0644\u0623\u0633\u0626\u0644\u0629 \u0628\u0627\u0644\u0639\u0631\u0628\u064a\u0629 \u0623\u0648 \u0627\u0644\u0625\u0646\u062c\u0644\u064a\u0632\u064a\u0629.", "colQ": "\u0627\u0644\u0633\u0624\u0627\u0644", "colA": "\u0627\u0644\u062e\u064a\u0627\u0631 \u0623", "colB": "\u0627\u0644\u062e\u064a\u0627\u0631 \u0628", "colC": "\u0627\u0644\u062e\u064a\u0627\u0631 \u062c", "colD": "\u0627\u0644\u062e\u064a\u0627\u0631 \u062f", "colAns": "\u0627\u0644\u0625\u062c\u0627\u0628\u0629", "colExp": "\u0627\u0644\u0634\u0631\u062d", "ex1q": "\u0643\u0645 \u064a\u0633\u0627\u0648\u064a 7 \u00d7 8\u061f", "ex1ans": "\u0628", "ex1exp": "7 \u00d7 8 = 56", "ex2q": "\u0645\u0627 \u0645\u0631\u0628\u0639 \u0627\u0644\u0639\u062f\u062f 12\u061f", "uploadXls": "\u0627\u0631\u0641\u0639 \u0645\u0644\u0641 Excel \u0623\u0648 CSV", "tplDownload": "\u062a\u0646\u0632\u064a\u0644 \u0642\u0627\u0644\u0628 Excel", "tplCopy": "\u0646\u0633\u062e \u0635\u0641\u0648\u0641 \u0627\u0644\u0642\u0627\u0644\u0628", "loadSample": "\u062a\u062d\u0645\u064a\u0644 \u0623\u0633\u0626\u0644\u0629 \u0646\u0645\u0648\u0630\u062c\u064a\u0629", "clearQ": "\u0645\u0633\u062d \u0627\u0644\u0643\u0644", "pasteL": "\u0623\u0648 \u0627\u0644\u0635\u0642 \u0627\u0644\u0635\u0641\u0648\u0641 \u0645\u0628\u0627\u0634\u0631\u0629 \u0645\u0646 Excel", "pastePh": "\u062d\u062f\u0651\u062f \u0627\u0644\u0635\u0641\u0648\u0641 \u0641\u064a Excel \u0648\u0627\u0646\u0633\u062e\u0647\u0627 \u062b\u0645 \u0627\u0644\u0635\u0642\u0647\u0627 \u0647\u0646\u0627", "pasteAdd": "\u0625\u0636\u0627\u0641\u0629 \u0627\u0644\u0635\u0641\u0648\u0641 \u0627\u0644\u0645\u0644\u0635\u0642\u0629", "manualSummary": "\u0627\u0643\u062a\u0628 \u0633\u0624\u0627\u0644\u064b\u0627 \u064a\u062f\u0648\u064a\u064b\u0627", "mQ": "\u0627\u0644\u0633\u0624\u0627\u0644", "mA": "\u0627\u0644\u062e\u064a\u0627\u0631 \u0623", "mB": "\u0627\u0644\u062e\u064a\u0627\u0631 \u0628", "mC": "\u0627\u0644\u062e\u064a\u0627\u0631 \u062c", "mD": "\u0627\u0644\u062e\u064a\u0627\u0631 \u062f", "mAns": "\u0627\u0644\u0625\u062c\u0627\u0628\u0629 (\u062d\u0631\u0641 \u0623\u0648 \u0646\u0635)", "mExp": "\u0627\u0644\u0634\u0631\u062d (\u0627\u062e\u062a\u064a\u0627\u0631\u064a)", "mAdd": "\u0625\u0636\u0627\u0641\u0629 \u0627\u0644\u0633\u0624\u0627\u0644", "startBtn": "\u0627\u062f\u062e\u0644 \u0627\u0644\u062f\u0648\u062c\u0648", "quit": "\u062e\u0631\u0648\u062c", "typeAnswer": "\u0627\u0643\u062a\u0628 \u0625\u062c\u0627\u0628\u062a\u0643", "strike": "\u0627\u0636\u0631\u0628!", "keyhint": "\u0627\u0633\u062a\u062e\u062f\u0645 \u0627\u0644\u0645\u0641\u0627\u062a\u064a\u062d 1-4 \u0644\u0644\u0625\u062c\u0627\u0628\u0629", "correctL": "\u0635\u062d\u064a\u062d\u0629", "wrongL": "\u062e\u0627\u0637\u0626\u0629", "accL": "\u0627\u0644\u062f\u0642\u0629", "reviewTitle": "\u0645\u0631\u0627\u062c\u0639\u0629 \u0627\u0644\u062f\u0631\u0633", "reviewSmall": "\u0643\u0644 \u0623\u0633\u0626\u0644\u0629 \u0647\u0630\u0647 \u0627\u0644\u0645\u0628\u0627\u0631\u0627\u0629", "rematch": "\u0625\u0639\u0627\u062f\u0629 \u0627\u0644\u0645\u0628\u0627\u0631\u0627\u0629", "toSetup": "\u062a\u063a\u064a\u064a\u0631 \u0627\u0644\u0623\u0633\u0626\u0644\u0629 \u0623\u0648 \u0627\u0644\u0645\u0642\u0627\u062a\u0644\u064a\u0646", "langLabel": "\u0627\u0644\u0644\u063a\u0629", "soundOn": "\u0627\u0644\u0635\u0648\u062a: \u064a\u0639\u0645\u0644", "soundOff": "\u0627\u0644\u0635\u0648\u062a: \u0645\u062a\u0648\u0642\u0641", "noPhoto1": "\u0644\u0627 \u062a\u0648\u062c\u062f \u0635\u0648\u0631\u0629", "noPhoto2": "\u0633\u064a\u064f\u0633\u062a\u062e\u062f\u0645 \u0648\u062c\u0647 \u0645\u0631\u0633\u0648\u0645", "qcount": "\u0639\u062f\u062f \u0627\u0644\u0623\u0633\u0626\u0644\u0629 \u0627\u0644\u062c\u0627\u0647\u0632\u0629: {n}", "qcount1": "\u0633\u0624\u0627\u0644 \u0648\u0627\u062d\u062f \u062c\u0627\u0647\u0632", "qcountNone": "\u0644\u0627 \u062a\u0648\u062c\u062f \u0623\u0633\u0626\u0644\u0629 \u0628\u0639\u062f: \u0633\u062a\u064f\u0633\u062a\u062e\u062f\u0645 \u0627\u0644\u0623\u0633\u0626\u0644\u0629 \u0627\u0644\u0646\u0645\u0648\u0630\u062c\u064a\u0629", "answerItem": "\u0627\u0644\u0625\u062c\u0627\u0628\u0629: {a}", "typedItem": "\u0625\u062c\u0627\u0628\u0629 \u0645\u0643\u062a\u0648\u0628\u0629: {a}", "or": " \u0623\u0648 ", "removeQ": "\u062d\u0630\u0641 \u0627\u0644\u0633\u0624\u0627\u0644 {n}", "importAdded": "{src}: \u062a\u0645\u062a \u0625\u0636\u0627\u0641\u0629 {n} \u0645\u0646 \u0627\u0644\u0623\u0633\u0626\u0644\u0629.", "importNone": "{src}: \u0644\u0645 \u064a\u064f\u0639\u062b\u0631 \u0639\u0644\u0649 \u0623\u0633\u0626\u0644\u0629. \u062a\u062d\u0642\u0651\u0642 \u0645\u0646 \u062a\u0631\u062a\u064a\u0628 \u0627\u0644\u0623\u0639\u0645\u062f\u0629.", "importSkipped": " \u062a\u0645 \u062a\u062e\u0637\u064a {n}: {list}.", "rowNoAns": "\u0627\u0644\u0635\u0641 {r}: \u0644\u0627 \u062a\u0648\u062c\u062f \u0625\u062c\u0627\u0628\u0629", "rowBadAns": "\u0627\u0644\u0635\u0641 {r}: \u0627\u0644\u0625\u062c\u0627\u0628\u0629 \u00ab{a}\u00bb \u0644\u064a\u0633\u062a \u0645\u0646 \u0627\u0644\u062e\u064a\u0627\u0631\u0627\u062a", "xlsMissing": "\u062a\u0639\u0630\u0651\u0631 \u062a\u062d\u0645\u064a\u0644 \u0642\u0627\u0631\u0626 Excel. \u0627\u062d\u0641\u0638 \u0627\u0644\u0648\u0631\u0642\u0629 \u0628\u0635\u064a\u063a\u0629 CSV \u0648\u0627\u0631\u0641\u0639\u0647\u0627\u060c \u0623\u0648 \u0627\u0644\u0635\u0642 \u0627\u0644\u0635\u0641\u0648\u0641 \u0623\u062f\u0646\u0627\u0647.", "readErr": "\u062a\u0639\u0630\u0651\u0631\u062a \u0642\u0631\u0627\u0621\u0629 {f}: {e}", "tplStarted": "\u0628\u062f\u0623 \u062a\u0646\u0632\u064a\u0644 \u0627\u0644\u0642\u0627\u0644\u0628. \u0625\u0646 \u0644\u0645 \u064a\u064f\u0646\u0632\u064e\u0651\u0644 \u0634\u064a\u0621 \u0647\u0646\u0627\u060c \u0627\u0633\u062a\u062e\u062f\u0645 \u00ab\u0646\u0633\u062e \u0635\u0641\u0648\u0641 \u0627\u0644\u0642\u0627\u0644\u0628\u00bb \u0648\u0627\u0644\u0635\u0642\u0647\u0627 \u0641\u064a \u0648\u0631\u0642\u0629 Excel \u0641\u0627\u0631\u063a\u0629.", "tplBlocked": "\u0627\u0644\u062a\u0646\u0632\u064a\u0644 \u063a\u064a\u0631 \u0645\u062a\u0627\u062d \u0647\u0646\u0627. \u0627\u0633\u062a\u062e\u062f\u0645 \u00ab\u0646\u0633\u062e \u0635\u0641\u0648\u0641 \u0627\u0644\u0642\u0627\u0644\u0628\u00bb \u0648\u0627\u0644\u0635\u0642\u0647\u0627 \u0641\u064a Excel.", "tplCopied": "\u062a\u0645 \u0646\u0633\u062e \u0627\u0644\u0642\u0627\u0644\u0628. \u0627\u0644\u0635\u0642\u0647 \u0641\u064a \u0627\u0644\u062e\u0644\u064a\u0629 A1 \u0645\u0646 \u0648\u0631\u0642\u0629 Excel \u0641\u0627\u0631\u063a\u0629\u060c \u0648\u0633\u062a\u0648\u0636\u0639 \u0643\u0644 \u0642\u064a\u0645\u0629 \u0641\u064a \u0639\u0645\u0648\u062f\u0647\u0627.", "tplCopyFallback": "\u0627\u0644\u0646\u0633\u062e \u063a\u064a\u0631 \u0645\u062a\u0627\u062d \u0647\u0646\u0627. \u0627\u0644\u0642\u0627\u0644\u0628 \u0645\u062d\u062f\u064e\u0651\u062f \u0641\u064a \u0645\u0631\u0628\u0639 \u0627\u0644\u0644\u0635\u0642\u061b \u0627\u0636\u063a\u0637 Ctrl+C (\u0623\u0648 Cmd+C) \u0644\u0646\u0633\u062e\u0647.", "samplesLoaded": "\u062a\u0645 \u062a\u062d\u0645\u064a\u0644 {n} \u0645\u0646 \u0627\u0644\u0623\u0633\u0626\u0644\u0629 \u0627\u0644\u0646\u0645\u0648\u0630\u062c\u064a\u0629.", "srcPasted": "\u0627\u0644\u0635\u0641\u0648\u0641 \u0627\u0644\u0645\u0644\u0635\u0642\u0629", "srcManual": "\u0625\u062f\u062e\u0627\u0644 \u064a\u062f\u0648\u064a", "qnum": "\u0627\u0644\u0633\u0624\u0627\u0644 {n}", "secs": "{n} \u062b", "fbRight": "\u0625\u062c\u0627\u0628\u0629 \u0635\u062d\u064a\u062d\u0629! \u0627\u0636\u0631\u0628 \u0627\u0644\u0622\u0646!", "fbWrong": "\u062e\u0637\u0623! \u0627\u0644\u0625\u062c\u0627\u0628\u0629 \u0627\u0644\u0635\u062d\u064a\u062d\u0629: {a}.", "fbTime": "\u0627\u0646\u062a\u0647\u0649 \u0627\u0644\u0648\u0642\u062a! \u0627\u0644\u0625\u062c\u0627\u0628\u0629 \u0627\u0644\u0635\u062d\u064a\u062d\u0629: {a}.", "lsRight": "\u0635\u062d\u064a\u062d: {a}", "lsWrong": "\u0644\u064a\u0633 \u062a\u0645\u0627\u0645\u064b\u0627. \u0627\u0644\u0625\u062c\u0627\u0628\u0629: {a}", "lsTime": "\u0627\u0646\u062a\u0647\u0649 \u0627\u0644\u0648\u0642\u062a. \u0627\u0644\u0625\u062c\u0627\u0628\u0629: {a}", "timeRanOut": "(\u0627\u0646\u062a\u0647\u0649 \u0627\u0644\u0648\u0642\u062a)", "blank": "(\u0641\u0627\u0631\u063a\u0629)", "letters": "\u0623\u0628\u062c\u062f", "optLabel": "({l}) {o}", "resWin": "{s} \u064a\u0647\u0632\u0645 \u0627\u0644\u0633\u064a\u0646\u0633\u064a {t}!", "resLose": "\u0627\u0644\u0633\u064a\u0646\u0633\u064a {t} \u064a\u0641\u0648\u0632 \u0628\u0647\u0630\u0647 \u0627\u0644\u062c\u0648\u0644\u0629", "subFlawless": "\u0627\u0646\u062a\u0635\u0627\u0631 \u0643\u0627\u0645\u0644: \u0644\u0627 \u0625\u062c\u0627\u0628\u0629 \u062e\u0627\u0637\u0626\u0629 \u0648\u0627\u062d\u062f\u0629.", "subWin": "\u0627\u0644\u062a\u0644\u0645\u064a\u0630 \u062a\u0641\u0648\u0651\u0642 \u0639\u0644\u0649 \u0627\u0644\u0645\u0639\u0644\u0651\u0645. \u0631\u0627\u062c\u0639 \u0627\u0644\u0623\u062e\u0637\u0627\u0621 \u0623\u062f\u0646\u0627\u0647 \u0644\u062a\u0628\u0642\u0649 \u0645\u062a\u064a\u0642\u0638\u064b\u0627.", "subLose": "\u0643\u0644 \u0625\u062c\u0627\u0628\u0629 \u062e\u0627\u0637\u0626\u0629 \u062f\u0631\u0633. \u0627\u062f\u0631\u0633 \u0627\u0644\u0645\u0631\u0627\u062c\u0639\u0629 \u0623\u062f\u0646\u0627\u0647 \u0648\u062d\u0627\u0648\u0644 \u0645\u062c\u062f\u062f\u064b\u0627.", "revRight": "\u0623\u062c\u0628\u062a: {a}", "revWrong": "\u0623\u062c\u0628\u062a: {g}. \u0627\u0644\u0635\u062d\u064a\u062d: {c}", "hudQ": "\u0627\u0644\u0633\u0624\u0627\u0644", "senseiName": "\u0627\u0644\u0633\u064a\u0646\u0633\u064a {t}", "introTitle": "\u0627\u0644\u0633\u064a\u0646\u0633\u064a \u0636\u062f \u0627\u0644\u0634\u064a\u0646\u0648\u0628\u064a", "ironTeacher": "\u0627\u0644\u0645\u0639\u0644\u0651\u0645 \u0627\u0644\u062d\u062f\u064a\u062f\u064a", "shinobiStudent": "\u0627\u0644\u0637\u0627\u0644\u0628 \u0627\u0644\u0634\u064a\u0646\u0648\u0628\u064a", "round1": "\u0627\u0644\u062c\u0648\u0644\u0629 1", "fight": "\u0642\u0627\u062a\u0644!", "mv_katana": "\u0636\u0631\u0628\u0629 \u0627\u0644\u0628\u0631\u0642 \u0627\u0644\u062e\u0627\u0637\u0641\u0629", "mv_shuriken": "\u0639\u0627\u0635\u0641\u0629 \u0627\u0644\u0634\u0648\u0631\u064a\u0643\u0646", "mv_nunchaku": "\u063a\u0636\u0628 \u0627\u0644\u0646\u0646\u0634\u0627\u0643\u0648", "mv_kusarigama": "\u0641\u062e \u0627\u0644\u0645\u0646\u062c\u0644 \u0648\u0627\u0644\u0633\u0644\u0633\u0644\u0629", "mv_kick": "\u0631\u0643\u0644\u0629 \u0627\u0644\u0625\u0639\u0635\u0627\u0631", "mv_shadow": "\u062e\u0637\u0648\u0629 \u0627\u0644\u0638\u0644", "mv_storm": "\u0639\u0627\u0635\u0641\u0629 \u0623\u0648\u0631\u0627\u0642 \u0627\u0644\u062e\u0631\u064a\u0641", "mv_ruler": "\u0645\u0633\u0637\u0631\u0629 \u0627\u0644\u0642\u0627\u0646\u0648\u0646", "mv_chalk": "\u0648\u0627\u0628\u0644 \u0627\u0644\u0637\u0628\u0627\u0634\u064a\u0631", "mv_book": "\u0635\u0641\u0639\u0629 \u0627\u0644\u0643\u062a\u0627\u0628 \u0627\u0644\u0645\u062f\u0631\u0633\u064a", "mv_punch": "\u0644\u0643\u0645\u0629 \u0627\u0644\u0639\u0642\u0627\u0628", "finalExam": "\u0627\u0644\u0627\u0645\u062a\u062d\u0627\u0646 \u0627\u0644\u0646\u0647\u0627\u0626\u064a", "senseiFinisher": "\u0627\u0644\u0636\u0631\u0628\u0629 \u0627\u0644\u0642\u0627\u0636\u064a\u0629 \u0644\u0644\u0633\u064a\u0646\u0633\u064a", "popHit": ["\u0628\u0648\u0645!", "\u0637\u0627\u062e!", "\u0628\u0627\u0645!", "\u0643\u0631\u0627\u0643!"], "popSmall": ["\u0637\u0642!", "\u0628\u0642!", "\u0637\u062e!"], "popChalk": ["\u062a\u0643!", "\u0637\u0643!", "\u0628\u0643!"], "pw_slash": "\u0634\u064e\u0642!", "pw_thunk": "\u0637\u0642!", "pw_krak": "\u0643\u0631\u0627\u0643!", "pw_knee": "\u0631\u0643\u0628\u0629!", "pw_kick": "\u0631\u0643\u0644\u0629!", "pw_behind": "\u062e\u0644\u0641\u0643!", "pw_whack": "\u0637\u0627\u062e!", "pw_chalked": "\u0637\u0628\u0627\u0634\u064a\u0631!", "pw_smack": "\u0635\u0641\u0639\u0629!", "pw_detention": "\u0639\u0642\u0627\u0628!", "lost": "\u0633\u0642\u0637\u062a {w}!", "w_katana": "\u0627\u0644\u0643\u0627\u062a\u0627\u0646\u0627", "w_nunchaku": "\u0627\u0644\u0646\u0646\u0634\u0627\u0643\u0648", "w_shuriken": "\u0627\u0644\u0634\u0648\u0631\u064a\u0643\u0646", "w_kusarigama": "\u0627\u0644\u0643\u0648\u0633\u0627\u0631\u064a\u063a\u0627\u0645\u0627", "finishHim": "\u0623\u062c\u0647\u0632 \u0639\u0644\u064a\u0647!", "seeMe": "\u0631\u0627\u062c\u0639\u0646\u064a \u0628\u0639\u062f \u0627\u0644\u062d\u0635\u0629", "senseiWins": "\u0627\u0644\u0633\u064a\u0646\u0633\u064a \u064a\u0641\u0648\u0632", "hitBooks": "{s}\u060c \u062d\u0627\u0646 \u0648\u0642\u062a \u0627\u0644\u0645\u0630\u0627\u0643\u0631\u0629!", "wins": "{s} \u064a\u0641\u0648\u0632", "flawless": "\u0627\u0646\u062a\u0635\u0627\u0631 \u0643\u0627\u0645\u0644", "surpasses": "\u0627\u0644\u062a\u0644\u0645\u064a\u0630 \u062a\u0641\u0648\u0651\u0642 \u0639\u0644\u0649 \u0627\u0644\u0645\u0639\u0644\u0651\u0645", "shobuSub": "\u062d\u064f\u0633\u0645 \u0627\u0644\u0646\u0632\u0627\u0644", "v_sensei": "\u0627\u0644\u0633\u064a\u0646\u0633\u064a {t}", "v_round": "\u0627\u0644\u062c\u0648\u0644\u0629 \u0627\u0644\u0623\u0648\u0644\u0649.", "v_fight": "\u0642\u0627\u062a\u0644!", "v_finish": "\u0623\u062c\u0647\u0632 \u0639\u0644\u064a\u0647!", "v_dismissed": "\u0627\u0646\u062a\u0647\u062a \u0627\u0644\u062d\u0635\u0629.", "v_wins": "{s} \u064a\u0641\u0648\u0632!", "v_flawless": "{s} \u064a\u0641\u0648\u0632. \u0627\u0646\u062a\u0635\u0627\u0631 \u0643\u0627\u0645\u0644!", "v_lines": ["\u0625\u062c\u0627\u0628\u0629 \u062e\u0627\u0637\u0626\u0629!", "\u0631\u0627\u062c\u0639\u0646\u064a \u0628\u0639\u062f \u0627\u0644\u062d\u0635\u0629!", "\u0647\u0644 \u0630\u0627\u0643\u0631\u062a \u0623\u0635\u0644\u064b\u0627\u061f", "\u0627\u062e\u062a\u0628\u0627\u0631 \u0645\u0641\u0627\u062c\u0626!", "\u0639\u0642\u0627\u0628!"], "v_kiai": ["\u0647\u064a\u0651\u0627!", "\u0647\u0627\u0647!"], "viewL": "\u0627\u0644\u0631\u0633\u0648\u0645\u064a\u0627\u062a", "view3d": "\u062b\u0644\u0627\u062b\u064a \u0627\u0644\u0623\u0628\u0639\u0627\u062f", "view2d": "\u062b\u0646\u0627\u0626\u064a \u0627\u0644\u0623\u0628\u0639\u0627\u062f (\u0644\u0644\u0623\u062c\u0647\u0632\u0629 \u0627\u0644\u0623\u0628\u0637\u0623)", "streak": "{n} \u0639\u0644\u0649 \u0627\u0644\u062a\u0648\u0627\u0644\u064a!"} };
 let LANG = 'en';
 const RTL_RE = /[\u0590-\u08FF\uFB1D-\uFDFF\uFE70-\uFEFF]/;
 function tr(lang, k, v) {
@@ -1298,27 +1298,28 @@ function drawTrees() {
    ========================================================= */
 const parts = [], slashes = [], rings = [], pops = [], projs = [], drops = [], ghosts = [], banners = [];
 function sparks(x, y, n = 18, col = '#ffd36b', spd = 520) {
-  for (let i = 0; i < n; i++) { const a = rand(0, Math.PI * 2), s = rand(0.3, 1) * spd; parts.push({ k: 'spark', x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s - 80, life: 0, max: rand(0.18, 0.45), col, size: rand(2, 4), g: 700 }); }
+  for (let i = 0; i < n; i++) { const a = rand(0, Math.PI * 2), s = rand(0.3, 1) * spd; parts.push({ k: 'spark', x, y, z: 0.3, vz: rand(-1.6, 1.6) * spd / 500, vx: Math.cos(a) * s, vy: Math.sin(a) * s - 80, life: 0, max: rand(0.18, 0.45), col, size: rand(2, 4), g: 700 }); }
 }
 function dust(x, y, n = 12, dir = 0) {
-  for (let i = 0; i < n; i++) parts.push({ k: 'dust', x: x + rand(-20, 20), y: y + rand(-6, 2), vx: rand(-90, 90) + dir * 120, vy: rand(-80, -10), life: 0, max: rand(0.5, 0.9), size: rand(8, 18), col: '200,170,140', g: 30 });
+  for (let i = 0; i < n; i++) parts.push({ k: 'dust', z: rand(0, 0.7), vz: rand(-0.4, 0.4), x: x + rand(-20, 20), y: y + rand(-6, 2), vx: rand(-90, 90) + dir * 120, vy: rand(-80, -10), life: 0, max: rand(0.5, 0.9), size: rand(8, 18), col: '200,170,140', g: 30 });
 }
 function smoke(x, y, n = 24) {
-  for (let i = 0; i < n; i++) { const a = rand(0, Math.PI * 2), s = rand(40, 200); parts.push({ k: 'dust', x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s - 40, life: 0, max: rand(0.6, 1.1), size: rand(16, 34), col: pick(['90,90,110', '130,130,150', '60,60,80']), g: -40 }); }
+  for (let i = 0; i < n; i++) { const a = rand(0, Math.PI * 2), s = rand(40, 200); parts.push({ k: 'dust', x, y, z: rand(-0.2, 0.6), vz: rand(-0.9, 0.9), vx: Math.cos(a) * s, vy: Math.sin(a) * s - 40, life: 0, max: rand(0.6, 1.1), size: rand(16, 34), col: pick(['90,90,110', '130,130,150', '60,60,80']), g: -40 }); }
 }
 function leafBurst(x, y, n = 20, spd = 400) {
-  for (let i = 0; i < n; i++) { const a = rand(0, Math.PI * 2), s = rand(0.3, 1) * spd; parts.push({ k: 'leaf', x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s - 120, life: 0, max: rand(0.8, 1.6), col: pick(LEAF_COLS), size: rand(6, 11), rot: rand(0, 6), vr: rand(-10, 10), g: 260 }); }
+  for (let i = 0; i < n; i++) { const a = rand(0, Math.PI * 2), s = rand(0.3, 1) * spd; parts.push({ k: 'leaf', x, y, z: 0.3, vz: rand(-2, 2), vx: Math.cos(a) * s, vy: Math.sin(a) * s - 120, life: 0, max: rand(0.8, 1.6), col: pick(LEAF_COLS), size: rand(6, 11), rot: rand(0, 6), vr: rand(-10, 10), g: 260 }); }
 }
-function chalkPuff(x, y) { for (let i = 0; i < 14; i++) { const a = rand(0, Math.PI * 2), s = rand(40, 220); parts.push({ k: 'dust', x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s, life: 0, max: rand(0.4, 0.8), size: rand(6, 14), col: '245,245,240', g: -20 }); } }
+function chalkPuff(x, y) { for (let i = 0; i < 14; i++) { const a = rand(0, Math.PI * 2), s = rand(40, 220); parts.push({ k: 'dust', x, y, z: rand(0, 0.6), vz: rand(-1, 1), vx: Math.cos(a) * s, vy: Math.sin(a) * s, life: 0, max: rand(0.4, 0.8), size: rand(6, 14), col: '245,245,240', g: -20 }); } }
 function ring(x, y, r1, dur, col = '255,240,200', w = 8) { rings.push({ x, y, r1, life: 0, max: dur, col, w }); }
 function pow(x, y, size = 60, col = '#fff6c2') { parts.push({ k: 'pow', x, y, life: 0, max: 0.22, size, col, rot: rand(0, 1) }); }
 function popup(text, x, y, col = '#ffd23f', size = 40, rot = rand(-0.2, 0.2)) { pops.push({ text, x, y, col, size, rot, life: 0, max: 1.0 }); }
 function slashFx(x, y, r, a0, a1, col = '200,235,255', w = 16) { slashes.push({ x, y, r, a0, a1, life: 0, max: 0.32, col, w }); }
 function impact(x, y, power = 1) {
+  flash3(x, y, power);
   sparks(x, y, Math.round(16 * power), '#ffe08a', 520 * power);
   sparks(x, y, Math.round(8 * power), '#ff6a3d', 380 * power);
   pow(x, y, 50 + 30 * power); ring(x, y, 70 + 50 * power, 0.35, '255,240,200', 6);
-  for (let i = 0; i < 4; i++) { const a = rand(0, 6); parts.push({ k: 'star', x, y, vx: Math.cos(a) * 240, vy: Math.sin(a) * 240 - 120, life: 0, max: 0.6, size: rand(6, 10), col: '#fff3a0', g: 500, rot: 0, vr: 8 }); }
+  for (let i = 0; i < 4; i++) { const a = rand(0, 6); parts.push({ k: 'star', x, y, z: 0.4, vz: rand(-1.5, 1.5), vx: Math.cos(a) * 240, vy: Math.sin(a) * 240 - 120, life: 0, max: 0.6, size: rand(6, 10), col: '#fff3a0', g: 500, rot: 0, vr: 8 }); }
 }
 function spawnGhost(f) { ghosts.push({ f: { ...f, chain: null }, pose: { ...f.pose }, life: 0, max: 0.28 }); }
 function shoot(type, from, to, ms, o = {}) {
@@ -1335,6 +1336,7 @@ function updateFx(g, dt) {
   for (let i = parts.length - 1; i >= 0; i--) {
     const p = parts[i]; p.life += g;
     if (p.life >= p.max) { parts.splice(i, 1); continue; }
+    if (p.vz) p.z += p.vz * g;
     if (p.vx !== undefined) { p.vy += (p.g || 0) * g; p.x += p.vx * g; p.y += p.vy * g; if (p.k === 'dust' || p.k === 'leaf') { p.vx *= 1 - g * 1.5; } }
     if (p.vr) p.rot += p.vr * g;
   }
@@ -1357,15 +1359,16 @@ function updateFx(g, dt) {
     f.flash = Math.max(0, f.flash - g * 4);
     f.disp = f.disp > f.hp ? Math.max(f.hp, f.disp - dt * 40) : f.hp;
     if (f.trail && f.visible) { f.ghostT = (f.ghostT || 0) + g; if (f.ghostT > 0.05 && ghosts.length < 6) { f.ghostT = 0; spawnGhost(f); } }
-    if (f.aura > 0.2 && Math.random() < g * 40 * f.aura) { const c = chestOf(f); parts.push({ k: 'flame', x: c[0] + rand(-70, 70), y: c[1] + rand(-40, 120), vx: rand(-20, 20), vy: rand(-260, -140), life: 0, max: rand(0.4, 0.8), size: rand(8, 16), g: 0 }); }
+    if (f.aura > 0.2 && Math.random() < g * 40 * f.aura) { const c = chestOf(f); parts.push({ k: 'flame', z: rand(-0.4, 0.6), x: c[0] + rand(-70, 70), y: c[1] + rand(-40, 120), vx: rand(-20, 20), vy: rand(-260, -140), life: 0, max: rand(0.4, 0.8), size: rand(8, 16), g: 0 }); }
   }
-  if (G.storm > 0 && Math.random() < g * 60) parts.push({ k: 'leaf', x: rand(0, W), y: rand(0, H), vx: rand(-900, -500), vy: rand(-200, 200), life: 0, max: rand(0.6, 1.2), col: pick(LEAF_COLS), size: rand(8, 14), rot: rand(0, 6), vr: rand(-12, 12), g: 0 });
+  if (G.storm > 0 && Math.random() < g * 60) parts.push({ k: 'leaf', z: rand(-3, 3), x: rand(0, W), y: rand(0, H), vx: rand(-900, -500), vy: rand(-200, 200), life: 0, max: rand(0.6, 1.2), col: pick(LEAF_COLS), size: rand(8, 14), rot: rand(0, 6), vr: rand(-12, 12), g: 0 });
   shakeAmt = Math.max(0, shakeAmt - dt * 60);
 }
-function drawFx() {
+function drawFx(popsOnly) {
   ctx.save();
-  for (const r of rings) { const k = r.life / r.max; ctx.strokeStyle = `rgba(${r.col},${1 - k})`; ctx.lineWidth = r.w * (1 - k) + 1; ctx.beginPath(); ctx.ellipse(r.x, r.y, r.r1 * E.out(k), r.r1 * E.out(k) * 0.55, 0, 0, Math.PI * 2); ctx.stroke(); }
-  for (const p of parts) {
+  const rs = popsOnly ? [] : rings, ps2 = popsOnly ? [] : parts, ss = popsOnly ? [] : slashes;
+  for (const r of rs) { const k = r.life / r.max; ctx.strokeStyle = `rgba(${r.col},${1 - k})`; ctx.lineWidth = r.w * (1 - k) + 1; ctx.beginPath(); ctx.ellipse(r.x, r.y, r.r1 * E.out(k), r.r1 * E.out(k) * 0.55, 0, 0, Math.PI * 2); ctx.stroke(); }
+  for (const p of ps2) {
     const k = p.life / p.max;
     if (p.k === 'spark') { ctx.globalCompositeOperation = 'lighter'; ctx.strokeStyle = p.col; ctx.globalAlpha = 1 - k; ctx.lineWidth = p.size; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p.x - p.vx * 0.03, p.y - p.vy * 0.03); ctx.stroke(); ctx.globalCompositeOperation = 'source-over'; }
     else if (p.k === 'dust') { ctx.globalAlpha = (1 - k) * 0.55; ctx.fillStyle = `rgb(${p.col})`; ctx.beginPath(); ctx.arc(p.x, p.y, p.size * (0.6 + k), 0, Math.PI * 2); ctx.fill(); }
@@ -1380,7 +1383,7 @@ function drawFx() {
     }
   }
   ctx.globalAlpha = 1;
-  for (const s of slashes) {
+  for (const s of ss) {
     const k = s.life / s.max, a = 1 - k;
     ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.lineCap = 'round';
     const span = s.a1 - s.a0, end = s.a0 + span * Math.min(1, k * 4);
@@ -1547,7 +1550,7 @@ function drawOverlays() {
    ========================================================= */
 const R3 = { on: false, ok: false, tried: false };
 const U = 100;
-const cam3 = { yaw: 0, lift: 0 };
+const cam3 = { yaw: 0, lift: 0, kick: 0, kx: W / 2, ky: 400 };
 function to3(x, y, z = 0) { return new THREE.Vector3((x - W / 2) / U, (GROUND - y) / U, z); }
 function lambert(color, o = {}) { return new THREE.MeshLambertMaterial({ color, ...o }); }
 function mk(geo, mat, shadow = true) { const m = new THREE.Mesh(geo, mat); m.castShadow = shadow; return m; }
@@ -1574,6 +1577,7 @@ function init3D() {
     Object.assign(R3, { renderer, scene, camera });
     buildWorld();
     R3.rigN = buildRig(true); R3.rigT = buildRig(false);
+    initFx3(); R3.rigN.trail = R3.trailN; R3.rigT.trail = R3.trailT;
     R3.ghostsN = [0, 1, 2, 3, 4].map(() => buildRig(true, true));
     R3.ghostsT = [0, 1, 2].map(() => buildRig(false, true));
     R3.drops = new Map(); R3.projs = new Map();
@@ -1581,6 +1585,7 @@ function init3D() {
     R3.chain = new THREE.Line(chainGeo, new THREE.LineBasicMaterial({ color: 0xc5ccd6 })); R3.chain.frustumCulled = false; scene.add(R3.chain);
     R3.sickle = weaponMesh('kusarigama'); scene.add(R3.sickle);
     R3.ok = true;
+    initPortraits3();
     resize(true);
   } catch (e) { R3.ok = false; }
   return R3.ok;
@@ -1654,7 +1659,9 @@ function buildWorld() {
   const hillMat = lambert(0x4a3456);
   for (let i = 0; i < 9; i++) { const h = mk(new THREE.SphereGeometry(1, 16, 8), hillMat, false); h.scale.set(rand(14, 26), rand(3, 6), 8); h.position.set(-110 + i * 28, -1, -98 + rand(-4, 4)); scene.add(h); }
   // lake
-  const lake = new THREE.Mesh(new THREE.PlaneGeometry(500, 92), new THREE.MeshPhongMaterial({ color: 0x6f5687, specular: 0xffc49a, shininess: 60, transparent: true, opacity: 0.82 }));
+  R3.lakeTex = canvasTex(256, 64, g => { g.fillStyle = '#000'; g.fillRect(0, 0, 256, 64); const r = seeded(9); for (let i = 0; i < 110; i++) { g.fillStyle = `rgba(255,220,180,${0.2 + r() * 0.6})`; g.fillRect(r() * 256, r() * 64, 8 + r() * 36, 1.5); } }).tex;
+  R3.lakeTex.wrapS = R3.lakeTex.wrapT = THREE.RepeatWrapping; R3.lakeTex.repeat.set(16, 3);
+  const lake = new THREE.Mesh(new THREE.PlaneGeometry(500, 92), new THREE.MeshPhongMaterial({ color: 0x6f5687, specular: 0xffc49a, shininess: 60, transparent: true, opacity: 0.82, emissive: 0xffb88a, emissiveMap: R3.lakeTex, emissiveIntensity: 0.55 }));
   lake.rotation.x = -Math.PI / 2; lake.position.set(0, 0.02, -64); scene.add(lake);
   // autumn forest band on the near shore
   const leafCols = [0x7a2418, 0x9b2f1b, 0xb8471f, 0xc9652a, 0x8c3b26, 0x5c2a22, 0xd18a3a].map(c => new THREE.Color(c));
@@ -1689,6 +1696,7 @@ function buildWorld() {
   R3.leafState = [];
   for (let i = 0; i < NL; i++) { R3.leafState.push(newLeaf3(true)); R3.leaves.setColorAt(i, new THREE.Color(pick(LEAF_COLS))); }
   R3.leaves.frustumCulled = false; scene.add(R3.leaves);
+  buildGrass(); buildBamboo(-9.3, -9); buildBamboo(9.7, -10);
 }
 function newLeaf3(any) { return { x: any ? rand(-14, 16) : rand(8, 18), y: any ? rand(0, 9) : rand(7, 10), z: rand(-8, 4.5), vy: rand(0.3, 0.8), rx: rand(0, 6), ry: rand(0, 6), rz: rand(0, 6), s: rand(0.07, 0.13), ph: rand(0, 6) }; }
 function buildTorii(x, z) {
@@ -1770,11 +1778,14 @@ function weaponMesh(type, mat) {
   } else if (type === 'chalk') {
     const c = mk(new THREE.CylinderGeometry(0.03, 0.03, 0.17, 8), M(0xffffff)); c.rotation.z = Math.PI / 2; g.add(c);
   }
+  const TIPS = { katana: [[1.22, 0.03], [0.3, 0]], ruler: [[1.38, 0], [0.2, 0]], book: [[0.5, 0.42], [0.1, 0]], kusarigama: [[0.32, 0.4], [0.26, 0]] };
+  if (TIPS[type]) { const tip = new THREE.Object3D(), base = new THREE.Object3D(); tip.position.set(TIPS[type][0][0], TIPS[type][0][1], 0); base.position.set(TIPS[type][1][0], TIPS[type][1][1], 0); g.add(tip, base); g.userData.tip = tip; g.userData.base = base; }
+  if (type === 'nunchaku') { const tip = new THREE.Object3D(); tip.position.x = 0.44; g.userData.hinge.add(tip); g.userData.tip = tip; g.userData.base = g.userData.hinge; }
   return g;
 }
 
 /* ---------- fighter rigs ---------- */
-function buildRig(isN, ghost = false) {
+function buildRig(isN, ghost = false, scene = null) {
   const rig = { isN, ghost, mats: [], held: {}, stow: {}, decals: [], faceKey: '' };
   const root = new THREE.Group(); rig.root = root;
   const gm = ghost ? new THREE.MeshBasicMaterial({ color: isN ? 0x9fd8ff : 0xffb38a, transparent: true, opacity: 0.35, depthWrite: false }) : null;
@@ -1805,6 +1816,9 @@ function buildRig(isN, ghost = false) {
       rig.stow.katana = weaponMesh('katana'); rig.stow.katana.position.set(-D.sx * 1.15, -0.3, 0); rig.stow.katana.rotation.z = 1.25; rig.yaw.add(rig.stow.katana);
       rig.stow.shuriken = weaponMesh('shuriken'); rig.stow.shuriken.position.set(D.sx * 0.92, 0.12, 0.08); rig.stow.shuriken.rotation.y = Math.PI / 2; rig.yaw.add(rig.stow.shuriken);
       rig.stow.nunchaku = weaponMesh('nunchaku'); rig.stow.nunchaku.position.set(-D.sx * 0.5, -0.3, D.sz * 0.85); rig.stow.nunchaku.rotation.z = -1.7; rig.yaw.add(rig.stow.nunchaku);
+      const sheathG = new THREE.Group(); sheathG.position.copy(rig.stow.katana.position); sheathG.rotation.copy(rig.stow.katana.rotation);
+      const sheath = mk(new THREE.CylinderGeometry(0.042, 0.034, 1.02, 10), M(0x3b1717)); sheath.rotation.z = Math.PI / 2; sheath.position.x = 0.72; sheathG.add(sheath); rig.yaw.add(sheathG);
+      rig.stow.katana.children[2].visible = false;
       rig.stow.kusarigama = weaponMesh('kusarigama'); rig.stow.kusarigama.position.set(D.sx * 0.5, -0.3, -D.sz * 0.85); rig.stow.kusarigama.rotation.z = 1.1; rig.yaw.add(rig.stow.kusarigama);
     } else {
       const belt = mk(new THREE.CylinderGeometry(1, 1, 0.12, 24), M(0x2a1a12)); belt.scale.set(D.sx * 0.86, 1, D.sz * 0.72); belt.position.y = -0.47; rig.yaw.add(belt);
@@ -1814,6 +1828,10 @@ function buildRig(isN, ghost = false) {
       rig.tieBlade = mk(new THREE.BoxGeometry(0.03, 0.62, 0.13), M(0xa8232b)); rig.tieBlade.position.y = -0.34; rig.tie.add(rig.tieBlade);
       for (const s of [-1, 1]) { const c = mk(new THREE.ConeGeometry(0.08, 0.2, 3), M(0xffffff)); c.position.set(D.sx * 0.75, 0.5, s * 0.12); c.rotation.z = Math.PI; c.rotation.x = s * 0.5; rig.yaw.add(c); }
       const patch = mk(new THREE.BoxGeometry(0.02, 0.16, 0.16), M(0xc9b48d)); patch.position.set(D.sx * 0.6, -0.25, -0.38); patch.rotation.y = -0.6; rig.yaw.add(patch);
+      for (const s of [-1, 1]) {
+        const pec = mk(new THREE.SphereGeometry(1, 14, 10), suit); pec.scale.set(0.13, 0.17, 0.24); pec.position.set(D.sx * 0.8, 0.22, s * 0.26); rig.yaw.add(pec);
+        const trap = mk(new THREE.SphereGeometry(1, 12, 8), suit); trap.scale.set(0.2, 0.13, 0.22); trap.position.set(-0.04, D.sy * 0.86, s * 0.3); rig.yaw.add(trap);
+      }
     }
   }
   // head: sphere wrapped with a painted face texture
@@ -1828,6 +1846,7 @@ function buildRig(isN, ghost = false) {
     if (isN) {
       rig.tails = [0, 1].map(k => ribbon(5, 0xcf3a2c)); rig.tails.forEach(t => root.add(t));
       rig.scarf = ribbon(10, 0xcf3a2c); root.add(rig.scarf);
+      const hood = mk(new THREE.ConeGeometry(0.11, 0.3, 12), M(0x27305a)); hood.position.set(-D.R * 0.92, -0.02, 0); hood.rotation.z = Math.PI / 2; rig.headYaw.add(hood);
     } else {
       const ear = M(0xc8916a);
       for (const s of [-1, 1]) { const e = mk(new THREE.SphereGeometry(0.08, 10, 8), ear); e.scale.set(0.6, 1, 0.5); e.position.set(0, -0.02, s * D.R * 0.97); rig.headYaw.add(e); }
@@ -1839,7 +1858,8 @@ function buildRig(isN, ghost = false) {
   rig.uaF = cyl(D.ua, limbA); rig.uaB = cyl(D.ua, limbA); rig.laF = cyl(D.la, fore); rig.laB = cyl(D.la, fore);
   rig.elF = ball(D.ua * 0.95, limbA); rig.elB = ball(D.ua * 0.95, limbA);
   rig.hF = ball(D.hand, isN ? M(0xc79a74) : skin); rig.hB = ball(D.hand, isN ? M(0xc79a74) : skin);
-  rig.shF = ball(D.ua * 1.15, suit); rig.shB = ball(D.ua * 1.15, suit);
+  rig.shF = ball(isN ? D.ua * 1.15 : 0.25, suit); rig.shB = ball(isN ? D.ua * 1.15 : 0.25, suit);
+  if (isN && !ghost) { const gm2 = M(0x6d7280); rig.gdF = cyl(0.077, gm2); rig.gdB = cyl(0.077, gm2); rig.sgF = cyl(0.088, gm2); rig.sgB = cyl(0.088, gm2); }
   if (!isN) { rig.biF = ball(0.19, limbA); rig.biB = ball(0.19, limbA); rig.cuffF = ball(0.15, M(0xe4dccb)); rig.cuffB = ball(0.15, M(0xe4dccb)); }
   rig.thF = cyl(D.th, leg); rig.thB = cyl(D.th, leg); rig.shnF = cyl(D.sh, shin); rig.shnB = cyl(D.sh, shin);
   rig.knF = ball(D.th * 0.95, leg); rig.knB = ball(D.th * 0.95, leg);
@@ -1850,7 +1870,7 @@ function buildRig(isN, ghost = false) {
     for (const w of isN ? ['katana', 'nunchaku', 'shuriken', 'kusarigama'] : ['ruler', 'book', 'chalk']) { const m = weaponMesh(w); m.visible = false; root.add(m); rig.held[w] = m; }
   }
   root.visible = false;
-  R3.scene.add(root);
+  (scene || R3.scene).add(root);
   return rig;
 }
 function ribbon(n, color) {
@@ -1895,6 +1915,7 @@ function poseRig(rig, f, p) {
   place(rig.thF, pF, kF); place(rig.shnF, kF, fF); place(rig.thB, pB, kB); place(rig.shnB, kB, fB);
   rig.shF.position.copy(sF); rig.shB.position.copy(sB); rig.elF.position.copy(eF); rig.elB.position.copy(eB);
   rig.hF.position.copy(hF); rig.hB.position.copy(hB); rig.knF.position.copy(kF); rig.knB.position.copy(kB);
+  if (rig.gdF) { place(rig.gdF, eF.clone().lerp(hF, 0.3), eF.clone().lerp(hF, 0.85)); place(rig.gdB, eB.clone().lerp(hB, 0.3), eB.clone().lerp(hB, 0.85)); place(rig.sgF, kF.clone().lerp(fF, 0.2), kF.clone().lerp(fF, 0.8)); place(rig.sgB, kB.clone().lerp(fB, 0.2), kB.clone().lerp(fB, 0.8)); }
   if (rig.biF) { rig.biF.position.copy(sF).lerp(eF, 0.45); rig.biB.position.copy(sB).lerp(eB, 0.45); rig.cuffF.position.copy(eF); rig.cuffB.position.copy(eB); }
   const fwd = f.face * (rig.isN ? 0.07 : 0.11);
   rig.ftF.position.set(fF.x + fwd, fF.y, fF.z); rig.ftB.position.set(fB.x + fwd, fB.y, fB.z);
@@ -1917,6 +1938,7 @@ function poseRig(rig, f, p) {
     if (m.userData.hinge) m.userData.hinge.rotation.z = f.spin ? now * 30 : -1.3;
   }
   for (const k in rig.stow) rig.stow[k].visible = f.weapons.includes(k) && holdType !== k;
+  if (rig.trail) { const src = trailSource(rig, f, eF, hF, kF, fF); updateTrail(rig.trail, src && src[0], src && src[1]); }
   if (rig.tie) rig.tie.rotation.x = Math.sin(now * 2.3) * 0.12 + wind.v * 0.08;
   if (rig.scarf) {
     const n0 = neck3.clone(); n0.y -= 0.05;
@@ -1938,16 +1960,22 @@ function poseRig(rig, f, p) {
 function setDecals(rig, f) {
   for (const d of rig.decals) d.parent.remove(d);
   rig.decals = []; rig.dmgShown = f.dmg;
-  const D = rig.D, skin = lambert(0xd9a27a), bruiseM = lambert(0x5a2a62);
-  const spots = rig.isN
-    ? [[0.15, 0.6, 0.06], [-0.1, 1.1, 0.05], [-0.25, 0.3, 0.05], [0.3, 0.9, 0.05]]
-    : [[0.35, 0.5, 0.1], [-0.05, 0.7, 0.13], [0.2, 1.3, 0.1], [-0.3, 0.2, 0.09]];
+  if (!f.dmg) return;
+  const D = rig.D, sc = rig.isN ? 0.6 : 1;
+  const po = n => ({ polygonOffset: true, polygonOffsetFactor: n, polygonOffsetUnits: n });
+  const skinM = lambert(0xd9a27a, po(-2)), bruiseM = lambert(0x4a2058, { transparent: true, opacity: 0.82, depthWrite: false, ...po(-4) }), scarM = lambert(0x9a1418, po(-6));
+  const spots = rig.isN ? [[0.25, 0.4], [-0.2, 1.2], [0.55, 1.0], [-0.45, 0.3]] : [[0.3, 0.45], [-0.15, 0.85], [0.55, 1.15], [-0.4, 0.2]];
+  const add = (geo, mat, yf, az, lift, spin) => {
+    const k = Math.sqrt(Math.max(0, 1 - yf * yf)), p = new THREE.Vector3(D.sx * k * Math.cos(az), yf * D.sy, D.sz * k * Math.sin(az));
+    const n = new THREE.Vector3(p.x / (D.sx * D.sx), p.y / (D.sy * D.sy), p.z / (D.sz * D.sz)).normalize();
+    const m = new THREE.Mesh(geo, mat); m.position.copy(p).addScaledVector(n, lift); m.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), n); m.rotateZ(spin);
+    rig.yaw.add(m); rig.decals.push(m);
+  };
   for (let i = 0; i < f.dmg; i++) {
-    const [y, a, r] = spots[i], yy = y * D.sy / 0.6 * (rig.isN ? 1.4 : 1), k = Math.sqrt(Math.max(0, 1 - Math.pow(yy / D.sy, 2)));
-    const pos = new THREE.Vector3(D.sx * k * Math.cos(a), yy, D.sz * k * Math.sin(a));
-    const rip = mk(new THREE.SphereGeometry(r, 10, 8), skin, false); rip.position.copy(pos).multiplyScalar(1.0); rip.scale.set(1, 0.7, 1);
-    const br = mk(new THREE.SphereGeometry(r * 0.55, 8, 6), bruiseM, false); br.position.copy(pos).multiplyScalar(1.03);
-    rig.yaw.add(rip, br); rig.decals.push(rip, br);
+    const [yf, az] = spots[i];
+    add(new THREE.CircleGeometry(0.12 * sc, 7), skinM, yf, az, 0.004, rand(0, 6));
+    add(new THREE.CircleGeometry(0.07 * sc, 16), bruiseM, yf, az, 0.008, 0);
+    add(new THREE.PlaneGeometry(0.22 * sc, 0.018 * sc), scarM, yf + 0.06, az + 0.08, 0.012, rand(-0.8, 0.8));
   }
 }
 let photoVersion = 0;
@@ -2006,7 +2034,8 @@ function paintTeacherFace(g, f) {
 function updateCamera3() {
   const { camera } = R3, z = cam.z;
   const cx = clamp(cam.x, W / 2 / z, W - W / 2 / z), cy = clamp(cam.y, H / 2 / z, H - H / 2 / z);
-  const tx = (cx - W / 2) / U, ty = (GROUND - cy) / U - 0.25, dist = 9.9 / z;
+  const kk = cam3.kick || 0;
+  const tx = lerp((cx - W / 2) / U, (cam3.kx - W / 2) / U, 0.55 * kk), ty = lerp((GROUND - cy) / U - 0.25, (GROUND - cam3.ky) / U, 0.4 * kk), dist = 9.9 / z * (1 - 0.12 * kk);
   const yaw = cam3.yaw + Math.sin(rnow * 0.13) * 0.03;
   const sx = (Math.random() - 0.5) * shakeAmt * 0.012, sy = (Math.random() - 0.5) * shakeAmt * 0.012;
   camera.position.set(tx + Math.sin(yaw) * dist + sx, ty + 1.15 / z + cam3.lift + sy, Math.cos(yaw) * dist);
@@ -2025,20 +2054,29 @@ function syncWorld3(g) {
   R3.hero.intensity = dim * 1.6;
   R3.scene.fog.color.setRGB(0.85 * (1 - dim * 0.7), 0.58 * (1 - dim * 0.7), 0.48 * (1 - dim * 0.7));
   for (const t of R3.trees) { t.userData.crown.rotation.z = Math.sin(now * 1.4) * 0.03 * wind.v; t.userData.crown.rotation.x = Math.sin(now * 1.1 + 1) * 0.02 * wind.v; }
+  R3.grassTime.value = now; R3.grassWind.value = 0.55 + wind.v * 0.35 + G.storm * 1.5;
+  R3.lakeTex.offset.x += g * 0.015; R3.lakeTex.offset.y = Math.sin(now * 0.3) * 0.05;
+  for (const b of R3.bamboo) for (const st of b.children) st.rotation.z = Math.sin(now * 1.1 + st.userData.ph) * 0.03 * wind.v - wind.v * 0.025;
   for (const c of R3.clouds) { c.position.x -= g * wind.v * 0.8; if (c.position.x < -150) c.position.x = 150; }
   const dm = new THREE.Object3D(), L = R3.leaves;
   R3.leafState.forEach((s, i) => {
+    if (s.rest !== undefined) {
+      s.rest -= g; s.x -= wind.v * 0.12 * g;
+      if (s.rest > 0 && s.x > -16) { dm.position.set(s.x, 0.012, s.z); dm.rotation.set(-Math.PI / 2, 0, s.rz); dm.scale.setScalar(s.s); dm.updateMatrix(); L.setMatrixAt(i, dm.matrix); return; }
+      Object.assign(s, newLeaf3(false)); s.rest = undefined;
+    }
     s.x -= (wind.v * 1.3 + G.storm * 4 + Math.sin(now * 1.3 + s.ph) * 0.3) * g;
     s.y -= (s.vy + Math.sin(now * 2 + s.ph) * 0.2) * g * (G.storm ? 0.4 : 1);
     if (G.storm) s.y += Math.sin(now * 6 + s.ph) * 1.5 * g;
     s.rx += g * 3 * (1 + wind.v * 0.3); s.rz += g * 2;
-    if (s.x < -16 || s.y < 0.02) Object.assign(s, newLeaf3(false));
+    if (s.x < -16) Object.assign(s, newLeaf3(false));
+    else if (s.y < 0.02) { if (s.z > -15 && Math.random() < 0.75) { s.rest = rand(3, 8); s.y = 0.012; } else Object.assign(s, newLeaf3(false)); }
     dm.position.set(s.x, s.y, s.z); dm.rotation.set(s.rx, s.ry, s.rz); dm.scale.setScalar(s.s); dm.updateMatrix(); L.setMatrixAt(i, dm.matrix);
   });
   L.instanceMatrix.needsUpdate = true;
 }
 function syncFighters3() {
-  for (const [rig, f] of [[R3.rigN, N], [R3.rigT, T]]) { rig.root.visible = f.visible; if (f.visible) poseRig(rig, f, f.pose); }
+  for (const [rig, f] of [[R3.rigN, N], [R3.rigT, T]]) { rig.root.visible = f.visible; if (f.visible) poseRig(rig, f, f.pose); else if (rig.trail) updateTrail(rig.trail, null); }
   const gn = ghosts.filter(gh => gh.f.isN).slice(-R3.ghostsN.length), gt = ghosts.filter(gh => !gh.f.isN).slice(-R3.ghostsT.length);
   R3.ghostsN.forEach((r, i) => { const gh = gn[i]; r.root.visible = !!gh; if (gh) { poseRig(r, gh.f, gh.pose); r.ghostMat.opacity = 0.4 * (1 - gh.life / gh.max); } });
   R3.ghostsT.forEach((r, i) => { const gh = gt[i]; r.root.visible = !!gh; if (gh) { poseRig(r, gh.f, gh.pose); r.ghostMat.opacity = 0.35 * (1 - gh.life / gh.max); } });
@@ -2078,6 +2116,7 @@ function render3D(g) {
   syncWorld3(g);
   syncFighters3();
   syncProps3();
+  syncFx3();
   R3.renderer.render(R3.scene, R3.camera);
   ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
   ctx.clearRect(0, 0, W, H);
@@ -2091,12 +2130,229 @@ function render3D(g) {
     if (f.aura > 0.02) { const c = chestOf(f), gr = ctx.createRadialGradient(c[0], c[1], 20, c[0], c[1], 220); gr.addColorStop(0, `rgba(255,90,40,${0.35 * f.aura})`); gr.addColorStop(1, 'rgba(255,40,0,0)'); ctx.fillStyle = gr; ctx.fillRect(c[0] - 220, c[1] - 220, 440, 440); }
     if (f.dizzy) { const h = headOf(f); for (let i = 0; i < 3; i++) { const a = now * 4 + i * 2.09; drawStar(h[0] + Math.cos(a) * 34, h[1] - 34 + Math.sin(a) * 10, 8, '#ffe066'); } }
   }
-  drawFx();
+  drawFx(true);
   ctx.restore();
   drawOverlays();
   drawBanners();
   drawHUD();
 }
+/* ---------- 3D effects: glowing particles, slash arcs, shockwaves, weapon trails, hit light ---------- */
+const colCache = new Map();
+function rgbOf(c) {
+  let v = colCache.get(c);
+  if (!v) { const col = c.includes(',') ? new THREE.Color(...c.split(',').map(n => Number(n) / 255)) : new THREE.Color(c); v = [col.r, col.g, col.b]; colCache.set(c, v); }
+  return v;
+}
+function pointsLayer(max, additive) {
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(max * 3), 3));
+  geo.setAttribute('pcol', new THREE.BufferAttribute(new Float32Array(max * 3), 3));
+  geo.setAttribute('psize', new THREE.BufferAttribute(new Float32Array(max), 1));
+  geo.setAttribute('palpha', new THREE.BufferAttribute(new Float32Array(max), 1));
+  geo.setDrawRange(0, 0);
+  const mat = new THREE.ShaderMaterial({
+    transparent: true, depthWrite: false, blending: additive ? THREE.AdditiveBlending : THREE.NormalBlending,
+    uniforms: { pscale: { value: 600 } },
+    vertexShader: 'attribute vec3 pcol; attribute float psize; attribute float palpha; uniform float pscale; varying vec3 vC; varying float vA;\n' +
+      'void main(){ vC = pcol; vA = palpha; vec4 mv = modelViewMatrix * vec4(position, 1.0); gl_PointSize = psize * pscale / -mv.z; gl_Position = projectionMatrix * mv; }',
+    fragmentShader: 'varying vec3 vC; varying float vA;\n' + (additive
+      ? 'void main(){ float d = length(gl_PointCoord - 0.5); if (d > 0.5) discard; float a = pow(1.0 - d * 2.0, 1.6) * vA; gl_FragColor = vec4(vC * a, a); }'
+      : 'void main(){ float d = length(gl_PointCoord - 0.5); if (d > 0.5) discard; float a = smoothstep(0.5, 0.1, d) * vA; gl_FragColor = vec4(vC, a); }')
+  });
+  const p = new THREE.Points(geo, mat); p.frustumCulled = false; p.userData.max = max; p.userData.n = 0;
+  R3.scene.add(p);
+  return p;
+}
+function makeTrail(color) {
+  const n = 18, geo = new THREE.BufferGeometry(), idx = [];
+  geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(n * 2 * 3), 3));
+  geo.setAttribute('ta', new THREE.BufferAttribute(new Float32Array(n * 2), 1));
+  for (let i = 0; i < n - 1; i++) { const a = i * 2; idx.push(a, a + 1, a + 2, a + 1, a + 3, a + 2); }
+  geo.setIndex(idx);
+  const mat = new THREE.ShaderMaterial({
+    transparent: true, depthWrite: false, side: THREE.DoubleSide, blending: THREE.AdditiveBlending,
+    uniforms: { col: { value: new THREE.Color(color) } },
+    vertexShader: 'attribute float ta; varying float vA; void main(){ vA = ta; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+    fragmentShader: 'uniform vec3 col; varying float vA; void main(){ gl_FragColor = vec4(col * vA, vA); }'
+  });
+  const m = new THREE.Mesh(geo, mat); m.frustumCulled = false;
+  m.userData = { n, tips: [], bases: [], energy: 0 };
+  R3.scene.add(m);
+  return m;
+}
+function updateTrail(tr, tip, base) {
+  const d = tr.userData;
+  if (tip) { d.tips.unshift(tip.clone()); d.bases.unshift(base.clone()); } else if (d.tips.length) { d.tips.pop(); d.bases.pop(); }
+  if (d.tips.length > d.n) { d.tips.length = d.n; d.bases.length = d.n; }
+  const speed = d.tips.length > 1 ? d.tips[0].distanceTo(d.tips[1]) : 0;
+  d.energy = lerp(d.energy, clamp((speed - 0.03) * 7, 0, 1), 0.35);
+  tr.visible = d.tips.length > 1 && d.energy > 0.02;
+  if (!tr.visible) return;
+  const pos = tr.geometry.attributes.position, ta = tr.geometry.attributes.ta, L = d.tips.length;
+  for (let i = 0; i < d.n; i++) {
+    const j = Math.min(i, L - 1), a = (1 - i / (d.n - 1)) * d.energy * 0.9;
+    pos.setXYZ(i * 2, d.tips[j].x, d.tips[j].y, d.tips[j].z); pos.setXYZ(i * 2 + 1, d.bases[j].x, d.bases[j].y, d.bases[j].z);
+    ta.setX(i * 2, i < L ? a : 0); ta.setX(i * 2 + 1, i < L ? a * 0.15 : 0);
+  }
+  pos.needsUpdate = true; ta.needsUpdate = true;
+}
+function initFx3() {
+  R3.fxAdd = pointsLayer(2400, true);
+  R3.fxSoft = pointsLayer(900, false);
+  const powTex = canvasTex(256, 256, g => {
+    g.translate(128, 128); g.beginPath();
+    for (let i = 0; i < 24; i++) { const r = i % 2 ? 50 : 112 + (i % 4) * 6, a = i * Math.PI / 12; g.lineTo(Math.cos(a) * r, Math.sin(a) * r); }
+    g.closePath(); g.fillStyle = '#fff6c2'; g.fill(); g.lineWidth = 10; g.strokeStyle = '#ff7a2f'; g.stroke();
+  }).tex;
+  R3.pows = [0, 1, 2, 3, 4, 5, 6, 7].map(() => { const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: powTex, transparent: true, depthWrite: false })); s.visible = false; R3.scene.add(s); return s; });
+  R3.rings = [];
+  for (let i = 0; i < 12; i++) { const m = new THREE.Mesh(new THREE.RingGeometry(0.9, 1, 56), new THREE.MeshBasicMaterial({ transparent: true, depthWrite: false, side: THREE.DoubleSide, blending: THREE.AdditiveBlending })); m.visible = false; R3.scene.add(m); R3.rings.push(m); }
+  R3.leafFx = new THREE.InstancedMesh(R3.leaves.geometry, lambert(0xffffff, { side: THREE.DoubleSide }), 420);
+  R3.leafFx.count = 0; R3.leafFx.frustumCulled = false; R3.leafFx.setColorAt(0, new THREE.Color(1, 1, 1)); R3.scene.add(R3.leafFx);
+  R3.slashes = new Map();
+  R3.hitLight = new THREE.PointLight(0xffc890, 0, 7, 2); R3.scene.add(R3.hitLight);
+  R3.trailN = makeTrail(0xbfe8ff); R3.trailT = makeTrail(0xffb070);
+}
+function flash3(x, y, power, color) {
+  if (!R3.on || !R3.hitLight) return;
+  R3.hitLight.position.copy(to3(x, y, 1.1));
+  R3.hitLight.color.set(color || 0xffc890);
+  R3.hitLight.intensity = 3 + power * 3;
+}
+function syncFx3() {
+  const A = R3.fxAdd, Sf = R3.fxSoft, aa = A.geometry.attributes, sa = Sf.geometry.attributes;
+  let na = 0, ns = 0, nl = 0, np = 0;
+  const putA = (x, y, z, s, c, a) => { if (na >= A.userData.max) return; aa.position.setXYZ(na, x, y, z); aa.psize.setX(na, s); aa.pcol.setXYZ(na, c[0], c[1], c[2]); aa.palpha.setX(na, a); na++; };
+  const putS = (x, y, z, s, c, a) => { if (ns >= Sf.userData.max) return; sa.position.setXYZ(ns, x, y, z); sa.psize.setX(ns, s); sa.pcol.setXYZ(ns, c[0], c[1], c[2]); sa.palpha.setX(ns, a); ns++; };
+  const dm = new THREE.Object3D(), tmpC = new THREE.Color();
+  const FLAME = [1, 0.55, 0.2], STAR = [1, 0.95, 0.6];
+  for (const p of parts) {
+    const k = p.life / p.max, X = (p.x - W / 2) / U, Y = (GROUND - p.y) / U, Z = p.z === undefined ? 0.3 : p.z;
+    if (p.k === 'spark') {
+      const c = rgbOf(p.col);
+      for (let i = 0; i < 4; i++) { const t = i * 0.01; putA(X - (p.vx || 0) * t / U, Y + (p.vy || 0) * t / U, Z - (p.vz || 0) * t, p.size * 0.035 * (1 - i * 0.2), c, (1 - k) * (1 - i * 0.22)); }
+    } else if (p.k === 'flame') putA(X, Y, Z, p.size * 0.05, FLAME, (1 - k) * 0.9);
+    else if (p.k === 'star') { putA(X, Y, Z, p.size * 0.07, STAR, 1 - k); putA(X, Y, Z, p.size * 0.16, STAR, (1 - k) * 0.35); }
+    else if (p.k === 'dust') putS(X, Y, Z, p.size * 0.032 * (0.6 + k), rgbOf(p.col), (1 - k) * 0.5);
+    else if (p.k === 'leaf' && nl < R3.leafFx.instanceMatrix.count) {
+      dm.position.set(X, Y, Z); dm.rotation.set(p.rot * 1.3, p.rot, p.rot * 0.7); dm.scale.setScalar(p.size * 0.012); dm.updateMatrix();
+      R3.leafFx.setMatrixAt(nl, dm.matrix); R3.leafFx.setColorAt(nl, tmpC.set(p.col)); nl++;
+    } else if (p.k === 'pow' && np < R3.pows.length) {
+      const s = R3.pows[np++], sc = p.size / U * (0.7 + E.out(k) * 0.9) * 2.2;
+      s.visible = true; s.position.set(X, Y, 0.9); s.scale.set(sc, sc, 1); s.material.opacity = 1 - k; s.material.rotation = p.rot;
+    }
+  }
+  for (let i = np; i < R3.pows.length; i++) R3.pows[i].visible = false;
+  A.geometry.setDrawRange(0, na); Sf.geometry.setDrawRange(0, ns);
+  for (const k of ['position', 'pcol', 'psize', 'palpha']) { aa[k].needsUpdate = true; sa[k].needsUpdate = true; }
+  const ps = R3.renderer.domElement.height / (2 * Math.tan(THREE.MathUtils.degToRad(17)));
+  A.material.uniforms.pscale.value = Sf.material.uniforms.pscale.value = ps;
+  R3.leafFx.count = nl; R3.leafFx.instanceMatrix.needsUpdate = true; if (R3.leafFx.instanceColor) R3.leafFx.instanceColor.needsUpdate = true;
+  // shockwaves: flat on the ground when they start there, facing the camera otherwise
+  R3.rings.forEach((m, i) => {
+    const r = rings[i]; m.visible = !!r; if (!r) return;
+    const k = r.life / r.max, rad = Math.max(0.01, r.r1 * E.out(k) / U), c = rgbOf(r.col);
+    m.material.color.setRGB(c[0], c[1], c[2]); m.material.opacity = (1 - k) * 0.9;
+    if (Math.abs(r.y - GROUND) < 45) { m.position.set((r.x - W / 2) / U, 0.04, 0.2); m.rotation.set(-Math.PI / 2, 0, 0); m.scale.set(rad * 1.4, rad * 1.4, 1); }
+    else { m.position.copy(to3(r.x, r.y, 0.5)); m.quaternion.copy(R3.camera.quaternion); m.scale.set(rad, rad * 0.62, 1); }
+  });
+  // slash arcs as glowing crescents tilted in depth
+  const seen = new Set();
+  for (const s of slashes) {
+    let m = R3.slashes.get(s);
+    if (!m) {
+      const t0 = -s.a0, t1 = -s.a1, start = Math.min(t0, t1), len = Math.abs(t1 - t0), r = s.r / U;
+      m = new THREE.Mesh(new THREE.RingGeometry(r * 0.86, r * 1.08, 40, 1, start, len), new THREE.MeshBasicMaterial({ transparent: true, depthWrite: false, side: THREE.DoubleSide, blending: THREE.AdditiveBlending }));
+      const core = new THREE.Mesh(new THREE.RingGeometry(r * 0.95, r * 1.0, 40, 1, start, len), new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, depthWrite: false, side: THREE.DoubleSide, blending: THREE.AdditiveBlending }));
+      m.add(core);
+      const c = rgbOf(s.col); m.material.color.setRGB(c[0], c[1], c[2]);
+      m.position.copy(to3(s.x, s.y, 0.45)); m.rotation.set(rand(-0.45, 0.45), rand(-0.6, 0.6), 0);
+      R3.scene.add(m); R3.slashes.set(s, m);
+    }
+    seen.add(s);
+    const k = s.life / s.max; m.material.opacity = (1 - k) * 0.75; m.children[0].material.opacity = 1 - k; m.scale.setScalar(1 + k * 0.18);
+  }
+  for (const [s, m] of R3.slashes) if (!seen.has(s)) { R3.scene.remove(m); m.geometry.dispose(); m.children[0].geometry.dispose(); R3.slashes.delete(s); }
+  R3.hitLight.intensity *= 0.86;
+}
+/* trail source: the held weapon's tip, or a kicking foot / punching fist */
+function trailSource(rig, f, eF, hF, kF, fF) {
+  const m = f.holding && rig.held[f.holding.type];
+  if (m && m.visible && m.userData.tip) {
+    m.updateMatrixWorld(true);
+    return [m.userData.tip.getWorldPosition(new THREE.Vector3()), m.userData.base.getWorldPosition(new THREE.Vector3())];
+  }
+  if (f.trail) return rig.isN ? [fF.clone(), kF.clone()] : [hF.clone(), eF.clone()];
+  return null;
+}
+
+/* ---------- 3D character-select portraits on the setup screen ---------- */
+function initPortraits3() {
+  try {
+    R3.portraits = [['#pvN3', true, N, 0.45], ['#pvT3', false, T, -0.45]].map(([sel, isN, f, yaw]) => {
+      const canvas = $(sel), renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setClearColor(0x000000, 0);
+      const scene = new THREE.Scene();
+      scene.add(new THREE.HemisphereLight(0xffe0c8, 0x3a2838, 0.95));
+      const key = new THREE.DirectionalLight(0xffc48a, 1.0); key.position.set(-4, 6, 7); scene.add(key);
+      const rim = new THREE.DirectionalLight(0x9a8cff, 0.6); rim.position.set(5, 4, -6); scene.add(rim);
+      const rig = buildRig(isN, false, scene); rig.root.visible = true;
+      const shTex = canvasTex(128, 128, g => { const gr = g.createRadialGradient(64, 64, 4, 64, 64, 62); gr.addColorStop(0, 'rgba(20,8,6,.55)'); gr.addColorStop(1, 'rgba(20,8,6,0)'); g.fillStyle = gr; g.fillRect(0, 0, 128, 128); }).tex;
+      const shadow = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ map: shTex, transparent: true, depthWrite: false }));
+      shadow.rotation.x = -Math.PI / 2; shadow.scale.set(isN ? 1.6 : 2.6, isN ? 0.9 : 1.4, 1); scene.add(shadow);
+      return { canvas, renderer, scene, rig, f, yaw, shadow, camera: new THREE.PerspectiveCamera(28, 2, 0.1, 60), w: 0, h: 0 };
+    });
+  } catch (e) { R3.portraits = null; }
+}
+function drawPortraits3() {
+  for (const p of R3.portraits) {
+    const w = p.canvas.clientWidth, h = p.canvas.clientHeight;
+    if (!w || !h) continue;
+    if (p.w !== w || p.h !== h) { p.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2)); p.renderer.setSize(w, h, false); p.camera.aspect = w / h; p.camera.updateProjectionMatrix(); p.w = w; p.h = h; }
+    poseRig(p.rig, p.f, p.f.pose);
+    const hip = to3(p.f.homeX + p.f.pose.x, GROUND), tgt = new THREE.Vector3(hip.x, p.rig.isN ? 1.1 : 1.6, 0), d = p.rig.isN ? 5.0 : 7.2;
+    p.camera.position.set(tgt.x + Math.sin(p.yaw + Math.sin(rnow * 0.4) * 0.08) * d, tgt.y + 0.45, Math.cos(p.yaw) * d);
+    p.camera.lookAt(tgt);
+    p.shadow.position.set(hip.x, 0.005, 0);
+    p.renderer.render(p.scene, p.camera);
+  }
+}
+
+/* ---------- extra scenery ---------- */
+function buildGrass() {
+  R3.grassTime = { value: 0 };
+  R3.grassWind = { value: 1 };
+  const geo = new THREE.ConeGeometry(0.035, 0.42, 3); geo.translate(0, 0.21, 0);
+  const mat = lambert(0xc09a48);
+  mat.onBeforeCompile = sh => {
+    sh.uniforms.uTime = R3.grassTime; sh.uniforms.uWind = R3.grassWind;
+    sh.vertexShader = 'uniform float uTime; uniform float uWind;\n' + sh.vertexShader.replace('#include <begin_vertex>',
+      '#include <begin_vertex>\n  float gh = max(position.y, 0.0); vec4 gp = instanceMatrix * vec4(0.0, 0.0, 0.0, 1.0);\n  transformed.x -= gh * gh * uWind * (0.45 + 0.3 * sin(uTime * 2.3 + gp.x * 0.8 + gp.z * 1.3));');
+  };
+  const n = 1100, grass = new THREE.InstancedMesh(geo, mat, n), dm = new THREE.Object3D(), cols = [0xc09a48, 0xa7803a, 0xd1b060, 0x8f7a3a].map(c => new THREE.Color(c));
+  for (let i = 0; i < n; i++) {
+    const band = i % 3;
+    if (band === 0) dm.position.set(rand(-18, 18), 0, rand(-17, -13.5));
+    else if (band === 1) dm.position.set(rand(-13, -7.5), 0, rand(-12, 3));
+    else dm.position.set(rand(7.5, 13), 0, rand(-12, 3));
+    const s = rand(0.7, 1.5); dm.scale.set(s, s * rand(0.8, 1.4), s); dm.rotation.set(0, 0, 0); dm.updateMatrix();
+    grass.setMatrixAt(i, dm.matrix); grass.setColorAt(i, pick(cols));
+  }
+  grass.frustumCulled = false; R3.scene.add(grass);
+}
+function buildBamboo(x, z) {
+  const g = new THREE.Group(), stalkM = lambert(0x6f8f3a), nodeM = lambert(0x4f6a28), leafM = lambert(0x3f6a2a, { side: THREE.DoubleSide });
+  for (let i = 0; i < 9; i++) {
+    const h = rand(5, 7.5), r = rand(0.05, 0.085), s = new THREE.Group();
+    s.add(mk(new THREE.CylinderGeometry(r, r * 1.1, h, 8), stalkM)); s.children[0].position.y = h / 2;
+    for (let y = 0.55; y < h; y += rand(0.5, 0.7)) { const nd = mk(new THREE.TorusGeometry(r * 1.05, 0.012, 4, 10), nodeM, false); nd.rotation.x = Math.PI / 2; nd.position.y = y; s.add(nd); }
+    for (let k = 0; k < 5; k++) { const lf = mk(new THREE.ConeGeometry(0.06, 0.55, 3), leafM, false); lf.scale.z = 0.25; lf.position.set(rand(-0.3, 0.3), h - rand(0, 1.4), rand(-0.3, 0.3)); lf.rotation.set(rand(-1, 1), rand(0, 6), rand(1, 2)); s.add(lf); }
+    s.position.set(rand(-0.8, 0.8), 0, rand(-0.8, 0.8)); s.rotation.set(rand(-0.06, 0.06), 0, rand(-0.08, 0.08)); s.userData.ph = rand(0, 6);
+    g.add(s);
+  }
+  g.position.set(x, 0, z); R3.scene.add(g); (R3.bamboo || (R3.bamboo = [])).push(g);
+}
+
 function setView(v) {
   const want3 = v !== '2d';
   R3.on = want3 && init3D();
@@ -2184,6 +2440,7 @@ async function hurt(f, power = 1, o = {}) {
   f.hp = Math.max(0, f.hp - 25); f.dmg = Math.min(4, f.dmg + 1); f.flash = 1;
   hitstop(90 + 50 * power); shake(10 + 8 * power); sfx.hit(power);
   impact(c[0], c[1], power);
+  if (R3.on) { cam3.kx = c[0]; cam3.ky = c[1]; tween(cam3, { kick: 1 }, 70, E.out, true).then(() => tween(cam3, { kick: 0 }, 560, E.inOut, true)); }
   popup(o.word || pick(t('popHit')), c[0] + rand(-30, 30), c[1] - 70, '#ffd23f', 52);
   popup('-25%', c[0] + (f.isN ? -60 : 60), c[1] - 20, '#ff5a4a', 36, 0);
   G.flash = 0.35; G.flashCol = f.isN ? '#ff3a2a' : '#ffffff'; tween(G, { flash: 0 }, 220, E.out, true);
@@ -2334,11 +2591,13 @@ function pickNinjaMove() {
 }
 async function ninjaTurn() {
   S.front = 'N';
+  if (T.hp > 25) tween(cam3, { yaw: 0.1 }, 700, E.inOut, true);
   if (T.hp <= 25) { await ninjaFinisher(); return; }
   await NINJA_MOVES[pickNinjaMove()]();
   N.holding = null; N.trail = false;
   await wait(250);
   await Promise.all([goHome(N), goHome(T)]);
+  tween(cam3, { yaw: 0 }, 900, E.inOut, true);
 }
 
 /* ---------- teacher attacks (wrong answer) ---------- */
@@ -2391,6 +2650,7 @@ const TEACHER_MOVES = {
 };
 async function teacherTurn() {
   S.front = 'T';
+  tween(cam3, { yaw: -0.1 }, 700, E.inOut, true);
   sayT('v_lines', null, { pitch: 0.3, rate: 0.9 });
   const keys = Object.keys(TEACHER_MOVES);
   const used = S.tused || (S.tused = {});
@@ -2400,6 +2660,7 @@ async function teacherTurn() {
   T.holding = null; T.trail = false;
   if (N.hp <= 0) { await finishHim(); return; }
   await Promise.all([getUp(N).then(() => goHome(N)), (async () => { await wait(300); await goHome(T); })()]);
+  tween(cam3, { yaw: 0 }, 900, E.inOut, true);
 }
 
 /* ---------- finishers ---------- */
@@ -2725,8 +2986,8 @@ function resetMatch() {
   for (const a of [parts, slashes, rings, pops, projs, drops, ghosts, banners]) a.length = 0;
   Object.assign(G, { ts: 1, dim: 0, ko: 0, finish: 0, stamp: 0, speed: 0, hud: 0, storm: 0, target: 0, flash: 0 });
   tweens.length = 0;
-  Object.assign(cam, { z: 1, x: W / 2, y: H / 2 }); Object.assign(cam3, { yaw: 0, lift: 0 });
-  S.order = []; S.op = 0; S.qn = 0; S.log = []; S.used = {}; S.tused = {}; S.lesson = null;
+  Object.assign(cam, { z: 1, x: W / 2, y: H / 2 }); Object.assign(cam3, { yaw: 0, lift: 0, kick: 0 });
+  S.order = []; S.op = 0; S.qn = 0; S.log = []; S.used = {}; S.tused = {}; S.lesson = null; S.streak = 0;
 }
 async function runMatch() {
   if (S.running) return;
@@ -2738,6 +2999,8 @@ async function runMatch() {
   while (N.hp > 0 && T.hp > 0 && !S.quit) {
     const ok = await askQuestion();
     if (S.quit) break;
+    S.streak = ok ? (S.streak || 0) + 1 : 0;
+    if (ok && S.streak >= 2 && T.hp > 25) { banner(t('streak', { n: S.streak }), { size: 60, y: 352, dur: 1.4, col: '#9fe0ff' }); sfx.right(); }
     if (ok) await ninjaTurn(); else await teacherTurn();
     if (!S.quit) S.lesson && (S.lesson.show = false);
     mus.intense = N.hp <= 25 || T.hp <= 25;
@@ -2780,6 +3043,9 @@ function drawPortrait(cvs, f, k) {
 }
 function drawPortraits() {
   if (S.running) return;
+  const use3 = !!(R3.on && R3.portraits);
+  $('#pvN').hidden = $('#pvT').hidden = use3; $('#pvN3').hidden = $('#pvT3').hidden = !use3;
+  if (use3) { drawPortraits3(); return; }
   drawPortrait($('#pvN'), N, 0.72);
   drawPortrait($('#pvT'), T, 0.56);
 }
